@@ -6,7 +6,6 @@ import Navbar from "../UI/NavbarComponents/index"
 const Routings = () => {
   return (
     <>
-        <Navbar/>
         <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
