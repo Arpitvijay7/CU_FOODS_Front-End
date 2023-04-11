@@ -1,3 +1,5 @@
 .HeroSection{
-    
+    background: url("../../../../../../Assets/Homepage/heroimg.jpg");
+    background-size: cover;
+    background-position: center;
 }
