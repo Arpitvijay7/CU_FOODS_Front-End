@@ -11,7 +11,7 @@ const HeroSection = () => {
       <div className="max-w-screen bg-cover h-[60vh] HeroSection relative">
         <div className="text-xl font-bold sm:text-xl md:text-2xl lg:text-3xl text-white max-w-screen">
           <div className="flex justify-between p-5 lg:p-10">
-            <Link to={"/"}>CU FOODS</Link>
+            <Link to={"/"} className="font-black">CU FOODS</Link>
             <div className="flex justify-between w-36 md:w-56">
               <div>Login</div>
               <div>Sign Up</div>
@@ -22,7 +22,7 @@ const HeroSection = () => {
         <div className="mt-10 md:mt-5 h-2/3">
           <div className="h-full flex flex-col place-items-center">
             <div className="w-full text-white">
-              <div className="text-6xl font-bold">CU FOODS</div>
+              <div className="text-6xl font-black">CU FOODS</div>
               <div className="pt-8">
                 <p className="font-semibold text-xl md:text-4xl">
                   Discover the best food & drinks in{" "}
