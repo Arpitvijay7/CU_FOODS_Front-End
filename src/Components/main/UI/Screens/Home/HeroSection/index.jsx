@@ -30,7 +30,7 @@ const HeroSection = () => {
                 </p>
               </div>
             </div>
-            <div className="flex place-items-center w-2/3 mt-12">
+            <div className="flex place-items-center w-5/6 md:w-2/3 mt-12">
             <div className="grid place-items-center h-full w-full">
               <div className="flex place-items-center bg-white mt-10 md:mt-0 w-full md:w-2/3 h-14 rounded-lg md:rounded-lg">
                 <p className="pl-3 pr-2">
