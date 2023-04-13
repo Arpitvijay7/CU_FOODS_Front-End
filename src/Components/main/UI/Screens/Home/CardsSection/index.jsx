@@ -1,41 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./card";
-
 const CardsSection = () => {
-  const data=[
-    {
-      name:"Punjabi Rasoi",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
-    },
-    {
-      name:"Zaika",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
-    },
-    {
-      name:"MVR",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
-    },
-    {
-      name:"Res3",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
-    },
-    {
-      name:"Res4",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
-    },
-    {
-      name:"Res5",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
-    },
-    {
-      name:"Res6",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
-    },
-    {
-      name:"Res7",
-      address:"Photo booth fam kinfolk cold-pressed sriracha leggingsjianbing microdosing tousled waistcoat."
+  const [data,setData]=useState()
+  useEffect(() => {
+    const fetchData=async ()=>{
+    const res=await fetch("http://localhost:4000/api/vi/shop/getAllShops")
+    const dat1=await res.json()
+    setData(dat1.shops)
     }
-  ]
+    fetchData()
+  }, [])
   return (
     <>
       <div className="w-full -mt-14">
@@ -46,12 +20,9 @@ const CardsSection = () => {
 
                 {data && data.map((val,id)=>{
                   return(
-                    <Card name={val.name} address={val.address} />
+                    <Card key={id} image={val.image} name={val.name} address={val.description} />
                   )
                 })}
-
-
-
 
               </div>
             </div>
