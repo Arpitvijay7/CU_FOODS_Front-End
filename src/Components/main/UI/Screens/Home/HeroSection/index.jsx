@@ -12,6 +12,7 @@ const HeroSection = () => {
     );
     const data = await res.json();
     setSearchClick(1);
+    if(search.length>0){
     if (data["shops"].length!==0) {
       setSearchData(data.shops);
     } else {
@@ -21,6 +22,7 @@ const HeroSection = () => {
         setSearchClick(0)
       },2000)
     }
+  }
   };
   return (
     <>
@@ -31,8 +33,8 @@ const HeroSection = () => {
               CU FOODS
             </Link>
             <div className="flex justify-between w-36 md:w-56">
-              <div>Login</div>
-              <div>Sign Up</div>
+              <button>Login</button>
+              <button>Sign Up</button>
             </div>
           </div>
         </div>
@@ -75,20 +77,20 @@ const HeroSection = () => {
                     onChange={(e) => handleSearch(e)}
                   ></input>
                 </div>
-                {searchClick ? (
+                {search.length>0 && (
                   <>
                     <div className="w-full md:w-2/3 mt-3 rounded-lg bg-white absolute top-24 md:top-12 flex flex-col border-2 border-black">
                       {searchData &&
                         searchData.map((val, index) => {
                           return (
-                            <Link to={"/shops/"+val.name} className="p-5 hover:bg-gray-300" key={index}>
+                            <Link to={"/shops/"+val.name} className="p-5 hover:bg-gray-300 border-b m-1" key={index}>
                               {val.name}
                             </Link>
                           );
                         })}
                     </div>
                   </>
-                ) : null}
+                )}
               </div>
             </div>
           </div>
