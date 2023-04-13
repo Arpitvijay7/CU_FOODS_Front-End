@@ -11,85 +11,50 @@ const Footer = () => {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
         </svg>
-        <span class="ml-3 text-xl">Tailblocks</span>
+        <span class="ml-3 text-xl">CU FOODS</span>
       </Link>
-      <p class="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
+      <p class="mt-2 text-sm text-gray-500">A Simple Solution to Crowd Gathering</p>
     </div>
     <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
       <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">About Us</h2>
         <nav class="list-none mb-10">
           <li>
             <Link to="" class="text-gray-600 hover:text-gray-800">First Link</Link>
           </li>
           <li>
             <Link to="" class="text-gray-600 hover:text-gray-800">Second Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Third Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Fourth Link</Link>
           </li>
         </nav>
       </div>
       <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Want To Join Us?</h2>
         <nav class="list-none mb-10">
           <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">First Link</Link>
+            <Link to="" class="text-gray-600 hover:text-gray-800">Join us as a Vendor?</Link>
           </li>
           <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Second Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Third Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Fourth Link</Link>
+            <Link to="" class="text-gray-600 hover:text-gray-800">Join Our Team</Link>
           </li>
         </nav>
       </div>
       <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Facing Any Problem?</h2>
         <nav class="list-none mb-10">
           <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">First Link</Link>
+            <Link to="" class="text-gray-600 hover:text-gray-800">Contact Us</Link>
           </li>
           <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Second Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Third Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Fourth Link</Link>
+            <Link to="" class="text-gray-600 hover:text-gray-800">Customer Support</Link>
           </li>
         </nav>
       </div>
-      <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-        <nav class="list-none mb-10">
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">First Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Second Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Third Link</Link>
-          </li>
-          <li>
-            <Link to="" class="text-gray-600 hover:text-gray-800">Fourth Link</Link>
-          </li>
-        </nav>
-      </div>
+      
     </div>
   </div>
   <div class="bg-gray-100">
     <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-      <p class="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
-        <Link to="" href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@knyttneve</Link>
+      <p class="text-gray-500 text-sm text-center sm:text-left">© 2023 CU FOODS
       </p>
       <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
         <Link to="" class="text-gray-500">

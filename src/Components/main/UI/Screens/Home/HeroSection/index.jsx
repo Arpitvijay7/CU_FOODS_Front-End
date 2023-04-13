@@ -15,8 +15,9 @@ const HeroSection = () => {
     if (data["shops"].length!==0) {
       setSearchData(data.shops);
     } else {
-      setSearchData(["No Shops Found"]);
+      setSearchData([{name:"No Results Found"}]);
       setTimeout(()=>{
+        setSearchClick(0)
         setSearchClick(0)
       },2000)
     }
@@ -80,7 +81,7 @@ const HeroSection = () => {
                       {searchData &&
                         searchData.map((val, index) => {
                           return (
-                            <Link to={"/shops/"+val.name} className="p-5" key={index}>
+                            <Link to={"/shops/"+val.name} className="p-5 hover:bg-gray-300" key={index}>
                               {val.name}
                             </Link>
                           );
