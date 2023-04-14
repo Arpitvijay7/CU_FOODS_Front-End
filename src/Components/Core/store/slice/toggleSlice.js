@@ -1,19 +1,22 @@
 import {createSlice} from "@reduxjs/toolkit"
-const userSlice=createSlice({
-    name:"user",
+const toggleSlice=createSlice({
+    name:"toggle",
     initialState:{
-        auth:0
+        toggle:0
     },
     reducers:{
-        loginUser(state,action){
-            state.auth=1
+        signinToggle(state,action){
+            return{...state,["toggle"]:1}
             
         },
-        logoutUser(state,action){
-            state.auth=0;
+        signupToggle(state,action){
+            return{...state,["toggle"]:2}
+        },
+        closeToggle(state,action){
+            return{...state,["toggle"]:0}
         }
     }
 
 })
-export default userSlice.reducer
-export const {loginUser,logoutUser}=userSlice.actions
+export default toggleSlice.reducer
+export const {signinToggle,signupToggle,closeToggle}=toggleSlice.actions
