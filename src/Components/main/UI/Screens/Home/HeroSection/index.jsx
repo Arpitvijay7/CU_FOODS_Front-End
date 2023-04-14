@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./HeroStyles.css";
+import LScontainer from "../../../NavbarComponents/LScontainer";
+import { useSelector,useDispatch } from "react-redux";
+import { closeToggle,signinToggle,signupToggle} from "../../../../../Core/store/slice/toggleSlice";
 const HeroSection = () => {
+  const dispatch=useDispatch();
   const [search, setSearch] = useState("");
   const [searchClick, setSearchClick] = useState(0);
   const [searchData, setSearchData] = useState();
+  const click=useSelector((state)=>{
+    return state.toggle["toggle"]
+  })
+  console.log(click)
   const handleSearch = async (e) => {
     setSearch(e.target.value);
     const res = await fetch(
@@ -33,12 +41,12 @@ const HeroSection = () => {
               CU FOODS
             </Link>
             <div className="flex justify-between w-36 md:w-56">
-              <button>Login</button>
-              <button>Sign Up</button>
+              <button onClick={()=>dispatch(signinToggle())}>Login</button>
+              <button onClick={()=>dispatch(signupToggle())}>Sign Up</button>
             </div>
           </div>
         </div>
-
+        {click!=0?<LScontainer/>:<></>}
         <div className="mt-10 md:mt-5 h-2/3">
           <div className="h-full flex flex-col place-items-center">
             <div className="w-full text-white">
