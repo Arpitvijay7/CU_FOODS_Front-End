@@ -1,0 +1,15 @@
+.unit{
+    cursor: pointer;
+}
+.card{
+    padding-left: 12%;
+    padding-right: 12%;
+}
+
+@media(max-width: 1000px) {
+    .card{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    
+}

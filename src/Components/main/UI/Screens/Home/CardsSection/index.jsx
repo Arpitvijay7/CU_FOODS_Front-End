@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./card";
+import './Card.css'
 
 const CardsSection = () => {
   const data=[
@@ -38,7 +39,7 @@ const CardsSection = () => {
   ]
   return (
     <>
-      <div className="w-full -mt-14">
+      <div className="w-full -mt-14 card">
         <div className="">
           <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto">
