@@ -12,7 +12,7 @@ const CardsSection = () => {
   }, [])
   return (
     <>
-      <div className="w-full -mt-14">
+      <div className="w-full -mt-14 px-[12%] md:px-[5%]">
         <div className="">
           <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto">
