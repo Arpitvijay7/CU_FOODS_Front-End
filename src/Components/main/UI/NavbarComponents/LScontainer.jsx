@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   closeToggle,
@@ -6,12 +6,35 @@ import {
   signupToggle,
 } from "../../../Core/store/slice/toggleSlice";
 const LScontainer = () => {
+  const [loginData,setLoginData]=useState({
+    email:"",
+    password:""
+  })
+  const [signupData,setSignupData]=useState({
+    email:"",
+    password:"",
+    name:""
+  })
+  const handleLoginChange=(e)=>{
+    const {name,value}=e.target
+    setLoginData({...loginData,[name]:value})
+  }
+  const handleSignupChange=(e)=>{
+    const {name,value}=e.target
+    setSignupData({...signupData,[name]:value})
+  }
+  console.log(signupData,loginData)
   const dispatch = useDispatch();
   const click = useSelector((state) => {
     return state.toggle["toggle"];
   });
-  const handleLogin = () => {};
-  const handleRegister = () => {};
+  const handleLogin = (e) => {
+    e.preventDefault()
+    
+  };
+  const handleRegister = (e) => {
+    e.preventDefault()
+  };
   return (
     <div className="fixed top-0 z-10 grid place-items-center">
       <div
@@ -40,17 +63,30 @@ const LScontainer = () => {
         </div>
         {click > 1 ? (
           <form className="p-5">
-            <div className="w-full p-1 border rounded-lg my-4">
-              <input
-                type="email"
-                placeholder="email:  johnDoe@email.com"
+          <div className="w-full p-1 border rounded-lg my-4">
+              <input onChange={(e)=>handleSignupChange(e)}
+              value={signupData["name"]}
+                type="text"
+                placeholder="Name : John Doe"
                 className="p-4 text-xl w-full focus:outline-none"
+                name="name"
               ></input>
             </div>
             <div className="w-full p-1 border rounded-lg my-4">
-              <input
+              <input onChange={(e)=>handleSignupChange(e)}
+              value={signupData["email"]}
+                type="email"
+                placeholder="Email:  johnDoe@email.com"
+                className="p-4 text-xl w-full focus:outline-none"
+                name="email"
+              ></input>
+            </div>
+            <div className="w-full p-1 border rounded-lg my-4">
+              <input onChange={(e)=>handleSignupChange(e)}
+              value={signupData["password"]}
                 type="password"
-                placeholder="password:  *******"
+                name="password"
+                placeholder="Password:  *******"
                 className="p-4 text-xl w-full focus:outline-none"
               ></input>
             </div>
@@ -65,7 +101,7 @@ const LScontainer = () => {
             </p>
             <button
               className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-white"
-              onClick={() => handleLogin}
+              onClick={(e) => handleRegister(e)}
             >
               Register
             </button>
@@ -73,15 +109,19 @@ const LScontainer = () => {
         ) : (
           <form className="p-5">
             <div className="w-full p-1 border rounded-lg my-4">
-              <input
+              <input onChange={(e)=>handleLoginChange(e)}
+                value={loginData["email"]}
                 type="email"
                 placeholder="email:  johnDoe@email.com"
                 className="p-4 text-xl w-full focus:outline-none"
+                name="email"
               ></input>
             </div>
             <div className="w-full p-1 border rounded-lg my-4">
-              <input
+              <input onChange={(e)=>handleLoginChange(e)}
+                value={loginData["password"]}
                 type="password"
+                name="password"
                 placeholder="password:  *******"
                 className="p-4 text-xl w-full focus:outline-none"
               ></input>
@@ -97,7 +137,7 @@ const LScontainer = () => {
             </p>
             <button
               className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-white"
-              onClick={() => handleRegister}
+              onClick={(e) => handleLogin(e)}
             >
               Login
             </button>
