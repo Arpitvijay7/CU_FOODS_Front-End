@@ -5,6 +5,7 @@ import {
   signinToggle,
   signupToggle,
 } from "../../../Core/store/slice/toggleSlice";
+import { loginUser } from "../../../Core/store/slice/userSlice";
 const LScontainer = () => {
   const [loginData,setLoginData]=useState({
     email:"",
@@ -23,17 +24,43 @@ const LScontainer = () => {
     const {name,value}=e.target
     setSignupData({...signupData,[name]:value})
   }
-  console.log(signupData,loginData)
   const dispatch = useDispatch();
   const click = useSelector((state) => {
     return state.toggle["toggle"];
   });
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault()
-    
+    const res=await fetch("http://localhost:4000/api/vi/user/login", {
+      method: "POST",
+      body: JSON.stringify(loginData),
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
+  })
+  const data=await res.json()
+  if(data.success){
+    console.log(data)
+    alert("Login Successfull")
+    dispatch(loginUser())
+    dispatch(closeToggle())
+  }
+
   };
-  const handleRegister = (e) => {
+  const handleRegister =async (e) => {
     e.preventDefault()
+    const res=await fetch("http://localhost:4000/api/vi/user/login", {
+      method: "POST",
+      body: JSON.stringify(loginData),
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
+  })
+  const data=await res.json()
+  if(data.success){
+    console.log(data)
+    alert("registration Successfull")
+    dispatch(signinToggle())
+  }
   };
   return (
     <div className="fixed top-0 z-10 grid place-items-center">
@@ -100,7 +127,7 @@ const LScontainer = () => {
               </span>
             </p>
             <button
-              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-white"
+              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
               onClick={(e) => handleRegister(e)}
             >
               Register
@@ -136,7 +163,7 @@ const LScontainer = () => {
               </span>
             </p>
             <button
-              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-white"
+              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
               onClick={(e) => handleLogin(e)}
             >
               Login
