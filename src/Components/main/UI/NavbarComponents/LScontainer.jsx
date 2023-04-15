@@ -1,17 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   closeToggle,
   signinToggle,
   signupToggle,
 } from "../../../Core/store/slice/toggleSlice";
+import { loginUser } from "../../../Core/store/slice/userSlice";
 const LScontainer = () => {
+  const [loginData,setLoginData]=useState({
+    email:"",
+    password:""
+  })
+  const [signupData,setSignupData]=useState({
+    email:"",
+    password:"",
+    name:""
+  })
+  const handleLoginChange=(e)=>{
+    const {name,value}=e.target
+    setLoginData({...loginData,[name]:value})
+  }
+  const handleSignupChange=(e)=>{
+    const {name,value}=e.target
+    setSignupData({...signupData,[name]:value})
+  }
   const dispatch = useDispatch();
   const click = useSelector((state) => {
     return state.toggle["toggle"];
   });
-  const handleLogin = () => {};
-  const handleRegister = () => {};
+  const handleLogin = async(e) => {
+    e.preventDefault()
+    const res=await fetch("http://localhost:4000/api/vi/user/login", {
+      method: "POST",
+      body: JSON.stringify(loginData),
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
+  })
+  const data=await res.json()
+  if(data.success){
+    console.log(data)
+    alert("Login Successfull")
+    dispatch(loginUser())
+    dispatch(closeToggle())
+  }
+
+  };
+  const handleRegister =async (e) => {
+    e.preventDefault()
+    const res=await fetch("http://localhost:4000/api/vi/user/login", {
+      method: "POST",
+      body: JSON.stringify(loginData),
+      headers: {
+          "Content-type": "application/json; charset=UTF-8"
+      }
+  })
+  const data=await res.json()
+  if(data.success){
+    console.log(data)
+    alert("registration Successfull")
+    dispatch(signinToggle())
+  }
+  };
   return (
     <div className="fixed top-0 z-10 grid place-items-center">
       <div
@@ -40,17 +90,30 @@ const LScontainer = () => {
         </div>
         {click > 1 ? (
           <form className="p-5">
-            <div className="w-full p-1 border rounded-lg my-4">
-              <input
-                type="email"
-                placeholder="email:  johnDoe@email.com"
+          <div className="w-full p-1 border rounded-lg my-4">
+              <input onChange={(e)=>handleSignupChange(e)}
+              value={signupData["name"]}
+                type="text"
+                placeholder="Name : John Doe"
                 className="p-4 text-xl w-full focus:outline-none"
+                name="name"
               ></input>
             </div>
             <div className="w-full p-1 border rounded-lg my-4">
-              <input
+              <input onChange={(e)=>handleSignupChange(e)}
+              value={signupData["email"]}
+                type="email"
+                placeholder="Email:  johnDoe@email.com"
+                className="p-4 text-xl w-full focus:outline-none"
+                name="email"
+              ></input>
+            </div>
+            <div className="w-full p-1 border rounded-lg my-4">
+              <input onChange={(e)=>handleSignupChange(e)}
+              value={signupData["password"]}
                 type="password"
-                placeholder="password:  *******"
+                name="password"
+                placeholder="Password:  *******"
                 className="p-4 text-xl w-full focus:outline-none"
               ></input>
             </div>
@@ -64,8 +127,8 @@ const LScontainer = () => {
               </span>
             </p>
             <button
-              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-white"
-              onClick={() => handleLogin}
+              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
+              onClick={(e) => handleRegister(e)}
             >
               Register
             </button>
@@ -73,15 +136,19 @@ const LScontainer = () => {
         ) : (
           <form className="p-5">
             <div className="w-full p-1 border rounded-lg my-4">
-              <input
+              <input onChange={(e)=>handleLoginChange(e)}
+                value={loginData["email"]}
                 type="email"
                 placeholder="email:  johnDoe@email.com"
                 className="p-4 text-xl w-full focus:outline-none"
+                name="email"
               ></input>
             </div>
             <div className="w-full p-1 border rounded-lg my-4">
-              <input
+              <input onChange={(e)=>handleLoginChange(e)}
+                value={loginData["password"]}
                 type="password"
+                name="password"
                 placeholder="password:  *******"
                 className="p-4 text-xl w-full focus:outline-none"
               ></input>
@@ -96,8 +163,8 @@ const LScontainer = () => {
               </span>
             </p>
             <button
-              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-white"
-              onClick={() => handleRegister}
+              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
+              onClick={(e) => handleLogin(e)}
             >
               Login
             </button>
