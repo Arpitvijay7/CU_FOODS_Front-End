@@ -4,6 +4,7 @@ import Home from '../UI/Screens/Home'
 import Login from '../UI/Screens/Login'
 import Navbar from "../UI/NavbarComponents/index"
 import Footer from '../UI/FooterComponents'
+import ErrorPage from '../UI/Screens/Error'
 const Routings = () => {
   const location=useLocation();
     const isHome = location.pathname === '/';
@@ -14,6 +15,12 @@ const Routings = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+
+
+
+
+
+          <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <Footer />
       </>

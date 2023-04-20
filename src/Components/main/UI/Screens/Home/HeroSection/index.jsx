@@ -2,17 +2,24 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
-import { useSelector,useDispatch } from "react-redux";
-import { closeToggle,signinToggle,signupToggle} from "../../../../../Core/store/slice/toggleSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  closeToggle,
+  signinToggle,
+  signupToggle,
+} from "../../../../../Core/store/slice/toggleSlice";
 const HeroSection = () => {
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const [searchClick, setSearchClick] = useState(0);
   const [searchData, setSearchData] = useState();
-  const click=useSelector((state)=>{
-    return state.toggle["toggle"]
-  })
-  console.log(click)
+  const loggedIn = useSelector((state) => {
+    return state.users["auth"];
+  });
+  const click = useSelector((state) => {
+    return state.toggle["toggle"];
+  });
+
   const handleSearch = async (e) => {
     setSearch(e.target.value);
     const res = await fetch(
@@ -20,17 +27,17 @@ const HeroSection = () => {
     );
     const data = await res.json();
     setSearchClick(1);
-    if(search.length>0){
-    if (data["shops"].length!==0) {
-      setSearchData(data.shops);
-    } else {
-      setSearchData([{name:"No Results Found"}]);
-      setTimeout(()=>{
-        setSearchClick(0)
-        setSearchClick(0)
-      },2000)
+    if (search.length > 0) {
+      if (data["shops"].length !== 0) {
+        setSearchData(data.shops);
+      } else {
+        setSearchData([{ name: "No Results Found" }]);
+        setTimeout(() => {
+          setSearchClick(0);
+          setSearchClick(0);
+        }, 2000);
+      }
     }
-  }
   };
   return (
     <>
@@ -40,21 +47,40 @@ const HeroSection = () => {
             <Link to={"/"} className="font-black">
               CU FOODS
             </Link>
-            <div className="flex justify-between w-36 md:w-56">
-              <button onClick={()=>dispatch(signinToggle())}>Login</button>
-              <button onClick={()=>dispatch(signupToggle())}>Sign Up</button>
-            </div>
+            {loggedIn ? (
+              <>
+                <div className="flex justify-between w-48 text-lg md:text-2xl md:w-64">
+                  <Link to="/myaccount">
+                    My Account
+                  </Link>
+                  <Link to="/cart">
+                    My Cart
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex justify-between w-36 md:w-56">
+                  <button onClick={() => dispatch(signinToggle())}>
+                    Login
+                  </button>
+                  <button onClick={() => dispatch(signupToggle())}>
+                    Sign Up
+                  </button>
+                </div>{" "}
+              </>
+            )}
           </div>
         </div>
-        {click!=0?<LScontainer/>:<></>}
+        {click != 0 ? <LScontainer /> : <></>}
         <div className="mt-10 md:mt-5 h-2/3">
           <div className="h-full flex flex-col place-items-center">
             <div className="w-full text-white">
               <div className="text-6xl font-black">CU FOODS</div>
               <div className="pt-8">
                 <p className="font-semibold text-xl md:text-4xl">
-                  Discover the best food & drinks in{" "}
-                  <span className="font-bold">CU</span>
+                  Discover the best food & drinks in 
+                  <span className="font-bold"> CU</span>
                 </p>
               </div>
             </div>
@@ -85,13 +111,17 @@ const HeroSection = () => {
                     onChange={(e) => handleSearch(e)}
                   ></input>
                 </div>
-                {search.length>0 && (
+                {search.length > 0 && (
                   <>
                     <div className="w-full md:w-2/3 mt-3 rounded-lg bg-white absolute top-24 md:top-12 flex flex-col border-2 border-black">
                       {searchData &&
                         searchData.map((val, index) => {
                           return (
-                            <Link to={"/shops/"+val.name} className="p-5 hover:bg-gray-300 border-b m-1" key={index}>
+                            <Link
+                              to={"/shops/" + val.name}
+                              className="p-5 hover:bg-gray-300 border-b m-1"
+                              key={index}
+                            >
                               {val.name}
                             </Link>
                           );

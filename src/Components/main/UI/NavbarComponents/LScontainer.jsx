@@ -39,7 +39,6 @@ const LScontainer = () => {
   })
   const data=await res.json()
   if(data.success){
-    console.log(data)
     alert("Login Successfull")
     dispatch(loginUser())
     dispatch(closeToggle())
@@ -48,16 +47,15 @@ const LScontainer = () => {
   };
   const handleRegister =async (e) => {
     e.preventDefault()
-    const res=await fetch("http://localhost:4000/api/vi/user/login", {
+    const res=await fetch("http://localhost:4000/api/vi/user/new", {
       method: "POST",
-      body: JSON.stringify(loginData),
+      body: JSON.stringify(signupData),
       headers: {
           "Content-type": "application/json; charset=UTF-8"
       }
   })
   const data=await res.json()
   if(data.success){
-    console.log(data)
     alert("registration Successfull")
     dispatch(signinToggle())
   }
