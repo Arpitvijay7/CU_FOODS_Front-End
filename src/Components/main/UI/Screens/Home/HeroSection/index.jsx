@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
@@ -72,7 +72,7 @@ const HeroSection = () => {
             )}
           </div>
         </div>
-        {click !==0 ? <LScontainer /> : <></>}
+        {click != 0 ? <LScontainer /> : <></>}
         <div className="mt-10 md:mt-5 h-2/3">
           <div className="h-full flex flex-col place-items-center">
             <div className="w-full text-white">
