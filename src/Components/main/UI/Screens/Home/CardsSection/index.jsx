@@ -7,6 +7,7 @@ const CardsSection = () => {
     const res=await fetch("http://localhost:4000/api/vi/shop/getAllShops")
     const dat1=await res.json()
     setData(dat1.shops)
+    
     setLoad(0)
     }
   useEffect(() => {
