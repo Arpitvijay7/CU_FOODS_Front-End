@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Collapse, Dropdown, initTE } from "tw-elements";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../Core/store/slice/userSlice";
 const Navbar = () => {
+  const user=localStorage.getItem("JWT")
   useEffect(() => {
+    if(user){
+      loginUser()
+    }
     initTE({ Collapse, Dropdown });
   }, []);
+  
   return (
     <>
       <nav
