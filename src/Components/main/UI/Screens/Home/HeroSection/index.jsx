@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
@@ -8,8 +8,15 @@ import {
   signinToggle,
   signupToggle,
 } from "../../../../../Core/store/slice/toggleSlice";
+import { loginUser } from "../../../../../Core/store/slice/userSlice";
 const HeroSection = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    const user=localStorage.getItem("JWT")
+    if(user){
+      dispatch(loginUser())
+    }
+  }, []);
   const [search, setSearch] = useState("");
   const [searchClick, setSearchClick] = useState(0);
   const [searchData, setSearchData] = useState();

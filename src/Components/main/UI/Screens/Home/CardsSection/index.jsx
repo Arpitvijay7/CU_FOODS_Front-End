@@ -27,8 +27,8 @@ const CardsSection = () => {
         </div>
       ) : (
         <>
-          <div classNameName="w-full -mt-14 px-[12%] md:px-[5%]">
-            <div classNameName="">
+          <div className="w-full -mt-14 px-[12%] md:px-[5%]">
+            <div className="">
               <section className="text-gray-600 body-font">
                 <div className="container px-5 py-24 mx-auto">
                   <div className="flex flex-wrap -m-4">
