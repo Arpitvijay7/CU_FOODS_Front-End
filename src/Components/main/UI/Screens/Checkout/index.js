@@ -12,7 +12,7 @@ const Checkout = () => {
           </p>
           <div class="mt-8  rounded-lg border bg-white px-2 py-4 sm:px-6">
             <div class="flex flex-row rounded-lg bg-white justify-between">
-              <div class="flex flex-col px-4">
+              <div class="flex flex-col px-4 pb-3">
                 <div class="font-bold text-lg flex gap-2">
                   <div>
                     <img className="w-4" src={nveg}></img>
@@ -43,19 +43,23 @@ const Checkout = () => {
             <div class="mt-6 border-t border-b py-2">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-gray-900">Subtotal</p>
-                <p class="font-semibold text-gray-900">$399.00</p>
+                <p class="font-semibold text-gray-900">&#8377; 100.00</p>
               </div>
               <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-gray-900">Shipping</p>
-                <p class="font-semibold text-gray-900">$8.00</p>
+                <p class="text-sm font-medium text-gray-900">GST</p>
+                <p class="font-semibold text-gray-900">&#8377; 10.00</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-medium text-gray-900">Delivery</p>
+                <p class="font-semibold text-gray-900">&#8377; 10.00</p>
               </div>
             </div>
             <div class="mt-6 flex items-center justify-between">
               <p class="text-sm font-medium text-gray-900">Total</p>
-              <p class="text-2xl font-semibold text-gray-900">$408.00</p>
+              <p class="text-2xl font-semibold text-gray-900">&#8377; 120.00</p>
             </div>
           </div>
-          <button class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
+          <button class="mt-4 mb-8 w-full rounded-md bg-rose-600 hover:bg-rose-700 px-6 py-3 font-medium text-white">
             Place Order
           </button>
         </div>
