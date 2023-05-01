@@ -3,7 +3,7 @@ import nveg from "../../../../../Assets/veg:nonveg/nveg.png";
 import veg from "../../../../../Assets/veg:nonveg/veg.png";
 const Checkout = () => {
   return (
-    <>
+    <>  <div className="h-20 w-full hidden sm:block"></div>
       <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div class="px-4 pt-8">
           <p class="text-xl font-medium text-center">Order Summary</p>
