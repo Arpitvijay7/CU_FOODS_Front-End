@@ -1,18 +1,23 @@
-import React,{useEffect} from "react";
-import {
-  Dropdown,
-  Collapse,
-  initTE,
-} from "tw-elements";
+
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Collapse, Dropdown, initTE } from "tw-elements";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../Core/store/slice/userSlice";
 const Navbar = () => {
+  const user=localStorage.getItem("JWT")
   useEffect(() => {
-    initTE({ Dropdown, Collapse });
-  }, [])
+    if(user){
+      loginUser()
+    }
+    initTE({ Collapse, Dropdown });
+  }, []);
   
   return (
     <>
       <nav
         class="relative flex w-full flex-wrap items-center justify-between bg-neutral-900 py-2 text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start lg:py-4"
+        
         data-te-navbar-ref
       >
         <div class="flex w-full flex-wrap items-center justify-between px-3">
@@ -49,6 +54,7 @@ const Navbar = () => {
               Navbar
             </a>
 
+
             <ul
               class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
               data-te-navbar-nav-ref
@@ -65,6 +71,7 @@ const Navbar = () => {
               <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                 <a
                   class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+
                   href="#"
                   data-te-nav-link-ref
                 >
@@ -74,6 +81,7 @@ const Navbar = () => {
               <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                 <a
                   class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+
                   href="#"
                   data-te-nav-link-ref
                 >
@@ -85,6 +93,7 @@ const Navbar = () => {
           <div class="relative flex items-center">
             <a
               class="mr-4 text-white opacity-60 hover:opacity-80 focus:opacity-80"
+
               href="#"
             >
               <span class="[&>svg]:w-5">
@@ -98,9 +107,11 @@ const Navbar = () => {
                 </svg>
               </span>
             </a>
+
             <div class="relative" data-te-dropdown-ref>
               <a
                 class="hidden-arrow mr-4 flex items-center text-white opacity-60 hover:opacity-80 focus:opacity-80"
+
                 href="#"
                 id="dropdownMenuButton1"
                 role="button"
@@ -122,6 +133,7 @@ const Navbar = () => {
                   </svg>
                 </span>
                 <span class="absolute -mt-2.5 ml-2 rounded-full bg-red-700 px-1.5 py-0 text-xs text-white">
+
                   1
                 </span>
               </a>
@@ -172,7 +184,9 @@ const Navbar = () => {
                 <img
                   src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
                   class="rounded-full"
+
                   style={{"height": "25px", "width": "25px"}}
+
                   alt=""
                   loading="lazy"
                 />
