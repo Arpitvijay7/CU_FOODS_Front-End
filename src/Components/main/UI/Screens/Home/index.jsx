@@ -3,10 +3,10 @@ import HeroSection from "./HeroSection/index"
 import CardsSection from "./CardsSection/index"
 const Home = () => {
   return (
-    <>
+    <div className='text-center'>
       <HeroSection/>
       <CardsSection/>
-    </>
+    </div>
   )
 }
 
