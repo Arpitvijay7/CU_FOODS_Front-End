@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Collapse, Dropdown, initTE } from "tw-elements";
@@ -15,16 +16,17 @@ const Navbar = () => {
   return (
     <>
       <nav
-        class="flex-no-wrap relative flex w-full items-center justify-between bg-neutral-100 py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
+        class="relative flex w-full flex-wrap items-center justify-between bg-neutral-900 py-2 text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start lg:py-4"
+        
         data-te-navbar-ref
       >
         <div class="flex w-full flex-wrap items-center justify-between px-3">
           <button
-            class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+            class="block border-0 bg-transparent px-2 text-neutral-200 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 lg:hidden"
             type="button"
             data-te-collapse-init
-            data-te-target="#navbarSupportedContent1"
-            aria-controls="navbarSupportedContent1"
+            data-te-target="#navbarSupportedContent4"
+            aria-controls="navbarSupportedContent4"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
@@ -43,30 +45,23 @@ const Navbar = () => {
               </svg>
             </span>
           </button>
-
           <div
-            class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
-            id="navbarSupportedContent1"
+            class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+            id="navbarSupportedContent4"
             data-te-collapse-item
           >
-            <a
-              class="mb-4 mr-2 mt-3 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0"
-              href="#"
-            >
-              <img
-                src="https://tecdn.b-cdn.net/img/logo/te-transparent-noshadows.webp"
-                style={{ height: " 15px" }}
-                alt=""
-                loading="lazy"
-              />
+            <a class="pr-2 text-xl font-semibold text-white" href="#">
+              Navbar
             </a>
+
+
             <ul
               class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
               data-te-navbar-nav-ref
             >
-              <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <li class="my-4 lg:my-0 lg:pr-2" data-te-nav-item-ref>
                 <a
-                  class="text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+                  class="text-white disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
                   href="#"
                   data-te-nav-link-ref
                 >
@@ -75,7 +70,8 @@ const Navbar = () => {
               </li>
               <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                 <a
-                  class="text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                  class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+
                   href="#"
                   data-te-nav-link-ref
                 >
@@ -84,7 +80,8 @@ const Navbar = () => {
               </li>
               <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                 <a
-                  class="text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                  class="p-0 text-white opacity-60 hover:opacity-80 focus:opacity-80 disabled:text-black/30 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+
                   href="#"
                   data-te-nav-link-ref
                 >
@@ -95,7 +92,8 @@ const Navbar = () => {
           </div>
           <div class="relative flex items-center">
             <a
-              class="mr-4 text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              class="mr-4 text-white opacity-60 hover:opacity-80 focus:opacity-80"
+
               href="#"
             >
               <span class="[&>svg]:w-5">
@@ -112,7 +110,8 @@ const Navbar = () => {
 
             <div class="relative" data-te-dropdown-ref>
               <a
-                class="hidden-arrow mr-4 flex items-center text-neutral-500 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+                class="hidden-arrow mr-4 flex items-center text-white opacity-60 hover:opacity-80 focus:opacity-80"
+
                 href="#"
                 id="dropdownMenuButton1"
                 role="button"
@@ -133,7 +132,8 @@ const Navbar = () => {
                     />
                   </svg>
                 </span>
-                <span class="absolute -mt-2.5 ml-2 rounded-[0.37rem] bg-danger px-[0.45em] py-[0.2em] text-[0.6rem] leading-none text-white">
+                <span class="absolute -mt-2.5 ml-2 rounded-full bg-red-700 px-1.5 py-0 text-xs text-white">
+
                   1
                 </span>
               </a>
@@ -171,6 +171,7 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
+
             <div class="relative" data-te-dropdown-ref>
               <a
                 class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
@@ -183,11 +184,14 @@ const Navbar = () => {
                 <img
                   src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
                   class="rounded-full"
-                  style={{ height: "25px", width: "25px" }}
+
+                  style={{"height": "25px", "width": "25px"}}
+
                   alt=""
                   loading="lazy"
                 />
               </a>
+
               <ul
                 class="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
                 aria-labelledby="dropdownMenuButton2"

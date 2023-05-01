@@ -2,7 +2,7 @@ import './App.css';
 import Routings from './Components/main/Routes/Routes';
 function App() {
   return (
-    <div className="App">
+    <div className="">
       <Routings/>
     </div>
   );
