@@ -12,6 +12,7 @@ const Menu = ({ id }) => {
     }
   };
   useEffect(() => {
+    window.scrollTo(0, 0)
     fetchMenu();
   }, []);
 
@@ -31,7 +32,7 @@ const Menu = ({ id }) => {
               <div className="flex flex-wrap -m-4">
                 {menu &&
                   menu.map((val, index) => {
-                    return(
+                    return(<>
                     <MenuItemCard
                       key={index}
                       price={val.price}
@@ -41,7 +42,8 @@ const Menu = ({ id }) => {
                       ratings={val.rating}
                       id={val._id}
                     />
-
+                    
+                    </>
                     )
                   })}
               </div>

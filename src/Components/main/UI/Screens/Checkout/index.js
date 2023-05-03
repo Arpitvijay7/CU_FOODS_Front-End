@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import nveg from "../../../../../Assets/veg:nonveg/nveg.png";
 import veg from "../../../../../Assets/veg:nonveg/veg.png";
 const Checkout = () => {
@@ -44,7 +44,10 @@ const Checkout = () => {
     setAddress({ ...address, [name]: value });
     console.log(name, value);
   };
-
+   useEffect(() => {
+    window.scrollTo(0, 0)
+   }, [])
+   
   return (
     <>
       {" "}

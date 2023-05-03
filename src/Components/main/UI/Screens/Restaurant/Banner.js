@@ -25,7 +25,7 @@ const Banner = ({id}) => {
         </div>
         <div className="p-3 pt-5">
           <div class="p-5 shadow-lg rounded-lg md:mt-0 md:rounded-none w-full bg-green-100 flex justify-between">
-            <div className="md:w-[30vw]">
+            <div className="md:w-[30vw] md:pt-3">
               <h2 class="text-gray-900 title-font text-2xl font-bold pb-2">
                 {shop.name}
               </h2>

@@ -46,6 +46,7 @@ const HeroSection = () => {
       }
     }
   };
+  
   return (
     <>
       <div className="max-w-screen bg-cover h-[60vh] HeroSection relative">
