@@ -8,6 +8,7 @@ import ErrorPage from '../UI/Screens/Error'
 import ForgotPwd from '../UI/Screens/Forgotpassword/forgotPwd'
 import ResetPwd from '../UI/Screens/Resetpassword/resetPwd'
 import Checkout from '../UI/Screens/Checkout'
+import Restaurant from '../UI/Screens/Restaurant'
 const Routings = () => {
   const location=useLocation();
     const isHome = location.pathname === '/';
@@ -21,6 +22,7 @@ const Routings = () => {
           <Route path='/resetpassword' element={<ResetPwd/>}/>
           <Route path='/forgotpassword' element={<ForgotPwd/>}/>
           <Route path='/checkout' element={<Checkout/>}/>
+          <Route path='/restaurant/:id' element={<Restaurant/>}/>
 
 
 

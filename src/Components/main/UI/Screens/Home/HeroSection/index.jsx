@@ -51,9 +51,7 @@ const HeroSection = () => {
       <div className="max-w-screen bg-cover h-[60vh] HeroSection relative">
         <div className="text-xl font-bold sm:text-xl md:text-2xl lg:text-3xl text-white max-w-screen">
           <div className="flex justify-between p-5 lg:p-10">
-            <Link to={"/"} className="font-black">
-              CU FOODS
-            </Link>
+           <p></p>
             {loggedIn ? (
               <>
                 <div className="flex justify-between w-48 text-lg md:text-2xl md:w-64">

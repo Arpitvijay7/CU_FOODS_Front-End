@@ -51,7 +51,7 @@ const Navbar = () => {
             data-te-collapse-item
           >
             <a class="pr-2 text-xl font-semibold text-white" href="#">
-              Navbar
+              CU FOODS
             </a>
 
 
