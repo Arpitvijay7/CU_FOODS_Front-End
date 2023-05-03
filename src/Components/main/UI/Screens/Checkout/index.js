@@ -103,7 +103,7 @@ const Checkout = () => {
           </div>
           {deliveryCheckbox ? (
             <div className="p-5 mt-5 rounded-lg border  border-black">
-              <form>
+              <div>
                 <div class="md:w-full bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
                   <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
                     Delivery Address
@@ -145,7 +145,7 @@ const Checkout = () => {
                     delivery partner. We will not be responsible for it.
                   </p>
                 </div>
-              </form>
+              </div>
             </div>
           ) : (
             <></>
