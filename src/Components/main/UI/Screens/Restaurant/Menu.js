@@ -8,7 +8,6 @@ const Menu = ({ id }) => {
     const data = await res.json();
     if (data.message === "Success") {
       setMenu(data.Menu);
-      console.log(data)
       setLoad(0);
     }
   };
@@ -32,7 +31,7 @@ const Menu = ({ id }) => {
               <div className="flex flex-wrap -m-4">
                 {menu &&
                   menu.map((val, index) => {
-                    return(<>
+                    return(
                     <MenuItemCard
                       key={index}
                       price={val.price}
@@ -42,7 +41,7 @@ const Menu = ({ id }) => {
                       ratings={val.rating}
                       id={val._id}
                     />
-                    </>
+
                     )
                   })}
               </div>
