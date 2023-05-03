@@ -166,10 +166,10 @@ const Checkout = () => {
                 <p class="text-sm font-medium text-gray-900">GST</p>
                 <p class="font-semibold text-gray-900">&#8377; 10.00</p>
               </div>
-              <div class="flex items-center justify-between">
+              {deliveryCheckbox?<div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-gray-900">Delivery</p>
                 <p class="font-semibold text-gray-900">&#8377; 10.00</p>
-              </div>
+              </div>:null}
             </div>
             <div class="mt-6 flex items-center justify-between">
               <p class="text-sm font-medium text-gray-900">Total</p>
