@@ -14,7 +14,7 @@ const Navbar = () => {
   }, []);
   
   return (
-    <>
+    <div className="">
       <nav
         class="relative flex w-full flex-wrap items-center justify-between bg-neutral-900 py-2 text-neutral-200 shadow-lg lg:flex-wrap lg:justify-start lg:py-4"
         
@@ -229,7 +229,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 
