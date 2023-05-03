@@ -42,33 +42,6 @@ const Menu = ({ id }) => {
                       ratings={val.rating}
                       id={val._id}
                     />
-                    <MenuItemCard
-                      key={index}
-                      price={val.price}
-                      name={val.name}
-                      imgLink={val.images}
-                      details={val.description}
-                      ratings={val.rating}
-                      id={val._id}
-                    />
-                    <MenuItemCard
-                      key={index}
-                      price={val.price}
-                      name={val.name}
-                      imgLink={val.images}
-                      details={val.description}
-                      ratings={val.rating}
-                      id={val._id}
-                    />
-                    <MenuItemCard
-                      key={index}
-                      price={val.price}
-                      name={val.name}
-                      imgLink={val.images}
-                      details={val.description}
-                      ratings={val.rating}
-                      id={val._id}
-                    />
                     </>
                     )
                   })}
