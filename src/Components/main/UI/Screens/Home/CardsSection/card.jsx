@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import pic from "../../../../../../Assets/Homepage/img.png"
 const Card = (props) => {
   return (
     <>
         <Link to={"/restaurant/"+props.id} class="p-4 md:w-1/3 ease-in-out duration-300 hover:scale-105 cursor-pointer">
                   <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                     <img
-                      class="lg:h-48 md:h-36 w-full object-cover object-center"
-                      src={props.image}
+                      class="lg:h-48 md:h-36 w-full object-stretch object-center"
+                      src={pic}
                       alt="blog"
                     />
                     <div class="p-6">
