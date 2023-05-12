@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
@@ -8,13 +8,13 @@ import {
   signinToggle,
   signupToggle,
 } from "../../../../../Core/store/slice/toggleSlice";
-import { loginUser } from "../../../../../Core/store/slice/userSlice";
+import { loginUser,logoutUser } from "../../../../../Core/store/slice/userSlice";
 const HeroSection = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const user=localStorage.getItem("JWT")
-    if(user){
-      dispatch(loginUser())
+    let user = localStorage.getItem("JWT")
+    if (user) {
+      dispatch(loginUser());
     }
   }, []);
   const [search, setSearch] = useState("");
@@ -46,22 +46,38 @@ const HeroSection = () => {
       }
     }
   };
-  
+  const handleLogout=()=>{
+    localStorage.removeItem()
+    dispatch(logoutUser())
+  }
+
   return (
     <>
       <div className="max-w-screen bg-cover h-[60vh] HeroSection relative">
         <div className="text-xl font-bold sm:text-xl md:text-2xl lg:text-3xl text-white max-w-screen">
           <div className="flex justify-between p-5 lg:p-10">
-           <p></p>
+            <p></p>
             {loggedIn ? (
               <>
-                <div className="flex justify-between w-48 text-lg md:text-2xl md:w-64">
-                  <Link to="/myaccount">
-                    My Account
-                  </Link>
-                  <Link to="/cart">
-                    My Cart
-                  </Link>
+                <div className="flex justify-between w-56 md:w-[20vw] text-lg md:text-2xl">
+                  <Link to="/myaccount">My Account</Link>
+                  <button onClick={()=>handleLogout()} className="flex ml-2">
+                    Logout{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 mt-1 ml-1 rotate-180"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </>
             ) : (
@@ -85,7 +101,7 @@ const HeroSection = () => {
               <div className="text-6xl font-black">CU FOODS</div>
               <div className="pt-8">
                 <p className="font-semibold text-xl md:text-4xl">
-                  Discover the best food & drinks in 
+                  Discover the best food & drinks in
                   <span className="font-bold"> CU</span>
                 </p>
               </div>
