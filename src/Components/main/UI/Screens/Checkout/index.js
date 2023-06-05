@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import nveg from "../../../../../Assets/veg:nonveg/nveg.png";
-import veg from "../../../../../Assets/veg:nonveg/veg.png";
+import nveg from "../../../../../Assets/veg-nonveg/nveg.png";
+import veg from "../../../../../Assets/veg-nonveg/veg.png";
 const Checkout = () => {
   const [deliveryCheckbox, setDeliveryCheckbox] = useState(0);
   const hostelData = [
