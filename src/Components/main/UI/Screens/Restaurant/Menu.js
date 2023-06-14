@@ -8,6 +8,7 @@ const Menu = ({ id }) => {
     const data = await res.json();
     if (data.message === "Success") {
       setMenu(data.Menu);
+      console.log(data.Menu)
       setLoad(0);
     }
   };
@@ -36,11 +37,15 @@ const Menu = ({ id }) => {
                     <MenuItemCard
                       key={index}
                       price={val.price}
+                      price_half={val.price_half}
+                      price_full={val.price_full}
                       name={val.name}
                       imgLink={val.images}
                       details={val.description}
                       ratings={val.rating}
                       id={val._id}
+                      dualOption={val.DualOptions}
+                      shop={val.shop}
                     />
                     
                     </>

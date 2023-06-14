@@ -11,7 +11,7 @@ const LScontainer = () => {
   const futureDate = new Date(today);
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
-  console.log(formattedDate);
+
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -45,10 +45,14 @@ const LScontainer = () => {
     });
     const data = await res.json();
     if (data.success) {
+      document.cookie = `token=${data.token}; expires=${formattedDate};`
       localStorage.setItem("JWT",data.token)
       alert("Login Successfull");
       dispatch(loginUser());
       dispatch(closeToggle());
+    }
+    else{
+      alert("login unsuccessfull")
     }
   };
   const handleRegister = async (e) => {

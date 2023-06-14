@@ -47,7 +47,9 @@ const HeroSection = () => {
     }
   };
   const handleLogout=()=>{
-    localStorage.removeItem()
+    const token =document.cookie
+    document.cookie = `token=${token}; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
+    localStorage.clear()
     dispatch(logoutUser())
   }
 
