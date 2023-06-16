@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../../Core/API/endpoint";
 const MenuItemCard = ({
   name,
   imgLink,
@@ -36,17 +37,15 @@ const MenuItemCard = ({
     console.log(item);
     console.log(config);
     console.log(
-      "http://localhost:4000/api/vi/cart/addToCart/" + id + "/" + config
+      BASE_URL+"api/vi/cart/addToCart/" + id + "/" + config
     );
     const res = await fetch(
-      "http://localhost:4000/api/vi/cart/addToCart/" + id + "/" + config,
+      BASE_URL+"cart/addToCart/" + id + "/" + config,
       {
-        method: "POST",
         headers: {
           "Content-Type": "application/json",
           token,
         },
-        body: JSON.stringify(item),
       }
     );
     const data = await res.json();

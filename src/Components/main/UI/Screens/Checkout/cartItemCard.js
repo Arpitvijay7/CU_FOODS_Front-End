@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import {BASE_URL} from "../../../../Core/API/endpoint"
 const CartItem = ({ name, price, quantity, option, id }) => {
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const token = localStorage.getItem("JWT");
@@ -8,7 +8,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   const handleQuantityIncrease = async () => {
     setLoading(1);
     const res = await fetch(
-      "http://localhost:4000/api/vi/cart/increaseQuantity/" + id,
+      {BASE_URL}+"cart/increaseQuantity/" + id,
       {
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   const handleQuantityDecrease = async () => {
     setLoading(1);
     const res = await fetch(
-      "http://localhost:4000/api/vi/cart/decreaseQuantity/" + id,
+      {BASE_URL}+"cart/decreaseQuantity/" + id,
       {
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   const handleRemoveItem=async ()=>{
     setLoading(1);
     const res = await fetch(
-      "http://localhost:4000/api/vi/cart/removeFromCart/" + id,
+      {BASE_URL}+"cart/removeFromCart/" + id,
       {
         method:"DELETE",
         headers: {

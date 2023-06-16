@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { BASE_URL } from "../../../Core/API/endpoint";
 import {
   closeToggle,
   signinToggle,
@@ -36,7 +37,7 @@ const LScontainer = () => {
   });
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/api/vi/user/login", {
+    const res = await fetch(BASE_URL+"user/login", {
       method: "POST",
       body: JSON.stringify(loginData),
       headers: {
@@ -57,7 +58,7 @@ const LScontainer = () => {
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/api/vi/user/new", {
+    const res = await fetch(BASE_URL+"user/new", {
       method: "POST",
       body: JSON.stringify(signupData),
       headers: {

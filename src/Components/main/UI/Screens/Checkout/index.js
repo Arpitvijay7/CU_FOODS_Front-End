@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "./cartItemCard";
+import { BASE_URL } from "../../../../Core/API/endpoint";
 const Checkout = () => {
   const [deliveryCheckbox, setDeliveryCheckbox] = useState(0);
   const [cartItems,setCartItems]=useState()
@@ -46,7 +47,7 @@ const Checkout = () => {
   };
   const fetchUserCart=async()=>{
     const token=localStorage.getItem("JWT")
-    const res=await fetch("http://localhost:4000/api/vi/cart/getAllfromCart",{
+    const res=await fetch({BASE_URL}+"cart/getAllfromCart",{
       headers:{
         "Content-Type": "application/json",
           token,

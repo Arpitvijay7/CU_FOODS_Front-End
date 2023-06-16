@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import MenuItemCard from "./MenuItemCard.js";
+import { BASE_URL } from "../../../../Core/API/endpoint.js";
 const Menu = ({ id }) => {
   const [menu, setMenu] = useState([]);
   const [load, setLoad] = useState(1);
   const fetchMenu = async () => {
-    const res = await fetch("http://localhost:4000/api/vi/shop/getMenu/" + id);
+    const res = await fetch({BASE_URL}+"shop/getMenu/" + id);
     const data = await res.json();
     if (data.message === "Success") {
       setMenu(data.Menu);

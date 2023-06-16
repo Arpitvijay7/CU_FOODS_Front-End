@@ -1,0 +1,1 @@
+export const BASE_URL="https://cu-foodz.onrender.com/api/vi/"
