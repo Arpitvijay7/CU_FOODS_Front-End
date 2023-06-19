@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
 import { useSelector, useDispatch } from "react-redux";
+import { BASE_URL } from "../../../../../Core/API/endpoint";
 import {
   closeToggle,
   signinToggle,
@@ -30,7 +31,7 @@ const HeroSection = () => {
   const handleSearch = async (e) => {
     setSearch(e.target.value);
     const res = await fetch(
-      "http://localhost:4000/api/vi/shop/getAllShops?keyword=" + search
+      `${BASE_URL}shop/getAllShops?keyword=${search}`
     );
     const data = await res.json();
     setSearchClick(1);
@@ -47,7 +48,9 @@ const HeroSection = () => {
     }
   };
   const handleLogout=()=>{
-    localStorage.removeItem()
+    const token =document.cookie
+    document.cookie = `token=${token}; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
+    localStorage.clear()
     dispatch(logoutUser())
   }
 

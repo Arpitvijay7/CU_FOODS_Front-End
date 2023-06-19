@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { BASE_URL } from "../../../Core/API/endpoint";
 import {
   closeToggle,
   signinToggle,
@@ -11,7 +12,7 @@ const LScontainer = () => {
   const futureDate = new Date(today);
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
-  console.log(formattedDate);
+
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -36,7 +37,7 @@ const LScontainer = () => {
   });
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/api/vi/user/login", {
+    const res = await fetch(`${BASE_URL}user/login`, {
       method: "POST",
       body: JSON.stringify(loginData),
       headers: {
@@ -45,15 +46,19 @@ const LScontainer = () => {
     });
     const data = await res.json();
     if (data.success) {
+      document.cookie = `token=${data.token}; expires=${formattedDate};`
       localStorage.setItem("JWT",data.token)
       alert("Login Successfull");
       dispatch(loginUser());
       dispatch(closeToggle());
     }
+    else{
+      alert("login unsuccessfull")
+    }
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:4000/api/vi/user/new", {
+    const res = await fetch(`${BASE_URL}user/new`, {
       method: "POST",
       body: JSON.stringify(signupData),
       headers: {
