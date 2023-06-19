@@ -31,7 +31,7 @@ const HeroSection = () => {
   const handleSearch = async (e) => {
     setSearch(e.target.value);
     const res = await fetch(
-      {BASE_URL}+"shop/getAllShops?keyword=" + search
+      `${BASE_URL}shop/getAllShops?keyword=${search}`
     );
     const data = await res.json();
     setSearchClick(1);

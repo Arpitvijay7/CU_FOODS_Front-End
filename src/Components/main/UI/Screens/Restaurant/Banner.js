@@ -3,7 +3,7 @@ import {BASE_URL} from "../../../../Core/API/endpoint"
 const Banner = ({id}) => {
   const [shop,setShop]=useState("");
   const fetchShop=async ()=>{
-    const res=await fetch({BASE_URL}+"shop/getShopDetail/"+id)
+    const res=await fetch(`${BASE_URL}shop/getShopDetail/${id}`)
     const data=await res.json()
     if(data.success){
       setShop(data.shop)

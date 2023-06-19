@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {BASE_URL} from "../../../../Core/API/endpoint"
+import { BASE_URL } from "../../../../Core/API/endpoint";
 const CartItem = ({ name, price, quantity, option, id }) => {
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const token = localStorage.getItem("JWT");
@@ -7,15 +7,12 @@ const CartItem = ({ name, price, quantity, option, id }) => {
 
   const handleQuantityIncrease = async () => {
     setLoading(1);
-    const res = await fetch(
-      {BASE_URL}+"cart/increaseQuantity/" + id,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          token,
-        },
-      }
-    );
+    const res = await fetch(`${BASE_URL}cart/increaseQuantity/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        token,
+      },
+    });
     const responseData = await res.json();
     console.log(responseData);
     if (responseData.message === "quantity increased successfully") {
@@ -27,15 +24,12 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   };
   const handleQuantityDecrease = async () => {
     setLoading(1);
-    const res = await fetch(
-      {BASE_URL}+"cart/decreaseQuantity/" + id,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          token,
-        },
-      }
-    );
+    const res = await fetch(`${BASE_URL}cart/decreaseQuantity/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        token,
+      },
+    });
     const responseData = await res.json();
     console.log(responseData);
     if (responseData.message === "quantity decreased successfully") {
@@ -44,18 +38,15 @@ const CartItem = ({ name, price, quantity, option, id }) => {
     }
     setLoading(0);
   };
-  const handleRemoveItem=async ()=>{
+  const handleRemoveItem = async () => {
     setLoading(1);
-    const res = await fetch(
-      {BASE_URL}+"cart/removeFromCart/" + id,
-      {
-        method:"DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          token,
-        },
-      }
-    );
+    const res = await fetch(`${BASE_URL}cart/removeFromCart/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        token,
+      },
+    });
     const responseData = await res.json();
     console.log(responseData);
     if (responseData.message === "Product removed from cart Successfully") {
@@ -63,9 +54,9 @@ const CartItem = ({ name, price, quantity, option, id }) => {
     } else {
     }
     setLoading(0);
-  }
+  };
   return (
-    <div className={`${itemQuantity?"":"hidden"}`}>
+    <div className={`${itemQuantity ? "" : "hidden"}`}>
       <div class={` flex flex-row rounded-lg bg-white justify-between mt-4`}>
         <div class="flex flex-col px-4 pb-3">
           <div class="font-bold text-lg">{name}</div>
@@ -74,7 +65,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
         </div>
         <div className="flex">
           <button onClick={() => (loading ? null : handleQuantityIncrease())}>
-            <p className="border py-1 px-3 sm:px-5 sm:py-3">+</p>
+            <p className="border py-1 px-3 sm:px-5 sm:py-3 rounded-l">+</p>
           </button>
           {loading ? (
             <button className="hover:cursor-default pl-2">
@@ -101,9 +92,12 @@ const CartItem = ({ name, price, quantity, option, id }) => {
             </button>
           )}
           <button onClick={() => (loading ? null : handleQuantityDecrease())}>
-            <p className="border py-1 px-3 sm:px-5 sm:py-3">-</p>
+            <p className="border py-1 px-3 sm:px-5 sm:py-3 rounded-r">-</p>
           </button>
-          <button className="pl-5" onClick={() => (loading ? null : handleRemoveItem())}>
+          <button
+            className="pl-5"
+            onClick={() => (loading ? null : handleRemoveItem())}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

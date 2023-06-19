@@ -5,7 +5,7 @@ const CardsSection = () => {
   const [data, setData] = useState();
   const [load, setLoad] = useState(1);
   const fetchData = async () => {
-    const res = await fetch({BASE_URL}+"shop/getAllShops");
+    const res = await fetch(`${BASE_URL}shop/getAllShops`);
     const dat1 = await res.json();
     setData(dat1.shops);
     setLoad(0);

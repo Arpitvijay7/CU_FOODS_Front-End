@@ -37,7 +37,7 @@ const LScontainer = () => {
   });
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch(BASE_URL+"user/login", {
+    const res = await fetch(`${BASE_URL}user/login`, {
       method: "POST",
       body: JSON.stringify(loginData),
       headers: {
@@ -58,7 +58,7 @@ const LScontainer = () => {
   };
   const handleRegister = async (e) => {
     e.preventDefault();
-    const res = await fetch(BASE_URL+"user/new", {
+    const res = await fetch(`${BASE_URL}user/new`, {
       method: "POST",
       body: JSON.stringify(signupData),
       headers: {

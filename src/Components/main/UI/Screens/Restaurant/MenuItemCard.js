@@ -18,43 +18,47 @@ const MenuItemCard = ({
   const [config, setConfig] = useState("half");
   const [loading, setLoading] = useState(0);
   const [added, setAdded] = useState(0);
+  const [replaceCartToggle,setReplaceCartToggle]=useState(0)
   const ref = useRef(null);
   const handleAddToCartClick = () => {
     categ ? setCateg(0) : setCateg(1);
     height === "0vh" ? setHeight("27vh") : setHeight("0vh");
   };
+  const handleReplaceCartAcceptance=()=>{
+    setReplaceCartToggle(0)
+  }
+  const handleReplaceCartRejection=()=>{
+    setReplaceCartToggle(0)
+  }
   const handleAddToCartAction = async () => {
-    setLoading(1);
-    console.log(config);
-    const item = {
-      name,
-      option: config,
-      price: config == "half" ? (price_half ? price_half : price) : price_full,
-      quantity: 1,
-      shop,
-    };
-    const token = localStorage.getItem("JWT");
-    console.log(item);
-    console.log(config);
-    console.log(
-      BASE_URL+"api/vi/cart/addToCart/" + id + "/" + config
-    );
-    const res = await fetch(
-      BASE_URL+"cart/addToCart/" + id + "/" + config,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          token,
-        },
-      }
-    );
-    const data = await res.json();
-    console.log(data);
-    if (data.message==="Item Successfully added in Cart") {
-      setAdded(1);
-      setLoading(0);
-    } else {
-      setLoading(0);
+      setLoading(1);
+      const item = {
+        name,
+        option: config,
+        price: config == "half" ? (price_half ? price_half : price) : price_full,
+        quantity: 1,
+        shop,
+      };
+      const token = localStorage.getItem("JWT");
+      console.log(item);
+      console.log(config);
+      console.log(`${BASE_URL}cart/addToCart/${id}/${config}`);
+      const res = await fetch(
+        `${BASE_URL}cart/addToCart/${id}/${config}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            token,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      if (data.message==="Item Successfully added in Cart") {
+        setAdded(1);
+        setLoading(0);
+      } else {
+        setLoading(0);
     }
   };
   return (
@@ -185,6 +189,15 @@ const MenuItemCard = ({
           )}
         </div>
       </div>
+      {replaceCartToggle? <div className="backdrop-blur w-screen h-screen fixed top-0 left-0 right-0 grid place-items-center">
+                  <div className="h-max w-[80vw] sm:w-[50vw] lg:w-[30vw] bg-white border-2 rounded-lg border-rose-400 shadow-xl py-10 px-10 md:px-20">
+                    <div className="font-bold text-xl text-center">There is already an item from different shop. Do you want to replace them?</div>
+                    <div className="flex justify-between mt-10">
+                      <button onClick={()=>handleReplaceCartAcceptance()} className="bg-white hover:bg-rose-600 border-2 border-red-600 hover:text-white w-[45%] rounded-lg h-14">No</button>
+                      <button onClick={()=>handleReplaceCartRejection()} className="bg-white hover:bg-rose-600 border-2 border-red-600 hover:text-white w-[45%] rounded-lg h-14">Yes</button>
+                    </div>
+                  </div>
+        </div>:null}
     </>
   );
 };
