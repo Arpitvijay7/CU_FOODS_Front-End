@@ -5,6 +5,7 @@ const Checkout = () => {
   const [deliveryCheckbox, setDeliveryCheckbox] = useState(0);
   const [cartItems,setCartItems]=useState([])
   const [loading,setLoading]=useState(1)
+  const [totalPrice,setTotalPrice]=useState(0)
   const hostelData = [
     {
       name: "NC1",
@@ -96,7 +97,7 @@ const Checkout = () => {
                 />
               </svg>
             </div>:<>{cartItems && cartItems.map((val,index)=>{
-              return <CartItem key={index} name={val.name} price={val.price} option={val.Option} quantity={val.quantity} id={val._id}></CartItem>
+              return <CartItem key={index} name={val.name} price={val.price} option={val.Option} quantity={val.quantity} id={val.foodId}></CartItem>
             })}</>}
           </div>
           
@@ -178,7 +179,7 @@ const Checkout = () => {
             <div class="mt-6 border-t border-b py-2">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-gray-900">Subtotal</p>
-                <p class="font-semibold text-gray-900">&#8377; 100.00</p>
+                <p class="font-semibold text-gray-900">&#8377; {totalPrice}</p>
               </div>
               <div class="flex items-center justify-between">
                 <p class="text-sm font-medium text-gray-900">GST</p>
@@ -191,7 +192,7 @@ const Checkout = () => {
             </div>
             <div class="mt-6 flex items-center justify-between">
               <p class="text-sm font-medium text-gray-900">Total</p>
-              <p class="text-2xl font-semibold text-gray-900">&#8377; 120.00</p>
+              <p class="text-2xl font-semibold text-gray-900">&#8377; {deliveryCheckbox?totalPrice+20:totalPrice+10}.00</p>
             </div>
           </div>
           <button class="mt-4 mb-8 w-full rounded-md bg-rose-600 hover:bg-rose-700 px-6 py-3 font-medium text-white">

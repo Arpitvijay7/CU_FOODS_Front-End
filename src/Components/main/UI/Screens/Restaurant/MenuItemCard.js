@@ -22,7 +22,7 @@ const MenuItemCard = ({
   const ref = useRef(null);
   const handleAddToCartClick = () => {
     categ ? setCateg(0) : setCateg(1);
-    height === "0vh" ? setHeight("27vh") : setHeight("0vh");
+    height === "0vh" ? setHeight("100%") : setHeight("0vh");
   };
   const handleReplaceCartAcceptance=()=>{
     setReplaceCartToggle(0)
