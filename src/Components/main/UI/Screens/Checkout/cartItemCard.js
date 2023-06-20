@@ -6,8 +6,10 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   const [loading, setLoading] = useState(0);
 
   const handleQuantityIncrease = async () => {
+    console.log(id)
     setLoading(1);
-    const res = await fetch(`${BASE_URL}cart/increaseQuantity/${id}`, {
+    console.log(`${BASE_URL}cart/increaseQuantity/${id}?option=${option}`)
+    const res = await fetch(`${BASE_URL}cart/increaseQuantity/${id}?option=${option}`, {
       headers: {
         "Content-Type": "application/json",
         token,
@@ -24,7 +26,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   };
   const handleQuantityDecrease = async () => {
     setLoading(1);
-    const res = await fetch(`${BASE_URL}cart/decreaseQuantity/${id}`, {
+    const res = await fetch(`${BASE_URL}cart/decreaseQuantity/${id}?option=${option}`, {
       headers: {
         "Content-Type": "application/json",
         token,
