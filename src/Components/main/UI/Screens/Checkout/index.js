@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "./cartItemCard";
 import { BASE_URL } from "../../../../Core/API/endpoint";
+import axios  from "axios";
 const Checkout = () => {
   const [deliveryCheckbox, setDeliveryCheckbox] = useState(0);
   const [cartItems,setCartItems]=useState([])
   const [loading,setLoading]=useState(1)
   const [totalPrice,setTotalPrice]=useState(0)
+  const [phoneNumber,setPhoneNumber]=useState("")
+  const token=localStorage.getItem("JWT")
   const hostelData = [
     {
       name: "NC1",
@@ -38,6 +41,23 @@ const Checkout = () => {
       name: "Zakir D",
     },
   ];
+
+  function generateUid(length) {
+    let result = ""
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    const charactersLength = characters.length
+    let counter = 0
+    while (counter < length) {
+      result += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      )
+      counter += 1
+    }
+    return result
+  }
+
+
   const [address, setAddress] = useState({
     hostel: "",
     room: "",
@@ -45,10 +65,8 @@ const Checkout = () => {
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
     setAddress({ ...address, [name]: value });
-    console.log(name, value);
   };
   const fetchUserCart=async()=>{
-    const token=localStorage.getItem("JWT")
     const res=await fetch(`${BASE_URL}cart/getAllfromCart`,{
       headers:{
         "Content-Type": "application/json",
@@ -58,10 +76,86 @@ const Checkout = () => {
     const cartData=await res.json();
     if(cartData.message==="Your Cart Items"){
       setCartItems(cartData.cart)
+      setTotalPrice(cartData.totalSum)
     }
     console.log(cartData) 
     setLoading(0)
   }
+
+  const handlePlaceOrderClick=async()=>{
+    const uniqueOrderId=generateUid(20);
+    console.log(uniqueOrderId)
+    const res=await axios.post(`${BASE_URL}order/checkout`,{
+      productId: uniqueOrderId,
+      phoneNumber,
+      totalPrice,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        token,
+      },
+    })
+    console.log(res)
+    var options = {
+      key: "rzp_test_RkPAAly768WLy7",
+      amount: totalPrice * 100, // replace this with totalPrice coming from cart and amount is in paise
+      currency: "INR",
+      name: "CU FOODS",
+      description: "Pay & Checkout",
+      image: "",
+      order_id: res.data.id,
+      handler: async function (response) {
+        const paymentInfo = {
+          id: response.razorpay_payment_id,
+          status: "Payment Successful",
+        }
+
+        const verifyRes = await axios.post(
+          `${BASE_URL}order/verifyOrder`,
+          { checkoutRes: response, orderId: res.data.id }
+        )
+        console.log(verifyRes);
+        // if (verifyRes.data.isVerified === true) {
+        //   console.log(orderDetails);
+        //   const newOrderRes = await axios.post(
+        //     `${BASE_URL}order/new`,
+        //     orderDetails
+        //   )
+        //   console.log(newOrderRes);
+        //   // remove cartItems from local storage
+        //   localStorage.removeItem("productCheckout")
+        //   navigate("../myOrders")
+        // }
+      },
+      prefill: {
+        contact: "9876543210",
+        name: "Twinkle Sharma",
+        email: "smtwinkle@gmail.com",
+      },
+      notes: {
+        description: "Best Course for SDE placements",
+        language:
+          "Available in 4 major Languages JAVA, C/C++, Python, Javascript",
+        access: "This course have Lifetime Access",
+      },
+      theme: {
+        color: "#E11D48",
+      },
+    }
+
+    let razorpayObject = new window.Razorpay(options)
+    console.log(razorpayObject);
+    razorpayObject.on("payment.failed", function (response) {
+      console.log(response);
+      alert("This step of Payment Failed")
+    })
+
+    razorpayObject.open()
+
+
+  }
+
    useEffect(() => {
     window.scrollTo(0, 0)
     fetchUserCart();
@@ -70,19 +164,17 @@ const Checkout = () => {
   return (
     <>
       <div className="h-20 w-full hidden sm:block"></div>
-      <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
-        <div class="px-4 pt-8">
-          <p class="text-xl font-medium text-center">Order Summary</p>
-          <p class="text-gray-400 text-center">
+      <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+        <div className="px-4 pt-8">
+          <p className="text-xl font-medium text-center">Order Summary</p>
+          <p className="text-gray-400 text-center">
             Check your items. And select a payment method.
           </p>
-
-
-          <div class="mt-4 max-h-[60vh] overflow-y-auto rounded-lg border bg-white px-2 py-4 sm:px-6">
+          <div className="mt-4 max-h-[60vh] overflow-y-auto rounded-lg border bg-white px-2 py-4 sm:px-6">
             {loading?<div className="grid place-items-center">
               <svg
                 aria-hidden="true"
-                class="w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
+                className="w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,8 +192,27 @@ const Checkout = () => {
               return <CartItem key={index} name={val.name} price={val.price} option={val.Option} quantity={val.quantity} id={val.foodId}></CartItem>
             })}</>}
           </div>
+          <div className="w-full flex justify-center items-center mt-7 border border-blue-300 p-5  rounded-md">
+            <label
+              className="inline-block pl-[0.15rem] hover:cursor-pointer"
+            >
+             Phone Number :
+            </label>
+            <input
+              className="w-[70%] ml-3 border border-gray-300 h-10 rounded p-5"
+              type="number"
+              min="1000000000"
+              placeholder="9876543210"
+              value={phoneNumber}
+              onChange={(e) =>
+                setPhoneNumber(e.target.value)
+              }
+              id="checkboxDefault"
+            />
+          </div>
           
           <div className="w-full flex justify-center items-center mt-7 bg-gray-50 p-5  rounded-md">
+            
             <input
               className="w-7 h-7 mr-3"
               type="checkbox"
@@ -124,12 +235,12 @@ const Checkout = () => {
           {deliveryCheckbox ? (
             <div className="p-5 mt-5 rounded-lg border  border-black">
               <div>
-                <div class="md:w-full bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
-                  <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
+                <div className="md:w-full bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+                  <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
                     Delivery Address
                   </h2>
-                  <div class="relative mb-4">
-                    <label for="name" class="leading-7 text-sm text-gray-600">
+                  <div className="relative mb-4">
+                    <label for="name" className="leading-7 text-sm text-gray-600">
                       Hostel :
                     </label>
                     <select
@@ -145,8 +256,8 @@ const Checkout = () => {
                         })}
                     </select>
                   </div>
-                  <div class="relative mb-4">
-                    <label for="number" class="leading-7 text-sm text-gray-600">
+                  <div className="relative mb-4">
+                    <label for="number" className="leading-7 text-sm text-gray-600">
                       Room No. :
                     </label>
                     <input
@@ -157,10 +268,10 @@ const Checkout = () => {
                       max="9999"
                       value={address.room}
                       onChange={(e) => handleAddressChange(e)}
-                      class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      className="w-[70%] ml-3 bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     />
                   </div>
-                  <p class="text-xs text-gray-500 mt-3">
+                  <p className="text-xs text-gray-500 mt-3">
                     In case the mentioned delivery address is not found by our
                     delivery partner. We will not be responsible for it.
                   </p>
@@ -171,31 +282,31 @@ const Checkout = () => {
             <></>
           )}
         </div>
-        <div class="h-min mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-          <p class="text-xl font-medium text-center">
+        <div className="h-min mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+          <p className="text-xl font-medium text-center">
             <p className="">Bill Summary</p>
           </p>
-          <div class="">
-            <div class="mt-6 border-t border-b py-2">
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-gray-900">Subtotal</p>
-                <p class="font-semibold text-gray-900">&#8377; {totalPrice}</p>
+          <div className="">
+            <div className="mt-6 border-t border-b py-2">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-gray-900">Subtotal</p>
+                <p className="font-semibold text-gray-900">&#8377; {totalPrice}</p>
               </div>
-              <div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-gray-900">GST</p>
-                <p class="font-semibold text-gray-900">&#8377; 10.00</p>
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-gray-900">GST</p>
+                <p className="font-semibold text-gray-900">&#8377; 10.00</p>
               </div>
-              {deliveryCheckbox?<div class="flex items-center justify-between">
-                <p class="text-sm font-medium text-gray-900">Delivery</p>
-                <p class="font-semibold text-gray-900">&#8377; 10.00</p>
+              {deliveryCheckbox?<div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-gray-900">Delivery</p>
+                <p className="font-semibold text-gray-900">&#8377; 10.00</p>
               </div>:null}
             </div>
-            <div class="mt-6 flex items-center justify-between">
-              <p class="text-sm font-medium text-gray-900">Total</p>
-              <p class="text-2xl font-semibold text-gray-900">&#8377; {deliveryCheckbox?totalPrice+20:totalPrice+10}.00</p>
+            <div className="mt-6 flex items-center justify-between">
+              <p className="text-sm font-medium text-gray-900">Total</p>
+              <p className="text-2xl font-semibold text-gray-900">&#8377; {deliveryCheckbox?totalPrice+20:totalPrice+10}.00</p>
             </div>
           </div>
-          <button class="mt-4 mb-8 w-full rounded-md bg-rose-600 hover:bg-rose-700 px-6 py-3 font-medium text-white">
+          <button onClick={()=>handlePlaceOrderClick()} className="mt-4 mb-8 w-full rounded-md bg-rose-600 hover:bg-rose-700 px-6 py-3 font-medium text-white">
             Place Order
           </button>
         </div>
