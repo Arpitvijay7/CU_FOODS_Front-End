@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {BASE_URL} from "../../../../../Core/API/endpoint"
+import { BASE_URL } from "../../../../../Core/API/endpoint";
 import Card from "./card";
-const CardsSection = () => {
-  const [data, setData] = useState();
-  const [load, setLoad] = useState(1);
-  const fetchData = async () => {
-    const res = await fetch(`${BASE_URL}shop/getAllShops`);
-    const dat1 = await res.json();
-    setData(dat1.shops);
-    setLoad(0);
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+const CardsSection = ({ data, setData, load }) => {
   return (
     <>
       {load ? (
@@ -29,7 +18,7 @@ const CardsSection = () => {
               <section className="text-gray-600 body-font">
                 <div className="container px-5 py-24 mx-auto">
                   <div className="flex flex-wrap -m-4">
-                    {data &&
+                    {data !== [] ? (
                       data.map((val, id) => {
                         return (
                           <Card
@@ -40,7 +29,12 @@ const CardsSection = () => {
                             address={val.description}
                           />
                         );
-                      })}
+                      })
+                    ) : (
+                      <div className="w-full">
+                        <p className="text-center"> No Shops found </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </section>
