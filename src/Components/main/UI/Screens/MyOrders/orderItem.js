@@ -1,38 +1,34 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 const OrderItem = () => {
   useEffect(() => {
-    window.moveTo(0,0)
-  }, [])
-  
+    window.moveTo(0, 0);
+  }, []);
+
   return (
     <>
-      <div className="flex items-center lg:w-full pl-3 mx-auto pb-10 mb-10 border-gray-200 hover:border-2 shadow-md shadow-rose-200 md:p-5 rounded-lg border-rose-500">
-        <div className="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-green-100 text-green-500 flex-shrink-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-full h-full"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+      <div className="lg:w-full pl-3 mx-auto pb-10 mb-10 border-gray-200 hover:border-2 shadow-md md:p-5 rounded-lg">
+        <div className="flex justify-between">
+          <p>Order id:XXXX</p>
+          <p>Order status</p>
         </div>
-        <div className="flex-grow sm:text-left text-left ml-5 mt-6 sm:mt-0">
-          <h2 className="text-gray-900 text-lg title-font font-medium mb-2">
-            Chole Bhature x 2
-          </h2>
-          <p className="leading-relaxed text-base">
-            Rs 146
-          </p>
-          <p>OTP  :  20313</p>
-          <p>Status : Delivered</p>
-          <p>Date: 19 May, 2023</p>
+
+        <p>Payment Status:XP</p>
+
+        <div className="font-black flex justify-between">
+          <div>
+            <p>Punjabi Rasoi</p>
+            <p>Total Items: 2</p>
+            <p>Total Price :1000</p>
+          </div>
+          <div>
+            <p>Address:</p>
+            <p>Zakir A 901</p>
+          </div>
+        </div>
+        <p className="text-center font-bold text-3xl">OTP : 109923</p>
+        <div className="flex justify-between">
+          <p>Order Placed At: 27/1/23 </p>
+          <p>Payment Date: 18/1/23</p>
         </div>
       </div>
     </>
