@@ -1,10 +1,10 @@
+import axios from "axios";
 import React,{useEffect, useState} from "react";
 import {BASE_URL} from "../../../../Core/API/endpoint"
 const Banner = ({id}) => {
   const [shop,setShop]=useState("");
   const fetchShop=async ()=>{
-    const res=await fetch(`${BASE_URL}shop/getShopDetail/${id}`)
-    const data=await res.json()
+    const {data} = await axios(`${BASE_URL}shop/getShopDetail/${id}`)
     if(data.success){
       setShop(data.shop)
     }

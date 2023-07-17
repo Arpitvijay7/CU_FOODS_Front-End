@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 const CartItem = ({ name, price, quantity, option, id }) => {
@@ -9,15 +10,8 @@ const CartItem = ({ name, price, quantity, option, id }) => {
     console.log(id)
     setLoading(1);
     console.log(`${BASE_URL}cart/increaseQuantity/${id}?option=${option}`)
-    const res = await fetch(`${BASE_URL}cart/increaseQuantity/${id}?option=${option}`, {
-      headers: {
-        "Content-Type": "application/json",
-        token,
-      },
-    });
-    const responseData = await res.json();
-    console.log(responseData);
-    if (responseData.message === "quantity increased successfully") {
+    const {data} = await axios(`${BASE_URL}cart/increaseQuantity/${id}?option=${option}`);
+    if (data.message === "quantity increased successfully") {
       setItemQuantity(1 + itemQuantity);
       setLoading(0);
     } else {
@@ -26,15 +20,8 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   };
   const handleQuantityDecrease = async () => {
     setLoading(1);
-    const res = await fetch(`${BASE_URL}cart/decreaseQuantity/${id}?option=${option}`, {
-      headers: {
-        "Content-Type": "application/json",
-        token,
-      },
-    });
-    const responseData = await res.json();
-    console.log(responseData);
-    if (responseData.message === "quantity decreased successfully") {
+    const {data} = await axios(`${BASE_URL}cart/decreaseQuantity/${id}?option=${option}`);
+    if (data.message === "quantity decreased successfully" ) {
       setItemQuantity(itemQuantity - 1);
     } else {
     }
@@ -42,16 +29,8 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   };
   const handleRemoveItem = async () => {
     setLoading(1);
-    const res = await fetch(`${BASE_URL}cart/removeFromCart/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        token,
-      },
-    });
-    const responseData = await res.json();
-    console.log(responseData);
-    if (responseData.message === "Product removed from cart Successfully") {
+    const {data} = await axios.delete(`${BASE_URL}cart/removeFromCart/${id}`);
+    if (data.message === "Product removed from cart Successfully") {
       setItemQuantity(0);
     } else {
     }

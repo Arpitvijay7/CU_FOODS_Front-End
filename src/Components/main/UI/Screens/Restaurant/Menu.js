@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import MenuItemCard from "./MenuItemCard.js";
 import { BASE_URL } from "../../../../Core/API/endpoint.js";
+import axios from "axios";
 const Menu = ({ id }) => {
   const [menu, setMenu] = useState([]);
   const [load, setLoad] = useState(1);
+
   const fetchMenu = async () => {
-    const res = await fetch(`${BASE_URL}shop/getMenu/${id}`);
-    const data = await res.json();
+    const {data} = await axios(`${BASE_URL}shop/getMenu/${id}`);
     if (data.message === "Success") {
       setMenu(data.Menu);
-      console.log(data.Menu)
       setLoad(0);
     }
   };
@@ -41,7 +41,7 @@ const Menu = ({ id }) => {
                       price_half={val.price_half}
                       price_full={val.price_full}
                       name={val.name}
-                      imgLink={val.images}
+                      imgLink={val.image.path}
                       details={val.description}
                       ratings={val.rating}
                       id={val._id}

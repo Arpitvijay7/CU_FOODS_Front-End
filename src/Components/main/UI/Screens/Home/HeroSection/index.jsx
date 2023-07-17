@@ -10,6 +10,7 @@ import {
   signupToggle,
 } from "../../../../../Core/store/slice/toggleSlice";
 import { loginUser,logoutUser } from "../../../../../Core/store/slice/userSlice";
+import axios from "axios";
 const HeroSection = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,6 +22,7 @@ const HeroSection = () => {
   const [search, setSearch] = useState("");
   const [searchClick, setSearchClick] = useState(0);
   const [searchData, setSearchData] = useState();
+  
   const loggedIn = useSelector((state) => {
     return state.users["auth"];
   });
@@ -30,10 +32,10 @@ const HeroSection = () => {
 
   const handleSearch = async (e) => {
     setSearch(e.target.value);
-    const res = await fetch(
+    const {data} = await axios(
       `${BASE_URL}shop/getAllShops?keyword=${search}`
     );
-    const data = await res.json();
+   
     setSearchClick(1);
     if (search.length > 0) {
       if (data["shops"].length !== 0) {
@@ -143,7 +145,7 @@ const HeroSection = () => {
                         searchData.map((val, index) => {
                           return (
                             <Link
-                              to={"/shops/" + val.name}
+                              to={"/restaurant/" + val.id}
                               className="p-5 hover:bg-gray-300 border-b m-1"
                               key={index}
                             >

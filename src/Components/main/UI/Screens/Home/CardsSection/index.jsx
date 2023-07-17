@@ -1,13 +1,13 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {BASE_URL} from "../../../../../Core/API/endpoint"
+import { BASE_URL } from "../../../../../Core/API/endpoint";
 import Card from "./card";
 const CardsSection = () => {
   const [data, setData] = useState();
   const [load, setLoad] = useState(1);
   const fetchData = async () => {
-    const res = await fetch(`${BASE_URL}shop/getAllShops`);
-    const dat1 = await res.json();
-    setData(dat1.shops);
+    const {data} = await axios(`${BASE_URL}shop/getAllShops`);
+    setData(data.shops);
     setLoad(0);
   };
   useEffect(() => {
@@ -35,7 +35,7 @@ const CardsSection = () => {
                           <Card
                             key={id}
                             id={val._id}
-                            image={val.image}
+                            image={val.image.path}
                             name={val.name}
                             address={val.description}
                           />

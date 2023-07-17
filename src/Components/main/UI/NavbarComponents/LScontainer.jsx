@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../../Core/API/endpoint";
+import "./styles.scss";
 import {
   closeToggle,
   signinToggle,
   signupToggle,
 } from "../../../Core/store/slice/toggleSlice";
 import { loginUser } from "../../../Core/store/slice/userSlice";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
+
 const LScontainer = () => {
   const today = new Date();
   const futureDate = new Date(today);
+  const navigate = useNavigate();
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
-
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -35,42 +41,41 @@ const LScontainer = () => {
   const click = useSelector((state) => {
     return state.toggle["toggle"];
   });
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${BASE_URL}user/login`, {
-      method: "POST",
-      body: JSON.stringify(loginData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",  
-      },
-    });
-    const data = await res.json();
-    if (data.success) {
-      document.cookie = `token=${data.token}; expires=${formattedDate};`
-      localStorage.setItem("JWT",data.token)
+    try {
+      const { data } = await axios.post(`${BASE_URL}user/login`, loginData);
+      console.log(data);
       alert("Login Successfull");
       dispatch(loginUser());
       dispatch(closeToggle());
-    }
-    else{
-      alert("login unsuccessfull")
+    } catch (error) {
+      alert("login unsuccessfull");
     }
   };
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${BASE_URL}user/new`, {
-      method: "POST",
-      body: JSON.stringify(signupData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
+    const {data} = await axios.post(`${BASE_URL}user/new`, {
+      signupData,
     });
-    const data = await res.json();
+
     if (data.success) {
       alert("registration Successfull");
       dispatch(signinToggle());
     }
   };
+
+  const googleLoginHandler = () => {
+    try {
+      window.open(`${BASE_URL}user/googleAuth`, "_self");
+      dispatch(loginUser());
+    } catch (err) {
+      navigate("*");
+    }
+  };
+
   return (
     <div className="fixed top-0 z-10 grid place-items-center">
       <div
@@ -182,6 +187,17 @@ const LScontainer = () => {
             >
               Login
             </button>
+            <div className="login_with_google">
+              <p className="seprater--text"> Or Login With </p>
+
+              <button
+                type="button"
+                className="login-with-google-btn"
+                onClick={googleLoginHandler}
+              >
+                Sign in with Google
+              </button>
+            </div>
           </form>
         )}
       </div>

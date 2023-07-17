@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint";
+import axios from "axios";
 const MenuItemCard = ({
   name,
   imgLink,
@@ -18,57 +19,51 @@ const MenuItemCard = ({
   const [config, setConfig] = useState("half");
   const [loading, setLoading] = useState(0);
   const [added, setAdded] = useState(0);
-  const [replaceCartToggle,setReplaceCartToggle]=useState(0)
+  const [replaceCartToggle, setReplaceCartToggle] = useState(0);
   const token = localStorage.getItem("JWT");
   const ref = useRef(null);
   const handleAddToCartClick = () => {
     categ ? setCateg(0) : setCateg(1);
     height === "0vh" ? setHeight("100%") : setHeight("0vh");
   };
-  const handleReplaceCartAcceptance=async ()=>{
-          const res1=await fetch(`${BASE_URL}cart/replaceFromCart/${id}/${config}`,{
-            headers: {
-              "Content-Type": "application/json",
-              token,
-            }
-          });
-          const respData=await res1.json()
-          if(respData.message==="Items replaced in cart Sucessfully"){
-            setLoading(0);
-            setAdded(1)
-          }
-    setReplaceCartToggle(0)
-  }
-  const handleReplaceCartRejection=()=>{
-    setReplaceCartToggle(0)
-  }
+  const handleReplaceCartAcceptance = async () => {
+    const { data } = await axios(
+      `${BASE_URL}cart/replaceFromCart/${id}/${config}`
+    );
+    if (data.message === "Items replaced in cart Sucessfully") {
+      setLoading(0);
+      setAdded(1);
+    }
+    setReplaceCartToggle(0);
+  };
+  const handleReplaceCartRejection = () => {
+    setReplaceCartToggle(0);
+  };
   const handleAddToCartAction = async () => {
-      setLoading(1);
-      const item = {
-        name,
-        option: config,
-        price: config == "half" ? (price_half ? price_half : price) : price_full,
-        quantity: 1,
-        shop,
-      };
-      const res = await fetch(
-        `${BASE_URL}cart/addToCart/${id}/${config}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            token,
-          },
-        }
-      );
-      const data = await res.json();
-      console.log(data);
-      if (data.message==="Item Successfully added in Cart") {
-        setAdded(1);
-        setLoading(0);
-      } 
-      else if(data.message==="You Already have a item in cart from diffrent shop remove them to add this item"){
-        setReplaceCartToggle(1);
-        
+    setLoading(1);
+    const item = {
+      name,
+      option: config,
+      price: config == "half" ? (price_half ? price_half : price) : price_full,
+      quantity: 1,
+      shop,
+    };
+    const { data } = await axios.get(
+      `${BASE_URL}cart/addToCart/${id}/${config}`
+    );
+    console.log(data);
+
+    if (
+      data.message === "Item Successfully added in Cart" ||
+      data.status === 200
+    ) {
+      setAdded(1);
+      setLoading(0);
+    } else if (
+      data.message ===
+      "You Already have a item in cart from diffrent shop remove them to add this item"
+    ) {
+      setReplaceCartToggle(1);
     }
   };
   return (
@@ -95,7 +90,10 @@ const MenuItemCard = ({
               src={imgLink}
             />
             {added ? (
-              <Link to={"/checkout"} className="absolute top-[63%] left-[8%] md:left-[20%] md:top-[80%] rounded-md">
+              <Link
+                to={"/checkout"}
+                className="absolute top-[63%] left-[8%] md:left-[20%] md:top-[80%] rounded-md"
+              >
                 <p className="px-2 py-2 rounded bg-rose-500 hover:bg-rose-700 hover:shadow-lg shadow-md font-bold text-md text-white">
                   View Cart
                 </p>
@@ -199,15 +197,30 @@ const MenuItemCard = ({
           )}
         </div>
       </div>
-      {replaceCartToggle? <div className="backdrop-blur w-screen h-screen fixed top-0 left-0 right-0 grid place-items-center">
-                  <div className="h-max w-[80vw] sm:w-[50vw] lg:w-[30vw] bg-white border-2 rounded-lg border-rose-400 shadow-xl py-10 px-10 md:px-20">
-                    <div className="font-bold text-xl text-center">There is already an item from different shop. Do you want to replace them?</div>
-                    <div className="flex justify-between mt-10">
-                      <button onClick={()=>handleReplaceCartRejection()} className="bg-white hover:bg-rose-600 border-2 border-red-600 hover:text-white w-[45%] rounded-lg h-14">No</button>
-                      <button onClick={()=>handleReplaceCartAcceptance()} className="bg-white hover:bg-rose-600 border-2 border-red-600 hover:text-white w-[45%] rounded-lg h-14">Yes</button>
-                    </div>
-                  </div>
-        </div>:null}
+      {replaceCartToggle ? (
+        <div className="backdrop-blur w-screen h-screen fixed top-0 left-0 right-0 grid place-items-center">
+          <div className="h-max w-[80vw] sm:w-[50vw] lg:w-[30vw] bg-white border-2 rounded-lg border-rose-400 shadow-xl py-10 px-10 md:px-20">
+            <div className="font-bold text-xl text-center">
+              There is already an item from different shop. Do you want to
+              replace them?
+            </div>
+            <div className="flex justify-between mt-10">
+              <button
+                onClick={() => handleReplaceCartRejection()}
+                className="bg-white hover:bg-rose-600 border-2 border-red-600 hover:text-white w-[45%] rounded-lg h-14"
+              >
+                No
+              </button>
+              <button
+                onClick={() => handleReplaceCartAcceptance()}
+                className="bg-white hover:bg-rose-600 border-2 border-red-600 hover:text-white w-[45%] rounded-lg h-14"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 };

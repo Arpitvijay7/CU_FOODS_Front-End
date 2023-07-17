@@ -8,8 +8,7 @@ const ForgotPwd = () => {
   }
   body{
     background-color: #194944;
-  }
-`
+  }`
 
   const[email,setEmail]=useState();
   const[phone,setPhone]=useState();
