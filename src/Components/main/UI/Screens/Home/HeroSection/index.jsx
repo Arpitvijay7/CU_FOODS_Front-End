@@ -10,8 +10,7 @@ import {
   signupToggle,
 } from "../../../../../Core/store/slice/toggleSlice";
 import { loginUser,logoutUser } from "../../../../../Core/store/slice/userSlice";
-import axios from "axios";
-const HeroSection = () => {
+const HeroSection = ({search,setSearch}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     let user = localStorage.getItem("JWT")
@@ -19,10 +18,6 @@ const HeroSection = () => {
       dispatch(loginUser());
     }
   }, []);
-  const [search, setSearch] = useState("");
-  const [searchClick, setSearchClick] = useState(0);
-  const [searchData, setSearchData] = useState();
-  
   const loggedIn = useSelector((state) => {
     return state.users["auth"];
   });
@@ -30,25 +25,7 @@ const HeroSection = () => {
     return state.toggle["toggle"];
   });
 
-  const handleSearch = async (e) => {
-    setSearch(e.target.value);
-    const {data} = await axios(
-      `${BASE_URL}shop/getAllShops?keyword=${search}`
-    );
-   
-    setSearchClick(1);
-    if (search.length > 0) {
-      if (data["shops"].length !== 0) {
-        setSearchData(data.shops);
-      } else {
-        setSearchData([{ name: "No Results Found" }]);
-        setTimeout(() => {
-          setSearchClick(0);
-          setSearchClick(0);
-        }, 2000);
-      }
-    }
-  };
+  
   const handleLogout=()=>{
     const token =document.cookie
     document.cookie = `token=${token}; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
@@ -135,27 +112,9 @@ const HeroSection = () => {
                     className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
                     placeholder="Search For Restaurants"
                     value={search}
-                    onChange={(e) => handleSearch(e)}
+                    onChange={(e) => setSearch(e.target.value)}
                   ></input>
                 </div>
-                {search.length > 0 && (
-                  <>
-                    <div className="w-full md:w-2/3 mt-3 rounded-lg bg-white absolute top-24 md:top-12 flex flex-col border-2 border-black">
-                      {searchData &&
-                        searchData.map((val, index) => {
-                          return (
-                            <Link
-                              to={"/restaurant/" + val.id}
-                              className="p-5 hover:bg-gray-300 border-b m-1"
-                              key={index}
-                            >
-                              {val.name}
-                            </Link>
-                          );
-                        })}
-                    </div>
-                  </>
-                )}
               </div>
             </div>
           </div>
