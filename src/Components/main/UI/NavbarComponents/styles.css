@@ -1,8 +1,6 @@
-$yellow: #f9d71c;
-
 .header {
   text-align: center;
-  background-color: $yellow;
+  background-color: #f9d71c;
 }
 
 .seprater--text {

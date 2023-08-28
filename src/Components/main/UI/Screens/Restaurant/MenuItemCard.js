@@ -1,7 +1,10 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const MenuItemCard = ({
   name,
   imgLink,
@@ -20,7 +23,9 @@ const MenuItemCard = ({
   const [loading, setLoading] = useState(0);
   const [added, setAdded] = useState(0);
   const [replaceCartToggle, setReplaceCartToggle] = useState(0);
-  const token = localStorage.getItem("JWT");
+
+  const navigate = useNavigate();
+
   const ref = useRef(null);
   const handleAddToCartClick = () => {
     categ ? setCateg(0) : setCateg(1);
@@ -39,6 +44,7 @@ const MenuItemCard = ({
   const handleReplaceCartRejection = () => {
     setReplaceCartToggle(0);
   };
+
   const handleAddToCartAction = async () => {
     setLoading(1);
     const item = {
@@ -48,23 +54,34 @@ const MenuItemCard = ({
       quantity: 1,
       shop,
     };
-    const { data } = await axios.get(
-      `${BASE_URL}cart/addToCart/${id}/${config}`
-    );
-    console.log(data);
-
-    if (
-      data.message === "Item Successfully added in Cart" ||
-      data.status === 200
-    ) {
-      setAdded(1);
+    try {
+      const { data } = await axios.get(
+        `${BASE_URL}cart/addToCart/${id}/${config}`
+      );
+      if (
+        data.message === "Item Successfully added in Cart" ||
+        data.status === 200
+      ) {
+        setAdded(1);
+        setLoading(0);
+      } else if (
+        data.message ==
+        "You Already have a item in cart from diffrent shop remove them to add this item"
+      ) {
+        setReplaceCartToggle(1);
+      }
+    } catch (err) {
+      console.log(err.response.data.message);
       setLoading(0);
-    } else if (
-      data.message ===
-      "You Already have a item in cart from diffrent shop remove them to add this item"
-    ) {
-      setReplaceCartToggle(1);
+      toast.error(err.response.data.message, {
+        autoClose :1500,
+        hideProgressBar: true
+      })
+      navigate('/?notauth=true');
+
     }
+
+    
   };
   return (
     <>
@@ -83,7 +100,7 @@ const MenuItemCard = ({
             <p className="mb-4">{details}</p>
           </div>
 
-          <div className="relative pb-7">
+          <div className="relative pb-7 z-0">
             <img
               alt={name + " photo"}
               className="flex-shrink-0 rounded-lg w-32 h-32 md:w-48 md:h-48 object-cover object-center sm:mb-0 mb-4"
@@ -221,6 +238,7 @@ const MenuItemCard = ({
           </div>
         </div>
       ) : null}
+      <ToastContainer autoClose={1500} hideProgressBar={true}/>
     </>
   );
 };

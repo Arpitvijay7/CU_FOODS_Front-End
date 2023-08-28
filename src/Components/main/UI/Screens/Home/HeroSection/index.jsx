@@ -3,21 +3,24 @@ import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
 import { useSelector, useDispatch } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+
 import { BASE_URL } from "../../../../../Core/API/endpoint";
 import {
   closeToggle,
   signinToggle,
   signupToggle,
 } from "../../../../../Core/store/slice/toggleSlice";
-import { loginUser,logoutUser } from "../../../../../Core/store/slice/userSlice";
-const HeroSection = ({search,setSearch}) => {
+import {
+  loginUser,
+  logoutUser,
+} from "../../../../../Core/store/slice/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+
+const HeroSection = ({ search, setSearch }) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    let user = localStorage.getItem("JWT")
-    if (user) {
-      dispatch(loginUser());
-    }
-  }, []);
+
   const loggedIn = useSelector((state) => {
     return state.users["auth"];
   });
@@ -25,13 +28,18 @@ const HeroSection = ({search,setSearch}) => {
     return state.toggle["toggle"];
   });
 
-  
-  const handleLogout=()=>{
-    const token =document.cookie
-    document.cookie = `token=${token}; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
-    localStorage.clear()
-    dispatch(logoutUser())
-  }
+  const handleLogout = () => {
+    try {
+      const { data } = axios.get(`${BASE_URL}user/logout`);
+      toast.success("Logout Successfull" ,{ 
+        autoClose:1500,
+        hideProgressBar: true,
+      });
+    } catch (error) {
+      toast.error("Logout Unsuccessfull");
+    }
+    dispatch(logoutUser());
+  };
 
   return (
     <>
@@ -43,7 +51,7 @@ const HeroSection = ({search,setSearch}) => {
               <>
                 <div className="flex justify-between w-56 md:w-[20vw] text-lg md:text-2xl">
                   <Link to="/myaccount">My Account</Link>
-                  <button onClick={()=>handleLogout()} className="flex ml-2">
+                  <button onClick={() => handleLogout()} className="flex ml-2">
                     Logout{" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -120,6 +128,7 @@ const HeroSection = ({search,setSearch}) => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={1500} hideProgressBar={true}/>
     </>
   );
 };

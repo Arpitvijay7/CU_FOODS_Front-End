@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../../Core/API/endpoint";
-import "./styles.scss";
+import "./styles.css";
 import {
   closeToggle,
   signinToggle,
@@ -10,6 +10,8 @@ import {
 import { loginUser } from "../../../Core/store/slice/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 axios.defaults.withCredentials = true;
 
@@ -47,9 +49,12 @@ const LScontainer = () => {
     try {
       const { data } = await axios.post(`${BASE_URL}user/login`, loginData);
       console.log(data);
-      alert("Login Successfull");
       dispatch(loginUser());
       dispatch(closeToggle());
+      toast.success("Login Successfull", {
+        autoClose: 1500,
+        hideProgressBar: true,
+      })
     } catch (error) {
       alert("login unsuccessfull");
     }
@@ -201,6 +206,7 @@ const LScontainer = () => {
           </form>
         )}
       </div>
+      <ToastContainer autoClose={1500} hideProgressBar={true}/>
     </div>
   );
 };

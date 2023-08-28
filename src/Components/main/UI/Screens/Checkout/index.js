@@ -3,6 +3,13 @@ import CartItem from "./cartItemCard";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import socketIO from "socket.io-client";
+
+const ENDPOINT = "http://localhost:4000";
+let socket;
+
 const Checkout = () => {
   const [deliveryCheckbox, setDeliveryCheckbox] = useState(0);
   const [cartItems, setCartItems] = useState([]);
@@ -10,7 +17,25 @@ const Checkout = () => {
   const [loading, setLoading] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const token = localStorage.getItem("JWT");
+  const [orderPlacedId, setOrderPlacedId] = useState(0);
+
+  useEffect(() => {
+    socket = socketIO.connect(ENDPOINT, { transports: ["websocket"] });
+
+    if (orderPlacedId !== 0) {
+      console.log("Order Placed");
+      socket.emit("orderPlaced", { vendorId: orderPlacedId });
+      setOrderPlacedId(0);
+
+      navigate("/myorders?status=placed");
+
+    }
+
+    return () => {
+      socket.off();
+    };
+  }, [orderPlacedId]);
+
   const hostelData = [
     {
       name: "NC1",
@@ -66,6 +91,7 @@ const Checkout = () => {
     const { name, value } = e.target;
     setAddress({ ...address, [name]: value });
   };
+  
   const fetchUserCart = async () => {
     const { data: cartData } = await axios(
       `${BASE_URL}cart/getAllfromCart`,
@@ -89,7 +115,7 @@ const Checkout = () => {
     });
     var options = {
       key: "rzp_test_RkPAAly768WLy7",
-      amount: Number(totalPrice * 100), // replace this with totalPrice coming from cart and amount is in paise
+      amount: Number(totalPrice * 100),
       currency: "INR",
       name: "CU FOODS",
       description: "Pay & Checkout",
@@ -101,7 +127,7 @@ const Checkout = () => {
           status: "Payment Successful",
         };
 
-        const {data} = await axios.post(`${BASE_URL}order/verifyOrder`, {
+        const { data } = await axios.post(`${BASE_URL}order/verifyOrder`, {
           checkoutRes: response,
           orderId: res.data.id,
           deliveryCheckbox,
@@ -110,10 +136,18 @@ const Checkout = () => {
         });
 
         if (data.success === true) {
-          alert("Order Placed Successfully");
-          navigate("/order");
+          toast.success("Order Placed Successfully", {
+            autoClose: 1500,
+            hideProgressBar: true,
+          });
+
+          setOrderPlacedId(data.order.vendor);
+
         } else {
-          alert("Payment Failed");
+          toast.error("Payment Failed", {
+            autoClose: 1500,
+            hideProgressBar: true,
+          });
           navigate("/");
         }
       },
@@ -318,6 +352,7 @@ const Checkout = () => {
           </button>
         </div>
       </div>
+      <ToastContainer autoClose={1500} hideProgressBar={true} />
     </>
   );
 };
