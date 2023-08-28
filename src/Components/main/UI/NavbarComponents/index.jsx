@@ -30,14 +30,14 @@ const Navbar = () => {
 
   return (
     <div className="">
-      <nav className="fixed bottom-0 w-full md:flex md:justify-between shadow-lg shadow-grey-100 p-3 md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem] bg-white ">
+      <nav className="bg-white z-10 fixed bottom-0 w-full md:flex md:justify-between shadow-lg shadow-grey-100 p-3 md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem]">
         <Link
           to="/"
           className="flex hidden md:block justify-center items-center text-2xl"
         >
           CU FOOD
         </Link>
-        <div className="flex relative justify-evenly items-center bg-white z-[500000000000] overflow-y-auto space-x-5">
+        <div className="flex relative justify-evenly items-center bg-white overflow-y-auto space-x-5">
           <Link
             to="/"
             non-active
