@@ -27,36 +27,35 @@ const Menu = ({ id }) => {
             role="status"
           ></div>
         </div>
-      ) : (
-        <>
-          <div className="flex flex-wrap w-full justify-center md:justify-start">
-            <section className="text-gray-600 body-font">
-              <div className="px-5 pt-10 pb-24">
-                <div className="flex flex-wrap justify-center">
-                  {menu &&
-                    menu.map((val, index) => {
-                      return (
-                        <>
-                          <MenuItemCard
-                            key={index}
-                            price={val.price}
-                            price_half={val.price_half}
-                            price_full={val.price_full}
-                            name={val.name}
-                            imgLink={val.image.path}
-                            details={val.description}
-                            rating={val.rating}
-                            id={val._id}
-                            dualOption={val.DualOptions}
-                            shop={val.shop}
-                          />
-                        </>
-                      );
-                    })}
-                </div>
+      ) : (<>
+        <div className="flex flex-wrap w-full justify-center md:justify-start">
+          <section className="text-gray-600 body-font">
+            <div className="px-5 pt-10 pb-24">
+              <div className="flex flex-wrap justify-center">
+                {menu &&
+                  menu.map((val, index) => {
+                    return(<>
+                    <MenuItemCard
+                      key={index}
+                      price={val.price}
+                      price_half={val.price_half}
+                      price_full={val.price_full}
+                      name={val.name}
+                      imgLink={val.image.path}
+                      details={val.description}
+                      rating={val.rating}
+                      id={val._id}
+                      dualOption={val.DualOptions}
+                      shop={val.shop}
+                    />
+                    
+                    </>
+                    )
+                  })}
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
+        </div>
         </>
       )}
     </>
