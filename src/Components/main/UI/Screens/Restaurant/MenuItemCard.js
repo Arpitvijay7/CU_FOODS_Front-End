@@ -82,7 +82,7 @@ const MenuItemCard = ({
   };
   return (
     <>
-      <div className="h-full w-full md:w-[47%] lg:w-[30%] p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1 m-2">
+      <div className="h-full w-full md:w-[47%] lg:w-[30vw] p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1 m-2">
         <div className=" flex items-center justify-between gap-3 text-center sm:text-left">
           <div className="flex-grow sm:pl-8 text-left">
             <h2 className="title-font font-medium text-lg text-gray-900">

@@ -28,10 +28,10 @@ const Menu = ({ id }) => {
           ></div>
         </div>
       ) : (<>
-        <div className="flex flex-wrap w-full justify-center md:justify-start">
+        <div className="flex flex-wrap w-full">
           <section className="text-gray-600 body-font">
             <div className="px-5 pt-10 pb-24">
-              <div className="flex flex-wrap justify-center">
+              <div className="flex flex-wrap w-full">
                 {menu &&
                   menu.map((val, index) => {
                     return(<>
