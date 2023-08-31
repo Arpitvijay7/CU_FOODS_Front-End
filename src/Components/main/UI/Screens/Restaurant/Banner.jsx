@@ -42,7 +42,7 @@ const Banner = ({ id }) => {
                 {shop.description}
               </h3>
             </div>
-            <div className="w-1/3 md:w-max md:ml-5 h-max text-center  rounded-md text-sm md:text-lg font-bold md:p-5">
+            <div className="w-max md:ml-5 h-max text-center  rounded-md text-sm md:text-lg font-bold md:p-5">
               <div className="flex gap-[2px]">
                 <Stack spacing={1}>
                   <Rating
@@ -52,7 +52,7 @@ const Banner = ({ id }) => {
                     precision={0.1}
                   />
                 </Stack>
-                <p className="text-[16px] text-slate-600 relative top-[-2px] text-bold flex flex-col justify-start">
+                <p className="text-[16px] text-slate-600 relative top-[2px] md:top-[-2px] text-bold flex flex-col justify-start">
                   {shop.rating ? shop.rating.avgRating : 0}
                 </p>
               </div>

@@ -31,8 +31,8 @@ const HeroSection = ({ search, setSearch }) => {
   const handleLogout = () => {
     try {
       const { data } = axios.get(`${BASE_URL}user/logout`);
-      toast.success("Logout Successfull" ,{ 
-        autoClose:1500,
+      toast.success("Logout Successfull", {
+        autoClose: 1500,
         hideProgressBar: true,
       });
     } catch (error) {
@@ -50,7 +50,11 @@ const HeroSection = ({ search, setSearch }) => {
             {loggedIn ? (
               <>
                 <div className="flex justify-between w-56 md:w-[20vw] text-lg md:text-2xl">
-                  <Link to="/myaccount">My Account</Link>
+                  <div className="flex space-x-4">
+                    <Link to="/checkout">Cart</Link>
+                    <Link to="/myorders">MyOrders</Link>
+                  </div>
+
                   <button onClick={() => handleLogout()} className="flex ml-2">
                     Logout{" "}
                     <svg
@@ -128,7 +132,7 @@ const HeroSection = ({ search, setSearch }) => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={1500} hideProgressBar={true}/>
+      <ToastContainer autoClose={1500} hideProgressBar={true} />
     </>
   );
 };

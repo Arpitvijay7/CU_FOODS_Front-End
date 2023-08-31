@@ -7,31 +7,36 @@ import "./styles.css";
 
 const Navbar = () => {
   const { pathname } = useLocation();
+  const [toggle, setToogle] = useState("");
+  console.log(pathname);
   const [route, setRoute] = useState(pathname);
+
   useEffect(() => {
     setRoute(pathname);
-    if(pathname.includes("checkout")){
-      console.log("checkout found")
+    if (pathname.includes("checkout")) {
+      setToogle("checkout");
     }
-    if(pathname.includes("myorders")){
-      console.log("myorders found")
+    if (pathname.includes("myorders")) {
+      setToogle("myorders");
     }
-  }, [pathname]);
+  }, [pathname, toggle]);
 
   return (
     <div>
-      <nav className="bg-white z-10 fixed bottom-0 w-full md:flex md:justify-between shadow-lg shadow-grey-100 p-3 md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem]">
+      <nav className="bg-white z-10 fixed bottom-0 w-full md:flex md:justify-between shadow-lg shadow-grey-100  md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem]">
         <Link
           to="/"
-          className="flex hidden md:block justify-center items-center text-2xl"
+          className="hidden md:flex md:justify-center md:items-center md:text-2xl md:px-4"
         >
           CU FOOD
         </Link>
-        <div className="flex relative justify-evenly items-center bg-white overflow-y-auto space-x-5 shadow-2xl py-2 rounded-md">
+        <div className="flex relative justify-evenly h-full items-center bg-white overflow-y-auto md:overflow-y-visible space-x-5 shadow-2xl md:shadow-none py-2 rounded-md">
           <Link
             to="/"
             className={`p-1 px-5 rounded-lg flex nav--links relative z-50 md:hidden flex-col justify-center items-center bg-whiteitems-center text-xl md:text-2xl ${
-              route.includes("restaurant") ? "bg-rose-500" : ""
+              route.includes("restaurant")
+                ? "text-[crimson] border-t-2 border-[crimson]"
+                : ""
             }`}
           >
             <FaHome />
@@ -40,16 +45,28 @@ const Navbar = () => {
 
           <Link
             to={"/checkout"}
-            className={`p-1 px-5 rounded-lg flex relative nav--links z-50 flex-col justify-center items-center  bg-white md:text-base text-xl text-center cursor-pointer ${
-              route.includes("checkout") ? "bg-rose-500" : ""
-            }`}
+            className={`p-1 px-5 md:rounded-sm h-max rounded-lg flex relative nav--links z-50 flex-col justify-center items-center  bg-white md:text-base text-xl text-center cursor-pointer ${
+              toggle === "checkout"
+                ? "text-[crimson] border-t-2 border-[crimson]"
+                : ""
+            } md:${
+              toggle === "checkout"
+                ? "text-[crimson] border-t-2 border-[transparent]"
+                : ""
+            }` }
           >
             <BsCartFill className="text-xl" /> <span>Cart</span>
           </Link>
           <Link
             to={"/myorders"}
-            className={`p-1 px-5 rounded-lg flex flex-col relative nav--links z-50 justify-center items-center bg-white md:text-base text-xl text-center cursor-pointer ${
-              route.includes("myorders") ? "bg-rose-500" : ""
+            className={`p-1 px-5 md:rounded-sm h-max rounded-lg flex flex-col relative nav--links z-50 justify-center items-center bg-white md:text-base text-xl text-center cursor-pointer ${
+              toggle === "myorders"
+                ? "text-[crimson] border-t-2 border-[crimson]"
+                : ""
+            } md:${
+              toggle === "myorders"
+                ? "text-[crimson] border-t-2 border-[transparent]"
+                : ""
             }`}
           >
             <MdRamenDining className="text-xl z-50" />
