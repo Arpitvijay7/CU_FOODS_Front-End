@@ -30,7 +30,6 @@ const Checkout = () => {
       navigate("/myorders?status=placed");
 
     }
-
     return () => {
       socket.off();
     };

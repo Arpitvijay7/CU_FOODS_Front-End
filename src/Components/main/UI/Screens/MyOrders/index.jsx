@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
+  const [Deliveredorders, setDeliveredOrders] = useState([]);
+  const [toogle , setToogle] = useState('live');
   const queryParams = new URLSearchParams(window.location.search);
   const status = queryParams.get("status");
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const MyOrders = () => {
         hideProgressBar: true,
       });
     }
-    
+
     setTimeout(() => {
       navigate("/myorders")
     } ,1500)
@@ -36,18 +38,38 @@ const MyOrders = () => {
 
     fetchOrders();
   }, []);
-  console.log(orders);
+
+  useEffect(() => {
+
+    async function fetchOrders() {
+      const res = await axios.get(`${BASE_URL}order/myDeliveredOrders`);
+
+      setDeliveredOrders(res.data.orders);
+    }
+
+    fetchOrders();
+  }, []);
+
+  const getDeliveredOrders = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}order/myDeliveredOrders`);
+
+      setDeliveredOrders(res.data.orders);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <div className="flex mt-4 md:w-[58%] mx-auto justify-evenly border-[1px] border-grey rounded-md">
-          <button className="hover:bg-[#F0F2F2] w-[50%] text-center">Live</button>
-          <button className="hover:bg-[#F0F2F2] w-[50%] text-center">Delivered</button>
+          <button className={`${toogle === 'live'?'bg-[#F0F2F2]' :''} w-[50%] text-center`} onClick={()=>setToogle('live')}>Live</button>
+          <button className={`${toogle === 'Delivered'?'bg-[#F0F2F2]' :''} w-[50%] text-center`} onClick={()=>setToogle('Delivered')}>Delivered</button>
       </div>
       <div className="grid place-items-center">
         <section className="text-gray-600 body-font w-full  pb-20">
           <div className="px-5 pb-24 mx-auto overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px] m-5">
-            {orders &&
+            {orders && toogle ==='live' &&
               orders.map((order) => {
                 return (
                   <OrderItem
@@ -58,6 +80,24 @@ const MyOrders = () => {
                     createdAt={order.createdAt}
                     totalPrice={order.totalPrice}
                     _id={order._id}
+                    toogle={toogle}
+                  />
+                );
+              })}
+              {Deliveredorders && toogle ==='Delivered' &&
+              Deliveredorders.map((order) => {
+                return (
+                  <OrderItem
+                    key={order._id}
+                    OrderItems={order.OrderItems}
+                    Otp={order.Otp}
+                    orderStatus={order.orderStatus}
+                    createdAt={order.createdAt}
+                    totalPrice={order.totalPrice}
+                    _id={order._id}
+                    toogle={toogle}
+                    review={order.review}
+                    getDeliveredOrders={getDeliveredOrders}
                   />
                 );
               })}

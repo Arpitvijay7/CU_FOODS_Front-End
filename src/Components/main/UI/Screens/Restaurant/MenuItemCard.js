@@ -4,13 +4,14 @@ import { BASE_URL } from "../../../../Core/API/endpoint";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 const MenuItemCard = ({
   name,
   imgLink,
   price,
   details,
-  ratings,
+  rating,
   id,
   dualOption,
   price_half,
@@ -74,14 +75,11 @@ const MenuItemCard = ({
       console.log(err.response.data.message);
       setLoading(0);
       toast.error(err.response.data.message, {
-        autoClose :1500,
-        hideProgressBar: true
-      })
-      navigate('/?notauth=true');
-
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+      navigate("/?notauth=true");
     }
-
-    
   };
   return (
     <>
@@ -91,9 +89,10 @@ const MenuItemCard = ({
             <h2 className="title-font font-medium text-lg text-gray-900">
               {name}
             </h2>
-            <p className="text-blue-600">
-              &#9733; &#9733; &#9733; &#9733; &#9733; {ratings} Ratings
-            </p>
+            <Stack spacing={1}>
+              <Rating name="size-small" readOnly defaultValue={rating.avgRating} precision={0.1} size="small" />
+            </Stack>
+            <p className="text-sm font-bold">{rating.avgRating}</p>
             <p className="text-green-600 font-bold text-xl">
               &#8377; {price_half ? price_half : price}
             </p>
@@ -238,7 +237,7 @@ const MenuItemCard = ({
           </div>
         </div>
       ) : null}
-      <ToastContainer autoClose={1500} hideProgressBar={true}/>
+      <ToastContainer autoClose={1500} hideProgressBar={true} />
     </>
   );
 };

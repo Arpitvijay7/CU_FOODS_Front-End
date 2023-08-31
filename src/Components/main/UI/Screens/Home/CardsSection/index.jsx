@@ -27,6 +27,7 @@ const CardsSection = ({ data, setData, load }) => {
                             image={val.image}
                             name={val.name}
                             address={val.description}
+                            rating={val.rating}
                           />
                         );
                       })
