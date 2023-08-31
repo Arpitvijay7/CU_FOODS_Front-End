@@ -74,18 +74,15 @@ const MenuItemCard = ({
       console.log(err.response.data.message);
       setLoading(0);
       toast.error(err.response.data.message, {
-        autoClose :1500,
-        hideProgressBar: true
-      })
-      navigate('/?notauth=true');
-
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+      navigate("/?notauth=true");
     }
-
-    
   };
   return (
     <>
-      <div className="h-full p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 flex-1 m-2">
+      <div className="h-full w-full md:w-[47%] lg:w-[30%] p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1 m-2">
         <div className=" flex items-center justify-between gap-3 text-center sm:text-left">
           <div className="flex-grow sm:pl-8 text-left">
             <h2 className="title-font font-medium text-lg text-gray-900">
@@ -238,7 +235,7 @@ const MenuItemCard = ({
           </div>
         </div>
       ) : null}
-      <ToastContainer autoClose={1500} hideProgressBar={true}/>
+      <ToastContainer autoClose={1500} hideProgressBar={true} />
     </>
   );
 };
