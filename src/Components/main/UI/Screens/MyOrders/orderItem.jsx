@@ -167,7 +167,7 @@ const OrderItem = ({
             {OrderItems &&
               OrderItems.map((item) => {
                 return (
-                  <div className="p-5 relative flex gap-4 space-x-6">
+                  <div className="p-5 relative flex gap-4 space-x-6 ">
                     <div className="flex flex-col  gap-3">
                       <p className="inline  text-[#007600] text-[1.25rem] leading-[1.5rem] font-[700]">
                         {orderStatus}

@@ -62,7 +62,7 @@ const MyOrders = () => {
 
   return (
     <>
-      <div className="flex mt-4 md:w-[58%] mx-auto justify-evenly border-[1px] border-grey rounded-md">
+      <div className="flex mt-4 md:w-[58%] w-full mx-auto justify-evenly border-[1px] border-grey rounded-md">
           <button className={`${toogle === 'live'?'bg-[#F0F2F2]' :''} w-[50%] text-center`} onClick={()=>setToogle('live')}>Live</button>
           <button className={`${toogle === 'Delivered'?'bg-[#F0F2F2]' :''} w-[50%] text-center`} onClick={()=>setToogle('Delivered')}>Delivered</button>
       </div>
