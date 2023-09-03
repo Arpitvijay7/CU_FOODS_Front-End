@@ -66,7 +66,7 @@ const MyOrders = () => {
           <button className={`${toogle === 'live'?'bg-[#F0F2F2]' :''} w-[50%] text-center`} onClick={()=>setToogle('live')}>Live</button>
           <button className={`${toogle === 'Delivered'?'bg-[#F0F2F2]' :''} w-[50%] text-center`} onClick={()=>setToogle('Delivered')}>Delivered</button>
       </div>
-      <div className="grid place-items-center">
+      <div className="grid place-items-center w-full">
         <section className="text-gray-600 body-font w-full  pb-20">
           <div className="px-5 pb-24 mx-auto overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px] m-5">
             {orders && toogle ==='live' &&

@@ -48,12 +48,31 @@ const Footer = () => {
               </h2>
               <nav class="list-none mb-10">
                 <li>
-                  <a class="text-gray-600 hover:text-gray-800">Contact Us</a>
+                  <Link
+                    class="text-gray-600 hover:text-gray-800"
+                    to={"/PrivacyPolicy"}
+                  >
+                    Privacy Policy
+                  </Link>
                 </li>
                 <li>
-                  <a class="text-gray-600 hover:text-gray-800">
-                    Customer Support
-                  </a>
+                  <Link
+                    class="text-gray-600 hover:text-gray-800"
+                    to={"/TermsAndCodition"}
+                  >
+                    Terms and Conditions
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    class="text-gray-600 hover:text-gray-800"
+                    to={"/RefundsAndReturns"}
+                  >
+                    Refunds and Returns
+                  </Link>
+                </li>
+                <li>
+                  <Link class="text-gray-600 hover:text-gray-800" to={'/contactUs'}>Contact Us</Link>
                 </li>
               </nav>
             </div>

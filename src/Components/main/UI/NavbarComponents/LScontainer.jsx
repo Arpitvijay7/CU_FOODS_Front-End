@@ -7,7 +7,7 @@ import {
   signinToggle,
   signupToggle,
 } from "../../../Core/store/slice/toggleSlice";
-import { loginUser } from "../../../Core/store/slice/userSlice";
+import { loginRequest, loginUser, logoutUser } from "../../../Core/store/slice/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -45,6 +45,7 @@ const LScontainer = () => {
   });
 
   const handleLogin = async (e) => {
+    dispatch(loginRequest());
     e.preventDefault();
     try {
       const { data } = await axios.post(`${BASE_URL}user/login`, loginData);
@@ -57,6 +58,7 @@ const LScontainer = () => {
       })
     } catch (error) {
       alert("login unsuccessfull");
+      dispatch(logoutUser());
     }
   };
 
@@ -78,6 +80,7 @@ const LScontainer = () => {
       dispatch(loginUser());
     } catch (err) {
       navigate("*");
+      dispatch(logoutUser());
     }
   };
 

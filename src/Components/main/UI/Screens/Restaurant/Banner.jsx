@@ -18,9 +18,12 @@ const Banner = ({ id }) => {
     fetchShop();
   }, []);
 
-  const formatedNoOfReviews = numeral(
-    shop.rating ? shop.rating.numofReviews : 0
-  ).format("0.a");
+  const numberOfReviews = shop.rating ? shop.rating.numofReviews : 0;
+  // Check if there are decimal places, and format accordingly
+  const formatedNoOfReviews = (numberOfReviews < 1000) ? 
+    numeral(numberOfReviews).format("0a") :
+    numeral(numberOfReviews).format("0.0a");
+  
 
   return (
     <>

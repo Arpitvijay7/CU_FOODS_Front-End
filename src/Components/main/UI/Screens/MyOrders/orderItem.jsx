@@ -74,7 +74,7 @@ const OrderItem = ({
     <>
       <div className="md:w-[60%] md:mx-auto rounded-md border-[1px] border-[#D5D9D9]">
         <div className="flex flex-col ">
-          <div className="flex justify-between rounded-t-md p-4 border-b-[1px] border-b-[#D5D9D9] text-[#565959] md:bg-[#F0F2F2]">
+          <div className="flex justify-between rounded-t-md p-4 border-b-[1px] border-b-[#D5D9D9] text-[#565959] bg-[#F0F2F2]">
             <div className="flex space-x-7 leading-4 font-semibold">
               <p className="flex flex-col text-[12px]">
                 ORDER PLACED{" "}
@@ -178,35 +178,38 @@ const OrderItem = ({
                         alt="food image"
                       />
                     </div>
-                    <div>
-                      <p>{item.name}</p>
-                      <p>Quantity : {item.quantity}</p>
-                      <p>{item.shopName}</p>
-                      {item.Option && <p>Option : {item.Option}</p>}
-                    </div>
-                    <div className="flex justify-end flex-col">
-                      {toogle === "Delivered" && (
-                        <Stack spacing={1}>
-                          <Rating
-                            name="size-large"
-                            defaultValue={
-                              item.review && item.review.rating
-                                ? item.review.rating
-                                : 0
-                            }
-                            readOnly={item.review ? true : false}
-                            size="large"
-                            onChange={(e) => HandleRatingChange(e, item)}
-                          />
-                        </Stack>
-                      )}
+                    <div className="flex flex-wrap md:space-x-20 ">
+                      <div className="w-max h-max">
+                        <p>{item.name}</p>
+                        <p>Quantity : {item.quantity}</p>
+                        <p>{item.shopName}</p>
+                        {item.Option && <p>Option : {item.Option}</p>}
+                      </div>
+
+                      <div className="md:flex md:justify-end md:flex-col md:h-[136px] h-max">
+                        {toogle === "Delivered" && (
+                          <Stack spacing={1}>
+                            <Rating
+                              name="size-large"
+                              defaultValue={
+                                item.review && item.review.rating
+                                  ? item.review.rating
+                                  : 0
+                              }
+                              readOnly={item.review ? true : false}
+                              size="large"
+                              onChange={(e) => HandleRatingChange(e, item)}
+                            />
+                          </Stack>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );
               })}
           </div>
           {Otp && (
-            <div className="flex justify-between rounded-b-md p-4 border-t-[1px] border-t-[#D5D9D9] text-[#565959] md:bg-[#F0F2F2]">
+            <div className="flex justify-between rounded-b-md p-4 border-t-[1px] border-t-[#D5D9D9] text-[#565959] bg-[#F0F2F2]">
               OTP : {Otp}
             </div>
           )}
