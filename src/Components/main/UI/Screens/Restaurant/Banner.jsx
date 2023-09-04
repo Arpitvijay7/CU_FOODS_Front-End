@@ -7,6 +7,13 @@ import Stack from "@mui/material/Stack";
 
 const Banner = ({ id }) => {
   const [shop, setShop] = useState("");
+  const [ratingValue, setRatingValue] = useState(0);
+  
+  useEffect(() => {
+    if (!shop) return;
+    document.title = shop.name;
+  }, [shop]);
+  
   const fetchShop = async () => {
     const { data } = await axios(`${BASE_URL}shop/getShopDetail/${id}`);
     if (data.success) {
@@ -16,15 +23,23 @@ const Banner = ({ id }) => {
   };
   useEffect(() => {
     fetchShop();
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    // Update the ratingValue whenever 'shop' changes
+    if (shop.rating) {
+      setRatingValue(shop.rating.avgRating || 0);
+    }
+  }, [shop]);
 
   const numberOfReviews = shop.rating ? shop.rating.numofReviews : 0;
   // Check if there are decimal places, and format accordingly
-  const formatedNoOfReviews = (numberOfReviews < 1000) ? 
-    numeral(numberOfReviews).format("0a") :
-    numeral(numberOfReviews).format("0.0a");
-  
+  const formatedNoOfReviews =
+    numberOfReviews < 1000
+      ? numeral(numberOfReviews).format("0a")
+      : numeral(numberOfReviews).format("0.0a");
 
+  console.log(shop.rating);
   return (
     <>
       <div className="w-screen flex flex-col">
@@ -50,7 +65,7 @@ const Banner = ({ id }) => {
                 <Stack spacing={1}>
                   <Rating
                     name="size-medium"
-                    defaultValue={shop.rating ? shop.rating.avgRating : 0}
+                    value={parseFloat(ratingValue)}
                     readOnly
                     precision={0.1}
                   />

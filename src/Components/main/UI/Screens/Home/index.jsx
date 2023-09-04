@@ -10,11 +10,15 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(1);
   const navigate = useNavigate();
-
+ 
   const queryParam = new URLSearchParams(window.location.search);
   const notauth = queryParam.get("notauth");
 
   console.log(notauth);
+
+  useEffect(() => {
+    document.title = "Cu Foodz";
+  }, []);
 
   useEffect(() => {
     if (notauth) {

@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 
 const RefundsAndReturns = () => {
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Refunds And Returns";
   }, []);
 
   return (

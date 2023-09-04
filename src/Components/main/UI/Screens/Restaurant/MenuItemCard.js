@@ -90,7 +90,7 @@ const MenuItemCard = ({
               {name}
             </h2>
             <Stack spacing={1}>
-              <Rating name="size-small" readOnly defaultValue={rating.avgRating} precision={0.1} size="small" />
+              <Rating name="size-small" readOnly defaultValue={rating?rating.avgRating:0} precision={0.1} size="small" />
             </Stack>
             <p className="text-sm font-bold">{rating.avgRating}</p>
             <p className="text-green-600 font-bold text-xl">

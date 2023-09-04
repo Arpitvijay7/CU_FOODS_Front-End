@@ -18,6 +18,10 @@ const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [orderPlacedId, setOrderPlacedId] = useState(0);
+  
+  useEffect(() => {
+    document.title = "Cart";
+  }, []);
 
   useEffect(() => {
     socket = socketIO.connect(ENDPOINT, { transports: ["websocket"] });
@@ -133,7 +137,7 @@ const Checkout = () => {
           address,
           paymentInfo,
         });
-
+        console.log(data);
         if (data.success === true) {
           toast.success("Order Placed Successfully", {
             autoClose: 1500,

@@ -6,6 +6,7 @@ const ContactUs = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Contact Us";
   }, []);
   
   return (

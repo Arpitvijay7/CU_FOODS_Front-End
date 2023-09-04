@@ -4,6 +4,8 @@ const TermsAndConditions = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Terms And Conditions";
+
   }, []);
 
   return (
