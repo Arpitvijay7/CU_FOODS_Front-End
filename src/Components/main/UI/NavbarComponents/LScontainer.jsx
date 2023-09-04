@@ -7,7 +7,11 @@ import {
   signinToggle,
   signupToggle,
 } from "../../../Core/store/slice/toggleSlice";
-import { loginRequest, loginUser, logoutUser } from "../../../Core/store/slice/userSlice";
+import {
+  loginRequest,
+  loginUser,
+  logoutUser,
+} from "../../../Core/store/slice/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -55,7 +59,7 @@ const LScontainer = () => {
       toast.success("Login Successfull", {
         autoClose: 1500,
         hideProgressBar: true,
-      })
+      });
     } catch (error) {
       alert("login unsuccessfull");
       dispatch(logoutUser());
@@ -64,7 +68,7 @@ const LScontainer = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const {data} = await axios.post(`${BASE_URL}user/new`, {
+    const { data } = await axios.post(`${BASE_URL}user/new`, {
       signupData,
     });
 
@@ -180,21 +184,28 @@ const LScontainer = () => {
                 className="p-4 text-xl w-full focus:outline-none"
               ></input>
             </div>
-            <p>
-              New to CU Foods?{" "}
-              <span
-                className="hover:cursor-pointer underline text-rose-500"
-                onClick={() => dispatch(signupToggle())}
-              >
-                Create account
-              </span>
-            </p>
             <button
               className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
               onClick={(e) => handleLogin(e)}
             >
               Login
             </button>
+            <div className="flex justify-between">
+              <div className="flex space justify-start">
+                <span className="md:block hidden">New to CU Foods ? </span>
+                <span
+                  className="hover:cursor-pointer flex ml-[5px] justify-start underline text-rose-500"
+                  onClick={() => dispatch(signupToggle())}
+                >
+                  Register
+                </span>
+              </div>
+
+              <span className="hover:cursor-pointer underline text-rose-500">
+                Forget Password
+              </span>
+            </div>
+
             <div className="login_with_google">
               <p className="seprater--text"> Or Login With </p>
 
@@ -209,7 +220,7 @@ const LScontainer = () => {
           </form>
         )}
       </div>
-      <ToastContainer autoClose={1500} hideProgressBar={true}/>
+      <ToastContainer autoClose={1500} hideProgressBar={true} />
     </div>
   );
 };

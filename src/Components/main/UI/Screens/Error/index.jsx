@@ -1,17 +1,37 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
+import './styles.css';
+
 const ErrorPage = () => {
+
+  useEffect(() => {
+    document.title = "Error 404";
+  }, []);
+
   return (
-    <Fragment>
-      <div className="h-[50vh] grid place-items-center bg-rose-300">
-        <div className="text-4xl font-bold">
-          Error 404 , Page not Found. Go{" "}
-          <span className="hover:underline text-blue-600">
-            <Link to="/">Home</Link>
-          </span>
+    <section class="page_404">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 ">
+            <div class="col-sm-10 col-sm-offset-1  text-center">
+              <div class="four_zero_four_bg">
+                <h1 class="text-center ">404</h1>
+              </div>
+
+              <div class="contant_box_404">
+                <h3 class="h2">Look like you're lost</h3>
+
+                <p>the page you are looking for not avaible!</p>
+
+                <Link to={'/'} class="link_404">
+                  Go to Home
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </Fragment>
+    </section>
   );
 };
 
