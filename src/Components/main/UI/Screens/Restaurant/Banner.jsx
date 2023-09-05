@@ -79,7 +79,6 @@ const Banner = ({ id }) => {
           </div>
         </div>
       </div>
-      <hr className="mt-5"></hr>
     </>
   );
 };

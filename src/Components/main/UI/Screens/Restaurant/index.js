@@ -9,26 +9,33 @@ const Restaurant = () => {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(1);
+  const [shopName, setShopName] = useState("");
   const fetchMenu = async () => {
     const { data } = await axios(`${BASE_URL}shop/getMenu/${id}`);
+    console.log(data);
+
     if (data.message === "Success") {
       console.log(data.Menu);
       setData(data.Menu);
+      setShopName(data.shopName);
       setLoad(0);
     }
   };
   const handleSearch = async () => {
-    setLoad(true)
+    setLoad(true);
     const res = await fetch(`${BASE_URL}shop/getMenu/${id}?keyword=${search}`);
     const data = await res.json();
     if (search.length > 0) {
       if (data["Menu"].length !== 0) {
         setData(data.Menu);
+        setShopName(data.shopName);
       } else {
         setData([]);
+        setShopName(data.shopName);
       }
     } else {
       fetchMenu();
+      setShopName(data.shopName);
     }
     setLoad(0);
   };
@@ -48,6 +55,7 @@ const Restaurant = () => {
         setSearch={setSearch}
         id={id}
         load={load}
+        shopName={shopName}
       />
     </>
   );
