@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from "react";
 import MenuItemCard from "./MenuItemCard.js";
-import { BASE_URL } from "../../../../Core/API/endpoint.js";
-import axios from "axios";
-const Menu = ({ id }) => {
-  const [menu, setMenu] = useState([]);
-  const [load, setLoad] = useState(1);
-
-  const fetchMenu = async () => {
-    const { data } = await axios(`${BASE_URL}shop/getMenu/${id}`);
-    if (data.message === "Success") {
-      setMenu(data.Menu);
-      setLoad(0);
-    }
-  };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchMenu();
-  }, []);
-
+const Menu = ({ id, data, setSearch, search, load }) => {
   return (
-    <>
+    <div className="p-2">
+      <div className="w-full md:w-1/2 lg:w-1/3 p-2 flex border-2 rounded-lg border-rose-600">
+        <p className="pl-3 pr-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
+        </p>
+        <input
+          type="text"
+          className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
+          placeholder="Search For Restaurants"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        ></input>
+      </div>
       {load ? (
         <div className="w-screen h-96 grid place-items-center">
           <div
@@ -27,38 +35,39 @@ const Menu = ({ id }) => {
             role="status"
           ></div>
         </div>
-      ) : (<>
-        <div className="flex flex-wrap w-full justify-center md:justify-start">
-          <section className="text-gray-600 body-font">
-            <div className="px-5 pt-10 pb-24">
-              <div className="flex flex-wrap justify-center">
-                {menu &&
-                  menu.map((val, index) => {
-                    return(<>
-                    <MenuItemCard
-                      key={index}
-                      price={val.price}
-                      price_half={val.price_half}
-                      price_full={val.price_full}
-                      name={val.name}
-                      imgLink={val.image.path}
-                      details={val.description}
-                      rating={val.rating}
-                      id={val._id}
-                      dualOption={val.DualOptions}
-                      shop={val.shop}
-                    />
-                    
-                    </>
-                    )
-                  })}
+      ) : (
+        <>
+          <div className="flex flex-wrap w-full justify-center md:justify-start">
+            <section className="text-gray-600 body-font">
+              <div className="px-5 pt-10 pb-24">
+                <div className="flex flex-wrap justify-center">
+                  {data &&
+                    data.map((val, index) => {
+                      return (
+                        <>
+                          <MenuItemCard
+                            key={index}
+                            price={val.price}
+                            price_half={val.price_half}
+                            price_full={val.price_full}
+                            name={val.name}
+                            imgLink={val.image.path}
+                            details={val.description}
+                            rating={val.rating}
+                            id={val._id}
+                            dualOption={val.DualOptions}
+                            shop={val.shop}
+                          />
+                        </>
+                      );
+                    })}
+                </div>
               </div>
-            </div>
-          </section>
-        </div>
+            </section>
+          </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

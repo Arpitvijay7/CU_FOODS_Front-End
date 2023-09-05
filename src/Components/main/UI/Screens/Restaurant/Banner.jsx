@@ -8,16 +8,15 @@ import Stack from "@mui/material/Stack";
 const Banner = ({ id }) => {
   const [shop, setShop] = useState("");
   const [ratingValue, setRatingValue] = useState(0);
-  
+
   useEffect(() => {
     if (!shop) return;
     document.title = shop.name;
   }, [shop]);
-  
+
   const fetchShop = async () => {
     const { data } = await axios(`${BASE_URL}shop/getShopDetail/${id}`);
     if (data.success) {
-      console.log(data.shop);
       setShop(data.shop);
     }
   };
@@ -38,8 +37,6 @@ const Banner = ({ id }) => {
     numberOfReviews < 1000
       ? numeral(numberOfReviews).format("0a")
       : numeral(numberOfReviews).format("0.0a");
-
-  console.log(shop.rating);
   return (
     <>
       <div className="w-screen flex flex-col">
