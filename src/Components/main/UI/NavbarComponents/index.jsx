@@ -51,7 +51,7 @@ const Navbar = () => {
                 : ""
             } md:${
               toggle === "checkout"
-                ? "text-[crimson] border-t-2 border-[transparent]"
+                ? "text-[yellow] md:border-t-2 md:border-[transparent]"
                 : ""
             }` }
           >
@@ -65,7 +65,7 @@ const Navbar = () => {
                 : ""
             } md:${
               toggle === "myorders"
-                ? "text-[crimson] border-t-2 border-[transparent]"
+                ? "text-[crimson] md:border-t-2 md:border-[transparent]"
                 : ""
             }`}
           >
