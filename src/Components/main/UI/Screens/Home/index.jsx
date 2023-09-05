@@ -56,6 +56,7 @@ const Home = () => {
   useEffect(() => {
     handleSearch();
   }, [search]);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchData();

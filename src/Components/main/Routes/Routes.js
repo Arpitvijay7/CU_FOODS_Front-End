@@ -23,6 +23,10 @@ import PrivacyPolicy from "../UI/FooterComponents/PrivacyPolicy";
 import TermsAndConditions from "../UI/FooterComponents/Terms&Conditions";
 import RefundsAndReturns from "../UI/FooterComponents/RefundsAndReturns";
 import ContactUs from "../UI/FooterComponents/ContactUs";
+import VendorHelpPage from "../UI/FooterComponents/VendorHelpPage";
+import JoinUs from "../UI/FooterComponents/JoinUs";
+import VendorJoinUsPage from "../UI/FooterComponents/VendorJoinUs";
+import HearfromOurInterns from "../UI/FooterComponents/HearfromOurInterns";
 axios.defaults.withCredentials = true;
 
 const Routings = () => {
@@ -68,8 +72,12 @@ const Routings = () => {
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/TermsAndCodition" element={<TermsAndConditions />} />
         <Route path="/RefundsAndReturns" element={<RefundsAndReturns />} />
-        <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/VendorHelp" element={<VendorHelpPage />} />
+        <Route path="/joinUs" element={<JoinUs/>} />
+        <Route path="/vendorJoinUs" element={<VendorJoinUsPage/>} />
+        <Route path="/hearFromOurInterns" element={<HearfromOurInterns/>} />
 
+        <Route path="/contactUs" element={<ContactUs />} />
 
         <Route path="*" element={<ErrorPage />} />
 
