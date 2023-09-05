@@ -7,7 +7,6 @@ const toggleSlice=createSlice({
     reducers:{
         signinToggle(state,action){
             return{...state,["toggle"]:1}
-            
         },
         signupToggle(state,action){
             return{...state,["toggle"]:2}
@@ -16,7 +15,6 @@ const toggleSlice=createSlice({
             return{...state,["toggle"]:0}
         }
     }
-
 })
 export default toggleSlice.reducer
 export const {signinToggle,signupToggle,closeToggle}=toggleSlice.actions
