@@ -36,7 +36,7 @@ const Banner = ({ id }) => {
   const formatedNoOfReviews =
     numberOfReviews < 1000
       ? numeral(numberOfReviews).format("0a")
-      : numeral(numberOfReviews).format("0.0a");
+      : numeral(numberOfReviews).format(`0.0a${numberOfReviews % 1000 === 0 ? "" : "+"}`);
   return (
     <>
       <div className="w-screen flex flex-col">

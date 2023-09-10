@@ -64,7 +64,7 @@ const OrderItem = ({
     clipPath: "polygon(40% 50%, 100% 100%, 100% 0)",
     width: "20px",
     height: "100%",
-    backgroundColor: "#F0F2F2 !important"  ,
+    backgroundColor: "#F0F2F2"  ,
     color: "white",
     position: "absolute",
     right: "0",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MenuItemCard from "./MenuItemCard.js";
+import MenuItemCard from "./MenuItemCard";
 const Menu = ({ id, data, setSearch, search, load ,shopName }) => {
   return (
     <div className="p-2">
@@ -57,6 +57,7 @@ const Menu = ({ id, data, setSearch, search, load ,shopName }) => {
                             id={val._id}
                             dualOption={val.DualOptions}
                             shop={val.shop}
+                            available={val.stockAvailability}
                           />
                         </>
                       );

@@ -29,7 +29,6 @@ const JoinUs = () => {
 
     // You can handle form submission here, e.g., send data to your backend
 
-    console.log("Form Data:", formData);
   };
 
   return (

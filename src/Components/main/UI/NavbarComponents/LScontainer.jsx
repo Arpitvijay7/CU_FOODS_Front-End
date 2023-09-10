@@ -6,6 +6,7 @@ import {
   closeToggle,
   signinToggle,
   signupToggle,
+  forgetPasswordToggle,
 } from "../../../Core/store/slice/toggleSlice";
 import {
   loginRequest,
@@ -16,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ButtonLoader from "../../../../Assets/ButtonLoader/ButtonLoader";
 
 axios.defaults.withCredentials = true;
 
@@ -26,6 +28,15 @@ const LScontainer = () => {
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
 
+  const [RegisterVerification, setRegisterVerification] = useState(false);
+  const [ForgetPasswordToggle, setForgetPasswordToggle] = useState(false);
+  const [forgetPasswordEmail, setforgetPasswordEmail] = useState("");
+  const [forgetPasswordEmailError, setforgetPasswordEmailError] =
+    useState(false);
+  const [forgetPasswordEmailErrorMessage, setforgetPasswordEmailErrorMessage] =
+    useState("");
+  const [load, setLoad] = useState(false);
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -35,14 +46,17 @@ const LScontainer = () => {
     password: "",
     name: "",
   });
+
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
   const handleSignupChange = (e) => {
+    e.preventDefault();
     const { name, value } = e.target;
     setSignupData({ ...signupData, [name]: value });
   };
+
   const dispatch = useDispatch();
   const click = useSelector((state) => {
     return state.toggle["toggle"];
@@ -66,15 +80,60 @@ const LScontainer = () => {
     }
   };
 
+  const handleForgetPassword = async (e) => {
+    e.preventDefault();
+    setLoad(true);
+    try {
+      const { data } = await axios.post(`${BASE_URL}user/password/forgot`, {
+        email: forgetPasswordEmail,
+      });
+      if (data.success) {
+        alert("Password reset link sent to your email");
+        setForgetPasswordToggle(true);
+      }
+      setLoad(false);
+    } catch (err) {
+      setLoad(false);
+
+      if (err.response) {
+        setforgetPasswordEmailError(true);
+        setforgetPasswordEmailErrorMessage(err.response.data.message);
+      } else {
+        setforgetPasswordEmailError(true);
+        setforgetPasswordEmailErrorMessage("Something went wrong");
+      }
+    }
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post(`${BASE_URL}user/new`, {
-      signupData,
-    });
 
-    if (data.success) {
-      alert("registration Successfull");
-      dispatch(signinToggle());
+    setLoad(true);
+    try {
+      const { data } = await axios.post(`${BASE_URL}user/new`, signupData);
+
+      setRegisterVerification(true);
+      setLoad(false);
+
+      // if (data.success) {
+      //   alert("registration Successfull");
+      //   dispatch(signinToggle());
+      //   dispatch(loginUser());
+      // }
+    } catch (err) {
+      if (err.response) {
+        toast.error(err.response.data.message, {
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
+        setLoad(false);
+      } else {
+        toast.error("Something went wrong", {
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
+        setLoad(false);
+      }
     }
   };
 
@@ -96,7 +155,9 @@ const LScontainer = () => {
       ></div>
       <div className="bg-white absolute top-[30%] z-20 w-[calc(100%-2rem)] md:w-1/3 rounded-lg">
         <div className="flex justify-between p-5 text-3xl font-bold">
-          <div>{click > 1 ? "Register" : "Login"}</div>
+          <div>
+            {click == 1 ? "Login" : click == 2 ? "Register" : "Forgot Password"}
+          </div>
           <button onClick={() => dispatch(closeToggle())}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +175,7 @@ const LScontainer = () => {
             </svg>
           </button>
         </div>
-        {click > 1 ? (
+        {click == 2 ? (
           <form className="p-5">
             <div className="w-full p-1 border rounded-lg my-4">
               <input
@@ -158,66 +219,123 @@ const LScontainer = () => {
             <button
               className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
               onClick={(e) => handleRegister(e)}
+              disabled={RegisterVerification}
             >
-              Register
+              {load ? (
+                <ButtonLoader />
+              ) : RegisterVerification ? (
+                "A verification link has been sent to your email. Please verify your email to continue. Check Spam folders also"
+              ) : (
+                "Register"
+              )}
             </button>
           </form>
         ) : (
-          <form className="p-5">
-            <div className="w-full p-1 border rounded-lg my-4">
-              <input
-                onChange={(e) => handleLoginChange(e)}
-                value={loginData["email"]}
-                type="email"
-                placeholder="email:  johnDoe@email.com"
-                className="p-4 text-xl w-full focus:outline-none"
-                name="email"
-              ></input>
-            </div>
-            <div className="w-full p-1 border rounded-lg my-4">
-              <input
-                onChange={(e) => handleLoginChange(e)}
-                value={loginData["password"]}
-                type="password"
-                name="password"
-                placeholder="password:  *******"
-                className="p-4 text-xl w-full focus:outline-none"
-              ></input>
-            </div>
-            <button
-              className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
-              onClick={(e) => handleLogin(e)}
-            >
-              Login
-            </button>
-            <div className="flex justify-between">
-              <div className="flex space justify-start">
-                <span className="md:block hidden">New to CU Foods ? </span>
+          click !== 3 && (
+            <form className="p-5">
+              <div className="w-full p-1 border rounded-lg my-4">
+                <input
+                  onChange={(e) => handleLoginChange(e)}
+                  value={loginData["email"]}
+                  type="email"
+                  placeholder="email:  johnDoe@email.com"
+                  className="p-4 text-xl w-full focus:outline-none"
+                  name="email"
+                ></input>
+              </div>
+              <div className="w-full p-1 border rounded-lg my-4">
+                <input
+                  onChange={(e) => handleLoginChange(e)}
+                  value={loginData["password"]}
+                  type="password"
+                  name="password"
+                  placeholder="password:  *******"
+                  className="p-4 text-xl w-full focus:outline-none"
+                ></input>
+              </div>
+              <button
+                className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
+                onClick={(e) => handleLogin(e)}
+              >
+                Login
+              </button>
+              <div className="flex justify-between">
+                <div className="flex space justify-start">
+                  <span className="md:block hidden">New to CU Foods ? </span>
+                  <span
+                    className="hover:cursor-pointer flex ml-[5px] justify-start underline text-rose-500"
+                    onClick={() => dispatch(signupToggle())}
+                  >
+                    Register
+                  </span>
+                </div>
+
                 <span
-                  className="hover:cursor-pointer flex ml-[5px] justify-start underline text-rose-500"
-                  onClick={() => dispatch(signupToggle())}
+                  className="hover:cursor-pointer underline text-rose-500"
+                  onClick={() => dispatch(forgetPasswordToggle())}
                 >
-                  Register
+                  Forgot Password
                 </span>
               </div>
 
-              <span className="hover:cursor-pointer underline text-rose-500">
-                Forget Password
-              </span>
+              <div className="login_with_google">
+                <p className="seprater--text"> Or Login With </p>
+
+                <button
+                  type="button"
+                  className="login-with-google-btn"
+                  onClick={googleLoginHandler}
+                >
+                  Sign in with Google
+                </button>
+              </div>
+            </form>
+          )
+        )}
+
+        {click == 3 ? (
+          <form className="p-5">
+            <div className="w-full p-1 border rounded-lg my-4 ">
+              <input
+                onChange={(e) => setforgetPasswordEmail(e.target.value)}
+                value={forgetPasswordEmail}
+                type="email"
+                placeholder="Email:  johnDoe@email.com"
+                className="p-4 text-xl w-full focus:outline-none"
+                name="ForgotEmail"
+                required
+              ></input>
             </div>
-
-            <div className="login_with_google">
-              <p className="seprater--text"> Or Login With </p>
-
-              <button
-                type="button"
-                className="login-with-google-btn"
-                onClick={googleLoginHandler}
+            {forgetPasswordEmailError && (
+              <p className="text-red-500 text-base mb-2">
+                {forgetPasswordEmailErrorMessage}
+              </p>
+            )}
+            <p>
+              Back to Login?{" "}
+              <span
+                className="hover:cursor-pointer underline text-rose-500"
+                onClick={() => dispatch(signinToggle())}
               >
-                Sign in with Google
-              </button>
-            </div>
+                Login
+              </span>
+            </p>
+
+            <button
+              className="w-full p-5 border rounded-lg my-4 bg-rose-500 outline-8   hover:bg-rose-700 text-xl text-white"
+              onClick={(e) => handleForgetPassword(e)}
+            >
+              {load ? (
+                <ButtonLoader />
+              ) : ForgetPasswordToggle ? (
+                "Mail sended To your email, check you email"
+              ) : (
+                "Send Mail"
+              )}
+            </button>
           </form>
+        ) : (
+          ""
         )}
       </div>
       <ToastContainer autoClose={1500} hideProgressBar={true} />

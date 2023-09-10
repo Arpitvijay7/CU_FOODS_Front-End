@@ -11,10 +11,18 @@ const Card = (props) => {
         <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
           <div className="relative">
             <img
-              class="lg:h-48 md:h-36 w-full h-56 object-stretch object-center"
+              class="lg:h-48 md:h-36 w-full h-56 object-stretch object-center backdrop-grayscale"
               src={pic}
               alt="blog"
+              style={
+                props.status === "closed" ? { filter: "grayscale(100%)" } : {}
+              }
             />
+            {props.status === "closed" ? (
+              <div className="absolute bg-[crimson] left-0 mt-[-2.0rem] font-bold rounded-tr-lg flex pr-3 items-center text-white p-1">
+                <p className="">Closed</p>
+              </div>
+            ) : null}
             <div className="bg-[#29623F] text-[16px] absolute mt-[-2.5rem] right-[0.2rem] text-white w-max rounded-[0.7rem] font-bold p-[.25rem]">
               &#9733;{" "}
               {props.rating && props.rating.avgRating

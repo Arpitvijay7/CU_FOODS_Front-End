@@ -59,7 +59,6 @@ const MyOrders = () => {
 
       setDeliveredOrders(res.data.orders);
     } catch (error) {
-      console.log(error);
     }
   };
 

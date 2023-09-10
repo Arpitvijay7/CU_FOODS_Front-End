@@ -11,7 +11,6 @@ const ProtectedRoutes = ({
   if (isAuthenticated) {
     return <>{!loading && (children ? children : <Outlet />)}</>;
   }
-  console.log(location.pathname);
 
   return !(loading) ? (
      <Navigate to="/?notauth=true" />

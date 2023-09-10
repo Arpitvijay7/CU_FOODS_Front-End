@@ -2,10 +2,13 @@ import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import axios from "axios";
+import numeral from "numeral";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+
 const MenuItemCard = ({
   name,
   imgLink,
@@ -17,6 +20,7 @@ const MenuItemCard = ({
   price_half,
   price_full,
   shop,
+  available,
 }) => {
   const [categ, setCateg] = useState(1);
   const [height, setHeight] = useState("0vh");
@@ -72,27 +76,46 @@ const MenuItemCard = ({
         setReplaceCartToggle(1);
       }
     } catch (err) {
-      console.log(err.response.data.message);
-      setLoading(0);
-      toast.error(err.response.data.message, {
-        autoClose: 1500,
-        hideProgressBar: true,
-      });
-      navigate("/?notauth=true");
+      let message;
+      if (err.response) {
+        message = err.response.data.message;
+      } else {
+        message = 'Something went wrong please try again later';
+      }
+      navigate(`/?notauth=${message}`);
     }
   };
+
+  const formatedNoOfReviews =
+  rating.numofReviews < 1000
+      ? numeral(rating.numofReviews).format("0a")
+      : numeral(rating.numofReviews).format(`0.0a${rating.numofReviews % 1000 === 0 ? "" : "+"}`);
+
   return (
     <>
       <div className="h-full w-full md:w-[47%] lg:w-[30vw] p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1 m-2">
         <div className=" flex items-center justify-between gap-3 text-center sm:text-left">
           <div className="flex-grow sm:pl-8 text-left">
             <h2 className="title-font font-medium text-lg text-gray-900">
+              {!available && (
+                <p className="text-[red]">Currently Not Available !</p>
+              )}
               {name}
             </h2>
-            <Stack spacing={1}>
-              <Rating name="size-small" readOnly defaultValue={rating?rating.avgRating:0} precision={0.1} size="small" />
-            </Stack>
-            <p className="text-sm font-bold">{rating.avgRating}</p>
+            <div className="flex">
+              <Stack spacing={1}>
+                <Rating
+                  name="size-small"
+                  readOnly
+                  defaultValue={rating ? rating.avgRating : 0}
+                  precision={0.1}
+                  size="small"
+                />
+              </Stack>
+              <p className="text-sm font-bold">{rating.avgRating}</p>
+            </div>
+
+            <p className="text-sm font-bold">{formatedNoOfReviews} reviews</p>
             <p className="text-green-600 font-bold text-xl">
               &#8377; {price_half ? price_half : price}
             </p>
@@ -103,6 +126,7 @@ const MenuItemCard = ({
             <img
               alt={name + " photo"}
               className="flex-shrink-0 rounded-lg w-32 h-32 md:w-48 md:h-48 object-cover object-center sm:mb-0 mb-4"
+              style={!available ? { filter: "grayscale(100%)" } : {}}
               src={imgLink}
             />
             {added ? (

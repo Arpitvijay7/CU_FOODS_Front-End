@@ -27,11 +27,15 @@ import VendorHelpPage from "../UI/FooterComponents/VendorHelpPage";
 import JoinUs from "../UI/FooterComponents/JoinUs";
 import VendorJoinUsPage from "../UI/FooterComponents/VendorJoinUs";
 import HearfromOurInterns from "../UI/FooterComponents/HearfromOurInterns";
+import VerifyEmail from "../UI/Screens/VerifyEmail/VerifyEmail";
 axios.defaults.withCredentials = true;
 
 const Routings = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const isResetPwd = location.pathname === "/resetpassword";
+  const verifyEmail = location.pathname === "/verifyEmail";
+
   const dispatch = useDispatch();
 
   const { auth, loading } = useSelector((state) => state.users);
@@ -39,7 +43,7 @@ const Routings = () => {
     dispatch(loginRequest());
     try {
       const { data } = await axios.get(`${BASE_URL}user/logedInUser`);
-      console.log(data);
+  
       if (data.success) {
         dispatch(loginUser());
       }
@@ -54,7 +58,7 @@ const Routings = () => {
 
   return (
     <>
-      {!isHome && <Navbar />}
+      {!isHome && !isResetPwd && !verifyEmail && <Navbar />}
       <Routes>
         <Route
           element={<ProtectedRoutes isAuthenticated={auth} loading={loading} />}
@@ -66,6 +70,7 @@ const Routings = () => {
         </Route>
         <Route path="/restaurant/:id" element={<Restaurant />} />
         <Route path="/" element={<Home />} />
+        <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/resetpassword" element={<ResetPwd />} />
         <Route path="/forgotpassword" element={<ForgotPwd />} />
@@ -82,7 +87,7 @@ const Routings = () => {
         <Route path="*" element={<ErrorPage />} />
 
       </Routes>
-      <Footer />
+      {!isResetPwd && <Footer /> }
     </>
   );
 };

@@ -10,17 +10,17 @@ const Restaurant = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(1);
   const [shopName, setShopName] = useState("");
+
   const fetchMenu = async () => {
     const { data } = await axios(`${BASE_URL}shop/getMenu/${id}`);
-    console.log(data);
 
     if (data.message === "Success") {
-      console.log(data.Menu);
       setData(data.Menu);
       setShopName(data.shopName);
       setLoad(0);
     }
   };
+  
   const handleSearch = async () => {
     setLoad(true);
     const res = await fetch(`${BASE_URL}shop/getMenu/${id}?keyword=${search}`);
@@ -39,6 +39,7 @@ const Restaurant = () => {
     }
     setLoad(0);
   };
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchMenu();

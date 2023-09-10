@@ -18,7 +18,9 @@ const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [orderPlacedId, setOrderPlacedId] = useState(0);
-  
+  const [shopStatus, setShopStatus] = useState("");
+
+  console.log(shopStatus);
   useEffect(() => {
     document.title = "Cart";
   }, []);
@@ -32,7 +34,6 @@ const Checkout = () => {
       setOrderPlacedId(0);
 
       navigate("/myorders?status=placed");
-
     }
     return () => {
       socket.off();
@@ -94,7 +95,7 @@ const Checkout = () => {
     const { name, value } = e.target;
     setAddress({ ...address, [name]: value });
   };
-  
+
   const fetchUserCart = async () => {
     const { data: cartData } = await axios(
       `${BASE_URL}cart/getAllfromCart`,
@@ -103,12 +104,29 @@ const Checkout = () => {
     if (cartData.message === "Your Cart Items") {
       setCartItems(cartData.cart);
       setTotalPrice(cartData.totalSum);
+      setShopStatus(cartData.shopStatus);
     }
     console.log(cartData);
     setLoading(0);
   };
 
   const handlePlaceOrderClick = async () => {
+    if (shopStatus === "closed") {
+      toast.error("Shop is closed", {
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+      return;
+    }
+
+    if (!shopStatus) {
+      toast.error("Cart is Empty", {
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+      return;
+    }
+
     const uniqueOrderId = generateUid(20);
     console.log(uniqueOrderId);
     const res = await axios.post(`${BASE_URL}order/checkout`, {
@@ -145,7 +163,6 @@ const Checkout = () => {
           });
 
           setOrderPlacedId(data.order.vendor);
-
         } else {
           toast.error("Payment Failed", {
             autoClose: 1500,
@@ -221,19 +238,27 @@ const Checkout = () => {
               </>
             )}
           </div>
-          <div className="w-full flex justify-center items-center mt-7 border border-blue-300 p-5  rounded-md">
-            <label className="inline-block pl-[0.15rem] hover:cursor-pointer">
-              Phone Number :
-            </label>
-            <input
-              className="w-[70%] ml-3 border border-gray-300 h-10 rounded p-5"
-              type="number"
-              min="1000000000"
-              placeholder="9876543210"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              id="checkboxDefault"
-            />
+          <div className="w-full flex flex-col justify-center items-center mt-7 border border-blue-300 p-5  rounded-md">
+            <div className="flex justify-start items-start w-full">
+              <label className="h-full pl-[0.15rem] flex justify-center items-center hover:cursor-pointer">
+                Phone Number :
+              </label>
+              <input
+                className="w-[70%] ml-3 border border-gray-300 h-10 rounded p-5"
+                type="number"
+                min="1000000000"
+                placeholder="9876543210"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                id="checkboxDefault"
+              />
+            </div>
+
+            <p className="text-xs text-gray-500 mt-3">
+              Please ensure the accuracy of your provided phone number, as any
+              errors may impact the success of your delivery. We will not be
+              responsible in that case.
+            </p>
           </div>
 
           <div className="w-full flex justify-center items-center mt-7 bg-gray-50 p-5  rounded-md">

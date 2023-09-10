@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 const CartItem = ({ name, price, quantity, option, id }) => {
   const [itemQuantity, setItemQuantity] = useState(quantity);
-  const token = localStorage.getItem("JWT");
   const [loading, setLoading] = useState(0);
 
   const handleQuantityIncrease = async () => {
-    console.log(id)
     setLoading(1);
-    console.log(`${BASE_URL}cart/increaseQuantity/${id}?option=${option}`)
-    const {data} = await axios(`${BASE_URL}cart/increaseQuantity/${id}?option=${option}`);
+
+    const { data } = await axios(
+      `${BASE_URL}cart/increaseQuantity/${id}?option=${option}`
+    );
     if (data.message === "quantity increased successfully") {
       setItemQuantity(1 + itemQuantity);
       setLoading(0);
@@ -20,8 +20,10 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   };
   const handleQuantityDecrease = async () => {
     setLoading(1);
-    const {data} = await axios(`${BASE_URL}cart/decreaseQuantity/${id}?option=${option}`);
-    if (data.message === "quantity decreased successfully" ) {
+    const { data } = await axios(
+      `${BASE_URL}cart/decreaseQuantity/${id}?option=${option}`
+    );
+    if (data.message === "quantity decreased successfully") {
       setItemQuantity(itemQuantity - 1);
     } else {
     }
@@ -29,7 +31,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
   };
   const handleRemoveItem = async () => {
     setLoading(1);
-    const {data} = await axios.delete(`${BASE_URL}cart/removeFromCart/${id}`);
+    const { data } = await axios.delete(`${BASE_URL}cart/removeFromCart/${id}`);
     if (data.message === "Product removed from cart Successfully") {
       setItemQuantity(0);
     } else {

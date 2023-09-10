@@ -28,6 +28,7 @@ const CardsSection = ({ data, setData, load }) => {
                             name={val.name}
                             address={val.description}
                             rating={val.rating}
+                            status={val.status}
                           />
                         );
                       })

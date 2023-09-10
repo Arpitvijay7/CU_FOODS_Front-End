@@ -8,7 +8,7 @@ import "./styles.css";
 const Navbar = () => {
   const { pathname } = useLocation();
   const [toggle, setToogle] = useState("");
-  console.log(pathname);
+
   const [route, setRoute] = useState(pathname);
 
   useEffect(() => {
