@@ -4,6 +4,7 @@ import { BsCartFill } from "react-icons/bs";
 import { MdRamenDining } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import "./styles.css";
+import logo from "../../../../Assets/Logo/CU_FOODS_WHITE_TRANSPARENT.png";
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -20,7 +21,6 @@ const Navbar = () => {
       setToogle("myorders");
     }
   }, [pathname, toggle]);
-
   return (
     <div>
       <nav className="bg-white z-10 fixed bottom-0 w-full md:flex md:justify-between shadow-lg shadow-grey-100  md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem]">
@@ -28,7 +28,7 @@ const Navbar = () => {
           to="/"
           className="hidden md:flex md:justify-center md:items-center md:text-2xl md:px-4"
         >
-          CU FOOD
+          <img src={logo} className="w-[150px] overflow-hidden" alt="Logo" />
         </Link>
         <div className="flex relative justify-evenly h-full items-center bg-white overflow-y-auto md:overflow-y-visible space-x-5 shadow-2xl md:shadow-none py-2 rounded-md">
           <Link

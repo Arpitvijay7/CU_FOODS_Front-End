@@ -10,6 +10,7 @@ import ButtonLoader from "../../../../../Assets/ButtonLoader/ButtonLoader";
 import SmallLoader from "./SmallLoader";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
+import logo from "../../../../../Assets/Logo/CU_FOODS_WHITE_TRANSPARENT.png";
 
 const ResetPwd = () => {
   const [newPwd, setNewPwd] = useState();
@@ -69,7 +70,7 @@ const ResetPwd = () => {
     <div className="mainDiv">
       <div className="cardStyle">
         <form action="" name="signupForm" id="signupForm">
-          <img src="" id="signupLogo" />
+          <img src={logo} className="w-[150px]" id="signupLogo" />
 
           <h2 className="formTitle">Login to your account</h2>
 
