@@ -80,22 +80,23 @@ const MenuItemCard = ({
       if (err.response) {
         message = err.response.data.message;
       } else {
-        message = 'Something went wrong please try again later';
+        message = "Something went wrong please try again later";
       }
       navigate(`/?notauth=${message}`);
     }
   };
 
   const formatedNoOfReviews =
-  rating.numofReviews < 1000
+    rating.numofReviews < 1000
       ? numeral(rating.numofReviews).format("0a")
-      : numeral(rating.numofReviews).format(`0.0a${rating.numofReviews % 1000 === 0 ? "" : "+"}`);
+      : numeral(rating.numofReviews / 1000).format("0.00a") +
+        (rating.numofReviews % 1000 === 0 ? "" : "+");
 
   return (
     <>
-      <div className="h-full w-full md:w-[47%] lg:w-[30vw] p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1 m-2">
+      <div className="h-full w-full md:w-[47%] lg:w-[30vw] p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1">
         <div className=" flex items-center justify-between gap-3 text-center sm:text-left">
-          <div className="flex-grow sm:pl-8 text-left">
+          <div className="w-1/2 overflow-hidden sm:pl-8 text-left flex-1">
             <h2 className="title-font font-medium text-lg text-gray-900">
               {!available && (
                 <p className="text-[red]">Currently Not Available !</p>
@@ -107,7 +108,7 @@ const MenuItemCard = ({
                 <Rating
                   name="size-small"
                   readOnly
-                  defaultValue={rating ? rating.avgRating : 0}
+                  defaultValue={rating ? rating.avgRating.toFixed(2) : 0}
                   precision={0.1}
                   size="small"
                 />
@@ -122,36 +123,39 @@ const MenuItemCard = ({
             <p className="mb-4">{details}</p>
           </div>
 
-          <div className="relative pb-7 z-0">
-            <img
-              alt={name + " photo"}
-              className="flex-shrink-0 rounded-lg w-32 h-32 md:w-48 md:h-48 object-cover object-center sm:mb-0 mb-4"
-              style={!available ? { filter: "grayscale(100%)" } : {}}
-              src={imgLink}
-            />
-            {added ? (
-              <Link
-                to={"/checkout"}
-                className="absolute top-[63%] left-[8%] md:left-[20%] md:top-[80%] rounded-md"
-              >
-                <p className="px-2 py-2 rounded bg-rose-500 hover:bg-rose-700 hover:shadow-lg shadow-md font-bold text-md text-white">
-                  View Cart
-                </p>
-              </Link>
-            ) : (
-              <button
-                onClick={
-                  dualOption
-                    ? () => handleAddToCartClick()
-                    : () => handleAddToCartAction()
-                }
-                className="absolute top-[63%] left-[8%] md:left-[20%] md:top-[80%] rounded-md"
-              >
-                <p className="px-2 py-2 rounded bg-rose-500 hover:bg-rose-700 hover:shadow-lg shadow-md font-bold text-md text-white">
-                  Add To Cart
-                </p>
-              </button>
-            )}
+          <div className="z-0 flex-1 flex justify-end ">
+            <div className="flex flex-col justify-center items-center">
+              <img
+                alt={name + " photo"}
+                className="flex-shrink-0 rounded-lg w-32 h-32 md:w-48 md:h-48 object-cover object-center sm:mb-0 mb-4"
+                style={!available ? { filter: "grayscale(100%)" } : {}}
+                src={imgLink}
+              />
+              {available &&
+                (added ? (
+                  <Link
+                    to={"/checkout"}
+                    className="rounded-md -mt-8 md:-mt-4 z-2"
+                  >
+                    <p className="w-max px-2 py-2 rounded bg-rose-500 hover:bg-rose-700 hover:shadow-lg shadow-md font-bold text-md text-white">
+                      View Cart
+                    </p>
+                  </Link>
+                ) : (
+                  <button
+                    onClick={
+                      dualOption
+                        ? () => handleAddToCartClick()
+                        : () => handleAddToCartAction()
+                    }
+                    className="rounded-md -mt-8 md:-mt-4 z-2"
+                  >
+                    <p className="w-max px-2 py-2 rounded bg-rose-500 hover:bg-rose-700 hover:shadow-lg shadow-md font-bold text-md text-white">
+                      Add To Cart
+                    </p>
+                  </button>
+                ))}
+            </div>
           </div>
         </div>
         <div

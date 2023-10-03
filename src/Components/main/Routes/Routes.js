@@ -28,6 +28,7 @@ import JoinUs from "../UI/FooterComponents/JoinUs";
 import VendorJoinUsPage from "../UI/FooterComponents/VendorJoinUs";
 import HearfromOurInterns from "../UI/FooterComponents/HearfromOurInterns";
 import VerifyEmail from "../UI/Screens/VerifyEmail/VerifyEmail";
+import MobileSearch from "../UI/Screens/MobileSearch";
 axios.defaults.withCredentials = true;
 
 const Routings = () => {
@@ -43,7 +44,7 @@ const Routings = () => {
     dispatch(loginRequest());
     try {
       const { data } = await axios.get(`${BASE_URL}user/logedInUser`);
-  
+
       if (data.success) {
         dispatch(loginUser());
       }
@@ -70,6 +71,7 @@ const Routings = () => {
         </Route>
         <Route path="/restaurant/:id" element={<Restaurant />} />
         <Route path="/" element={<Home />} />
+        <Route path="/mobileSearch" element={<MobileSearch />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/resetpassword" element={<ResetPwd />} />
@@ -78,16 +80,15 @@ const Routings = () => {
         <Route path="/TermsAndCodition" element={<TermsAndConditions />} />
         <Route path="/RefundsAndReturns" element={<RefundsAndReturns />} />
         <Route path="/VendorHelp" element={<VendorHelpPage />} />
-        <Route path="/joinUs" element={<JoinUs/>} />
-        <Route path="/vendorJoinUs" element={<VendorJoinUsPage/>} />
-        <Route path="/hearFromOurInterns" element={<HearfromOurInterns/>} />
+        <Route path="/joinUs" element={<JoinUs />} />
+        <Route path="/vendorJoinUs" element={<VendorJoinUsPage />} />
+        <Route path="/hearFromOurInterns" element={<HearfromOurInterns />} />
 
         <Route path="/contactUs" element={<ContactUs />} />
 
         <Route path="*" element={<ErrorPage />} />
-
       </Routes>
-      {!isResetPwd && <Footer /> }
+      {!isResetPwd && <Footer />}
     </>
   );
 };

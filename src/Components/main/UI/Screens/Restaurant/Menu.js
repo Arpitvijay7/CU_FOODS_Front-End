@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import MenuItemCard from "./MenuItemCard";
-const Menu = ({ id, data, setSearch, search, load ,shopName }) => {
+const Menu = ({ id, data, setSearch, search, load, shopName }) => {
   return (
-    <div className="p-2">
+    <div className="p-2 pt-10">
       <div className="w-full  md:w-1/2 lg:w-1/3 p-2 md:mx-12 flex border-2 rounded-lg border-rose-600">
         <p className="pl-3 pr-2">
           <svg
@@ -23,7 +23,7 @@ const Menu = ({ id, data, setSearch, search, load ,shopName }) => {
         <input
           type="text"
           className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
-          placeholder= {`Search in ${shopName}`}
+          placeholder={`Search in ${shopName}`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         ></input>
@@ -39,8 +39,8 @@ const Menu = ({ id, data, setSearch, search, load ,shopName }) => {
         <>
           <div className="flex flex-wrap w-full justify-center md:justify-start">
             <section className="text-gray-600 body-font">
-              <div className="px-5 md:pt-10 pt-1 pb-24">
-                <div className="flex flex-wrap justify-center">
+              <div className="md:pt-10 pt-1 pb-24">
+                <div className="flex flex-wrap justify-center p-2 gap-2">
                   {data &&
                     data.map((val, index) => {
                       return (
