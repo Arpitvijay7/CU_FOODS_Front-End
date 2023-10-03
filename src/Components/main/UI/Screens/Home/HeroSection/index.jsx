@@ -43,7 +43,7 @@ const HeroSection = ({ search, setSearch }) => {
 
   return (
     <>
-      <div className="max-w-screen bg-cover h-[60vh] HeroSection relative">
+      <div className="max-w-screen bg-cover h-[60vh] HeroSection relative shadow-2xl">
         <div className="text-xl font-bold sm:text-xl md:text-2xl lg:text-3xl text-white max-w-screen">
           <div className="flex justify-between p-5 lg:p-10">
             <p></p>
@@ -121,11 +121,15 @@ const HeroSection = ({ search, setSearch }) => {
                   </p>
                   <input
                     type="text"
-                    className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
+                    className="hidden md:block h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
                     placeholder="Search For Restaurants"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   ></input>
+                  <Link to="/mobilesearch"
+                    type="text"
+                    className="md:hidden h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg flex justify-start items-center text-neutral-400 font-semibold"
+                  >Search For Restaurants</Link>
                 </div>
               </div>
             </div>

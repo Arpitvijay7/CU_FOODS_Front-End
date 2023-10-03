@@ -6,35 +6,47 @@ const Card = (props) => {
     <>
       <Link
         to={"/restaurant/" + props.id}
-        class="p-4 w-full md:w-[50%] lg:w-1/3 ease-in-out duration-300 hover:scale-105 cursor-pointer"
+        className="bg-f5f5f5 w-full md:w-1/2 lg:w-1/4 p-2  flex items-center justify-center"
       >
-        <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+        <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden">
           <div className="relative">
-            <img
-              class="lg:h-48 md:h-36 w-full h-56 object-stretch object-center backdrop-grayscale"
-              src={pic}
-              alt="blog"
-              style={
-                props.status === "closed" ? { filter: "grayscale(100%)" } : {}
-              }
-            />
-            {props.status === "closed" ? (
-              <div className="absolute bg-[crimson] left-0 mt-[-2.0rem] font-bold rounded-tr-lg flex pr-3 items-center text-white p-1">
-                <p className="">Closed</p>
-              </div>
-            ) : null}
-            <div className="bg-[#29623F] text-[16px] absolute mt-[-2.5rem] right-[0.2rem] text-white w-max rounded-[0.7rem] font-bold p-[.25rem]">
-              &#9733;{" "}
-              {props.rating && props.rating.avgRating
-                ? props.rating.avgRating
-                : "N.A"}
+            <img className=" h-48 w-full" src={pic}></img>
+            <div className="absolute bottom-4 right-4 bg-gray-200 text-gray-700 px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              15-30 mins
             </div>
+            {props.status === "closed" && (
+              <div className="absolute bottom-[-1px] left-5 text-red-500 bg-white px-4 py-1 rounded-t-lg text-xs font-black w-max">
+                CLOSED
+              </div>
+            )}
           </div>
-          <div class="p-6">
-            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-              {props.name}
-            </h1>
-            <p class="leading-relaxed mb-3">{props.address}</p>
+          <div className="p-4">
+            <div className="flex justify-between items-center">
+              <div className="text-start">
+                <p className="text-xl font-semibold text-black">{props.name}</p>
+                <p className="text-gray-600 text-sm">{props.address}</p>
+              </div>
+              <div className="bg-green-700 text-white font-semibold rounded-md text-xs p-2 ml-6">
+                {props.rating && props.rating.avgRating
+                  ? props.rating.avgRating
+                  : "N.A"}{" "}
+                ★
+              </div>
+            </div>
           </div>
         </div>
       </Link>
