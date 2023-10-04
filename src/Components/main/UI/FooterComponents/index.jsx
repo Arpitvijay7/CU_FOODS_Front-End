@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "./../../../../Assets/Logo/logo192.png";
+import logo from "./../../../../Assets/Logo/CU_FOODS_WHITE_TRANSPARENT.png";
 
 const Footer = () => {
   return (
@@ -9,10 +9,10 @@ const Footer = () => {
         <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <Link
             to="/"
-            class="flex-shrink-0 md:mx-0 mx-auto text-center md:text-left"
+            class="flex-shrink-0 md:mx-0 md:mt-[-45px] mb-[-30px] mx-auto text-center md:text-left"
           >
             <p class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-              <img src={logo} />
+              <img className="w-[192px]" src={logo} />
             </p>
           </Link>
           <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
