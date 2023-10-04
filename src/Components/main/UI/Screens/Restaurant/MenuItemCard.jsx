@@ -127,6 +127,7 @@ const MenuItemCard = ({
             <div className="flex flex-col justify-center items-center">
               <img
                 alt={name + " photo"}
+                loading="lazy"
                 className="flex-shrink-0 rounded-lg w-32 h-32 md:w-48 md:h-48 object-cover object-center sm:mb-0 mb-4"
                 style={!available ? { filter: "grayscale(100%)" } : {}}
                 src={imgLink}

@@ -10,7 +10,7 @@ const Card = (props) => {
       >
         <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden">
           <div className="relative">
-            <img className=" h-48 w-full" src={pic}></img>
+            <img className=" h-48 w-full" loading="lazy" src={pic}></img>
             <div className="absolute bottom-4 right-4 bg-gray-200 text-gray-700 px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
