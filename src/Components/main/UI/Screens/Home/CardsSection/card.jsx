@@ -6,7 +6,7 @@ const Card = (props) => {
     <>
       <Link
         to={"/restaurant/" + props.id}
-        className="bg-f5f5f5 w-full md:w-1/2 lg:w-1/4 p-2  flex items-center justify-center"
+        className="bg-f5f5f5 w-full md:w-1/2 lg:w-1/4 p-2  flex items-center justify-center h-full"
       >
         <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden">
           <div className="relative">
@@ -35,12 +35,12 @@ const Card = (props) => {
             )}
           </div>
           <div className="p-4">
-            <div className="flex justify-between items-center">
-              <div className="text-start">
+            <div className="grid grid-cols-6">
+              <div className="text-start col-span-4">
                 <p className="text-xl font-semibold text-black">{props.name}</p>
                 <p className="text-gray-600 text-sm">{props.address}</p>
               </div>
-              <div className="bg-green-700 text-white font-semibold rounded-md text-xs p-2 ml-6">
+              <div className="bg-green-700 text-white font-semibold rounded-md text-xs p-2 ml-6 col-span-2 h-max">
                 {props.rating && props.rating.avgRating
                   ? props.rating.avgRating
                   : "N.A"}{" "}
