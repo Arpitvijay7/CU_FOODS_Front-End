@@ -97,7 +97,7 @@ const MenuItemCard = ({
       <div
         className={`${
           !available ? "md:h-64" : "h-full"
-        } w-[98%] md:w-[47%] lg:w-[30vw] p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1`}
+        } w-full p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1`}
       >
         <div className=" flex items-center justify-between gap-3 text-center sm:text-left">
           <div className="w-1/2 overflow-hidden sm:pl-8 text-left flex-1">
@@ -270,7 +270,6 @@ const MenuItemCard = ({
           </div>
         </div>
       ) : null}
-      <ToastContainer autoClose={1500} hideProgressBar={true} />
     </>
   );
 };
