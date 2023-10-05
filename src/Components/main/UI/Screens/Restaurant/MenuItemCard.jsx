@@ -96,7 +96,7 @@ const MenuItemCard = ({
     <>
       <div
         className={`${
-          !available ? "md:h-64" : "h-full"
+          !available ? "md:h-64" : "h-max"
         } w-full p-4 border-2 border-transparent hover:border-rose-600 rounded-md shadow-xl shadow-rose-100 col-span-1`}
       >
         <div className=" flex items-center justify-between gap-3 text-center sm:text-left">
