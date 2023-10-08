@@ -17,8 +17,11 @@ const Navbar = () => {
     if (pathname.includes("checkout")) {
       setToogle("checkout");
     }
-    if (pathname.includes("myorders")) {
+    else if (pathname.includes("myorders")) {
       setToogle("myorders");
+    }
+    else if (pathname.includes("/")) {
+      setToogle("home");
     }
   }, [pathname, toggle]);
   return (
@@ -45,7 +48,7 @@ const Navbar = () => {
           <Link
             to="/"
             className={`p-1 px-5 rounded-lg flex nav--links relative z-50 md:hidden flex-col justify-center items-center bg-whiteitems-center text-xl md:text-2xl ${
-              route.includes("restaurant")
+              route.includes("restaurant") || toggle == "home"
                 ? "text-[crimson] border-t-2 border-[crimson]"
                 : ""
             }`}
