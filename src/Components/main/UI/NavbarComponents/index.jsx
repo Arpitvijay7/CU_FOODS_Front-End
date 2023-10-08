@@ -23,7 +23,18 @@ const Navbar = () => {
   }, [pathname, toggle]);
   return (
     <div>
-      <nav className="bg-white z-10 fixed bottom-0 w-full md:flex md:justify-between shadow-lg shadow-grey-100  md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem]">
+      <nav
+        style={{
+          WebkitBoxShadow: "0px -11px 95px -32px rgba(0,0,0,0.75)",
+          MozBoxShadow: "0px -11px 95px -32px rgba(0,0,0,0.75)",
+          boxShadow: "0px -11px 95px -32px rgba(0,0,0,0.75)",
+        }}
+        className={`bg-white z-10 fixed bottom-0 w-full shadow-lg shadow-grey-100  ${
+          pathname !== "/"
+            ? "md:flex md:justify-between  md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem]"
+            : "md:hidden"
+        }`}
+      >
         <Link
           to="/"
           className="hidden md:flex md:justify-center md:items-center md:text-2xl md:px-4"
@@ -53,7 +64,7 @@ const Navbar = () => {
               toggle === "checkout"
                 ? "text-[yellow] md:border-t-2 md:border-[transparent]"
                 : ""
-            }` }
+            }`}
           >
             <BsCartFill className="text-xl" /> <span>Cart</span>
           </Link>

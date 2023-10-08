@@ -59,7 +59,7 @@ const Routings = () => {
 
   return (
     <>
-      {!isHome && !isResetPwd && !verifyEmail && <Navbar />}
+      {!isResetPwd && !verifyEmail && <Navbar />}
       <Routes>
         <Route
           element={<ProtectedRoutes isAuthenticated={auth} loading={loading} />}
