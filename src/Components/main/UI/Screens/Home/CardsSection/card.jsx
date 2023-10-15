@@ -35,12 +35,12 @@ const Card = (props) => {
             )}
           </div>
           <div className="p-4">
-            <div className="grid grid-cols-6">
-              <div className="text-start col-span-4">
+            <div className="grid grid-cols-10">
+              <div className="text-start col-span-7">
                 <p className="text-xl font-semibold text-black">{props.name}</p>
                 <p className="text-gray-600 text-sm">{props.address}</p>
               </div>
-              <div className="bg-green-700 text-white font-semibold rounded-md text-xs p-2 ml-6 col-span-2 h-max">
+              <div className=" bg-green-700 text-white font-semibold rounded-md text-xs p-2 ml-6 col-span-3 h-max">
                 {props.rating && props.rating.avgRating
                   ? props.rating.avgRating
                   : "N.A"}{" "}
