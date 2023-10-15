@@ -5,7 +5,7 @@ import numeral from "numeral";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 
-const Banner = ({ id }) => {
+const Banner = ({ id, setSearch, search, shopName }) => {
   const [shop, setShop] = useState("");
   const [ratingValue, setRatingValue] = useState(0);
 
@@ -36,19 +36,14 @@ const Banner = ({ id }) => {
   const formatedNoOfReviews =
     numberOfReviews < 1000
       ? numeral(numberOfReviews).format("0a")
-      : numeral(numberOfReviews).format(`0.0a${numberOfReviews % 1000 === 0 ? "" : "+"}`);
+      : numeral(numberOfReviews).format(
+          `0.0a${numberOfReviews % 1000 === 0 ? "" : "+"}`
+        );
   return (
     <>
-      <div className="w-screen flex flex-col">
-        <div className="shadow-lg h-[40vh]">
-          <img
-            class="object-cover object-center w-full h-full block"
-            src={shop.image}
-            alt="restaurant image"
-          />
-        </div>
+      <div className="w-screen flex flex-col border-t  shadow-lg pb-5 sticky top-0 z-10 bg-white">
         <div className="">
-          <div class="p-4 shadow-lg rounded-lg md:mt-0 md:rounded-none w-full bg-[white] flex justify-between">
+          <div class="px-4 rounded-lg md:mt-0 md:rounded-none w-full bg-[white] flex justify-between">
             <div className="md:w-[30vw] md:pt-3">
               <h2 class="text-gray-900 title-font text-2xl font-bold pb-2">
                 {shop.name}
@@ -77,6 +72,31 @@ const Banner = ({ id }) => {
               </p>
             </div>
           </div>
+        </div>
+        <div className="w-full bg-white md:w-1/2 lg:w-1/3 p-2 md:ml-5 flex border-2 rounded-lg border-rose-600">
+          <p className="pl-3 pr-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </p>
+          <input
+            type="text"
+            className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
+            placeholder={`Search in ${shopName}`}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          ></input>
         </div>
       </div>
     </>

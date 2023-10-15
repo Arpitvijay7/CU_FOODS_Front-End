@@ -1,33 +1,8 @@
 import React, { useState, useEffect } from "react";
 import MenuItemCard from "./MenuItemCard";
-const Menu = ({ id, data, setSearch, search, load, shopName }) => {
+const Menu = ({ id, data, load, shopName }) => {
   return (
     <div className="p-2 pt-10">
-      <div className="w-full  md:w-1/2 lg:w-1/3 p-2 md:mx-12 flex border-2 rounded-lg border-rose-600">
-        <p className="pl-3 pr-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-            />
-          </svg>
-        </p>
-        <input
-          type="text"
-          className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
-          placeholder={`Search in ${shopName}`}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        ></input>
-      </div>
       {load ? (
         <div className="w-screen h-96 grid place-items-center">
           <div

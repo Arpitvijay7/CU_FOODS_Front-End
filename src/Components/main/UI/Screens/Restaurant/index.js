@@ -20,7 +20,7 @@ const Restaurant = () => {
       setLoad(0);
     }
   };
-  
+
   const handleSearch = async () => {
     setLoad(true);
     const res = await fetch(`${BASE_URL}shop/getMenu/${id}?keyword=${search}`);
@@ -39,7 +39,7 @@ const Restaurant = () => {
     }
     setLoad(0);
   };
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchMenu();
@@ -49,15 +49,13 @@ const Restaurant = () => {
   }, [search]);
   return (
     <>
-      <Banner id={id} />
-      <Menu
-        data={data}
+      <Banner
+        id={id}
         search={search}
         setSearch={setSearch}
-        id={id}
-        load={load}
         shopName={shopName}
       />
+      <Menu data={data} id={id} load={load} shopName={shopName} />
     </>
   );
 };
