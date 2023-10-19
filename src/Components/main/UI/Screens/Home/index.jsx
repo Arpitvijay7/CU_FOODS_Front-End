@@ -52,7 +52,7 @@ const Home = () => {
 
   useEffect(() => {
     if (notauth) {
-      toast.error(notauth, {
+      toast.error('You need to login to access this resource', {
         autoClose: 1000,
         hideProgressBar: true,
       });
