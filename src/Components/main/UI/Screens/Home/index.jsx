@@ -19,7 +19,6 @@ const Home = () => {
   const notauth = queryParam.get("notauth");
   const verify = queryParam.get("verify");
   const verifyError = queryParam.get("verifyError");
-  console.log(notauth);
   useEffect(() => {
     document.title = "Cu Foodz";
   }, []);
@@ -59,22 +58,7 @@ const Home = () => {
         navigate("/");
       }, 1000);
     }
-    fetchData();
   }, []);
-
-  const fetchData = async () => {
-    const res = await fetch(`${BASE_URL}shop/getAllShops?page=${page}`);
-    const dat1 = await res.json();
-    const newShop = dat1.shops;
-    setData((prev) => {
-      const temp = [...prev, ...newShop];
-      const uniqueSet = new Set(temp);
-      const uniqueArray = Array.from(uniqueSet);
-      return uniqueArray;
-    });
-    setTotalShops(dat1.totalShops);
-    setLoad(0);
-  };
   const handleSearch = async () => {
     const res = await fetch(`${BASE_URL}shop/getAllShops?keyword=${search}`);
     const data = await res.json();
@@ -89,30 +73,35 @@ const Home = () => {
     }
     setLoad(0);
   };
+  const fetchData = async () => {
+    const res = await fetch(`${BASE_URL}shop/getAllShops?page=${page}`);
+    const dat1 = await res.json();
+    const newShop = dat1.shops;
+    setData((prev) => [...prev, ...newShop]);
+    setTotalShops(dat1.totalShops);
+    setLoad(0);
+  };
   useEffect(() => {
     handleSearch();
   }, [search]);
 
   useEffect(() => {
-    if (data.length < totalShops) {
-      fetchData();
-    }
+    fetchData();
   }, [page]);
+  useEffect(() => {
+    console.log("latest data", data, data.length, totalShops);
+  }, [data]);
 
-  const handleInfiniteScroll = async () => {
-    console.log("infinite scroll console", data, data.length, totalShops);
-    try {
+  const handleInfiniteScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
         document.documentElement.scrollHeight * 0.8
       ) {
+        console.log("in page ", data.length, totalShops);
         if (data.length < totalShops) {
           setPage((prev) => prev + 1);
         }
       }
-    } catch (e) {
-      console.log(e);
-    }
   };
   useEffect(() => {
     window.addEventListener("scroll", handleInfiniteScroll);
