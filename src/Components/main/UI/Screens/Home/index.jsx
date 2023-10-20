@@ -8,22 +8,21 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
 const Home = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState();
   const [data, setData] = useState([]);
+  const [totalShops, setTotalShops] = useState([]);
   const [load, setLoad] = useState(1);
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const queryParam = new URLSearchParams(window.location.search);
   const notauth = queryParam.get("notauth");
   const verify = queryParam.get("verify");
   const verifyError = queryParam.get("verifyError");
-
   console.log(notauth);
-
   useEffect(() => {
     document.title = "Cu Foodz";
   }, []);
-
   useEffect(() => {
     if (verify) {
       toast.success("Email Verification completed and loging In.", {
@@ -36,7 +35,6 @@ const Home = () => {
       }, 2000);
     }
   }, []);
-
   useEffect(() => {
     if (verifyError) {
       toast.error(verifyError, {
@@ -49,8 +47,8 @@ const Home = () => {
       }, 2000);
     }
   }, []);
-
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (notauth) {
       toast.error(notauth, {
         autoClose: 1000,
@@ -61,12 +59,20 @@ const Home = () => {
         navigate("/");
       }, 1000);
     }
+    fetchData();
   }, []);
 
   const fetchData = async () => {
-    const res = await fetch(`${BASE_URL}shop/getAllShops`);
+    const res = await fetch(`${BASE_URL}shop/getAllShops?page=${page}`);
     const dat1 = await res.json();
-    setData(dat1.shops);
+    const newShop = dat1.shops;
+    setData((prev) => {
+      const temp = [...prev, ...newShop];
+      const uniqueSet = new Set(temp);
+      const uniqueArray = Array.from(uniqueSet);
+      return uniqueArray;
+    });
+    setTotalShops(dat1.totalShops);
     setLoad(0);
   };
   const handleSearch = async () => {
@@ -88,8 +94,29 @@ const Home = () => {
   }, [search]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchData();
+    if (data.length < totalShops) {
+      fetchData();
+    }
+  }, [page]);
+
+  const handleInfiniteScroll = async () => {
+    console.log("infinite scroll console", data, data.length, totalShops);
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.scrollHeight * 0.8
+      ) {
+        if (data.length < totalShops) {
+          setPage((prev) => prev + 1);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleInfiniteScroll);
+    return () => window.removeEventListener("scroll", handleInfiniteScroll);
   }, []);
 
   return (
