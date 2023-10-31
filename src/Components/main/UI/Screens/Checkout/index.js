@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import socketIO from "socket.io-client";
-
 const ENDPOINT = "https://api.cufoodz.com";
 let socket;
 
@@ -19,8 +18,7 @@ const Checkout = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [orderPlacedId, setOrderPlacedId] = useState(0);
   const [shopStatus, setShopStatus] = useState("");
-
-  console.log(shopStatus);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   useEffect(() => {
     document.title = "Cart";
   }, []);
@@ -110,6 +108,81 @@ const Checkout = () => {
     setLoading(0);
   };
 
+  // const handlePayNowPlaceOrderClick = async () => {
+  //   if (shopStatus === "closed") {
+  //     toast.error("Shop is closed", {
+  //       autoClose: 1500,
+  //       hideProgressBar: true,
+  //     });
+  //     return;
+  //   }
+
+  //   if (!shopStatus) {
+  //     toast.error("Cart is Empty", {
+  //       autoClose: 1500,
+  //       hideProgressBar: true,
+  //     });
+  //     return;
+  //   }
+
+  //   const uniqueOrderId = generateUid(20);
+  //   console.log(uniqueOrderId);
+  //   const res = await axios.post(`${BASE_URL}order/checkout`, {
+  //     productId: uniqueOrderId,
+  //     phoneNumber,
+  //     totalPrice,
+  //   });
+  //   var options = {
+  //     key: "rzp_test_RkPAAly768WLy7",
+  //     amount: Number(totalPrice * 100),
+  //     currency: "INR",
+  //     name: "CU FOODS",
+  //     description: "Pay & Checkout",
+  //     image: "",
+  //     order_id: res.data.id,
+  //     handler: async function (response) {
+  //       const paymentInfo = {
+  //         id: response.razorpay_payment_id,
+  //         status: "Payment Successful",
+  //       };
+
+  //       const { data } = await axios.post(`${BASE_URL}order/verifyOrder`, {
+  //         checkoutRes: response,
+  //         orderId: res.data.id,
+  //         deliveryCheckbox,
+  //         address,
+  //         paymentInfo,
+  //       });
+  //       console.log(data);
+  //       if (data.success === true) {
+  //         toast.success("Order Placed Successfully", {
+  //           autoClose: 1500,
+  //           hideProgressBar: true,
+  //         });
+
+  //         setOrderPlacedId(data.order.vendor);
+  //       } else {
+  //         toast.error("Payment Failed", {
+  //           autoClose: 1500,
+  //           hideProgressBar: true,
+  //         });
+  //         navigate("/");
+  //       }
+  //     },
+  //     theme: {
+  //       color: "#E11D48",
+  //     },
+  //   };
+
+  //   let razorpayObject = new window.Razorpay(options);
+  //   console.log(razorpayObject);
+  //   razorpayObject.on("payment.failed", function (response) {
+  //     console.log(response);
+  //     alert("This step of Payment Failed");
+  //   });
+
+  //   razorpayObject.open();
+  // };
   const handlePlaceOrderClick = async () => {
     if (shopStatus === "closed") {
       toast.error("Shop is closed", {
@@ -191,6 +264,14 @@ const Checkout = () => {
     fetchUserCart();
   }, []);
 
+  useEffect(() => {
+    if (deliveryCheckbox) {
+      setTotalPrice((prev) => prev + 10);
+    } else {
+      setTotalPrice((prev) => prev - 10);
+    }
+  }, [deliveryCheckbox]);
+
   return (
     <>
       <div className="h-20 w-full hidden sm:block"></div>
@@ -226,6 +307,8 @@ const Checkout = () => {
                   cartItems.map((val, index) => {
                     return (
                       <CartItem
+                        deliveryCheckbox={deliveryCheckbox}
+                        setTotalAmount={setTotalPrice}
                         key={index}
                         name={val.name}
                         price={val.price}
@@ -238,7 +321,7 @@ const Checkout = () => {
               </>
             )}
           </div>
-          <div className="w-full flex flex-col justify-center items-center mt-7 border border-blue-300 p-5  rounded-md">
+          <div className="w-full flex flex-col justify-center items-center mt-7 border  p-5  rounded-md">
             <div className="flex justify-start items-start w-full">
               <label className="h-full pl-[0.15rem] flex justify-center items-center hover:cursor-pointer">
                 Phone Number :
@@ -254,7 +337,7 @@ const Checkout = () => {
               />
             </div>
 
-            <p className="text-xs text-gray-500 mt-3">
+            <p className="text-xs  mt-3 text-rose-500">
               Please ensure the accuracy of your provided phone number, as any
               errors may impact the success of your delivery. We will not be
               responsible in that case.
@@ -353,10 +436,6 @@ const Checkout = () => {
                   &#8377; {totalPrice}
                 </p>
               </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-900">GST</p>
-                <p className="font-semibold text-gray-900">&#8377; 10.00</p>
-              </div>
               {deliveryCheckbox ? (
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Delivery</p>
@@ -367,7 +446,7 @@ const Checkout = () => {
             <div className="mt-6 flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
               <p className="text-2xl font-semibold text-gray-900">
-                &#8377; {deliveryCheckbox ? totalPrice + 20 : totalPrice + 10}
+                &#8377; {totalPrice}
                 .00
               </p>
             </div>
@@ -381,6 +460,60 @@ const Checkout = () => {
         </div>
       </div>
       <ToastContainer autoClose={1500} hideProgressBar={true} />
+      {confirmModalOpen && (
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3
+                      className="text-lg leading-6 font-medium text-gray-900"
+                      id="modal-title"
+                    >
+                      Confirm Order
+                    </h3>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
+                        Please recheck your phone number :{" "}
+                        <span className="font-bold">{phoneNumber}</span>
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        Order Value : {totalPrice}
+                        <br />
+                        Order Address : {`${address.hostel} - ${address.room}`}
+                      </p>
+                      <p className="text-sm text-gray-500 border-t">
+                        Do you want to Proceed?
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                  Proceed
+                </button>
+                <button type="button" onClick={()=>setConfirmModalOpen(false)} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
