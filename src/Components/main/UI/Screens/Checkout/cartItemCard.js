@@ -1,10 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../../../../Core/API/endpoint";
-const CartItem = ({ name, price, quantity, option, id }) => {
+const CartItem = ({
+  name,
+  price,
+  quantity,
+  option,
+  id,
+  setTotalAmount,
+  deliveryCheckbox,
+}) => {
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const [loading, setLoading] = useState(0);
-
+  const updateAmount = (amount) => {
+    setTotalAmount(() => {
+      if (deliveryCheckbox) {
+        return amount + 10;
+      }
+      return amount;
+    });
+  };
   const handleQuantityIncrease = async () => {
     setLoading(1);
 
@@ -13,6 +28,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
     );
     if (data.message === "quantity increased successfully") {
       setItemQuantity(1 + itemQuantity);
+      updateAmount(data.totalSum);
       setLoading(0);
     } else {
       setLoading(0);
@@ -25,6 +41,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
     );
     if (data.message === "quantity decreased successfully") {
       setItemQuantity(itemQuantity - 1);
+      updateAmount(data.totalSum);
     } else {
     }
     setLoading(0);
@@ -34,6 +51,7 @@ const CartItem = ({ name, price, quantity, option, id }) => {
     const { data } = await axios.delete(`${BASE_URL}cart/removeFromCart/${id}`);
     if (data.message === "Product removed from cart Successfully") {
       setItemQuantity(0);
+      updateAmount(data.totalSum);
     } else {
     }
     setLoading(0);
