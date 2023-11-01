@@ -10,7 +10,8 @@ const ENDPOINT = "https://api.cufoodz.com";
 let socket;
 
 const Checkout = () => {
-  const [deliveryCheckbox, setDeliveryCheckbox] = useState(0);
+  const [deliveryCheckbox, setDeliveryCheckbox] = useState(false);
+  const [deliveryData, setDeliveryData] = useState();
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(1);
@@ -103,6 +104,7 @@ const Checkout = () => {
       setCartItems(cartData.cart);
       setTotalPrice(cartData.totalSum);
       setShopStatus(cartData.shopStatus);
+      setDeliveryData(cartData.deliveryData);
     }
     console.log(cartData);
     setLoading(0);
@@ -200,63 +202,55 @@ const Checkout = () => {
       return;
     }
 
-    const uniqueOrderId = generateUid(20);
-    console.log(uniqueOrderId);
-    const res = await axios.post(`${BASE_URL}order/checkout`, {
-      productId: uniqueOrderId,
-      phoneNumber,
-      totalPrice,
-    });
-    var options = {
-      key: "rzp_test_RkPAAly768WLy7",
-      amount: Number(totalPrice * 100),
-      currency: "INR",
-      name: "CU FOODS",
-      description: "Pay & Checkout",
-      image: "",
-      order_id: res.data.id,
-      handler: async function (response) {
-        const paymentInfo = {
-          id: response.razorpay_payment_id,
-          status: "Payment Successful",
+    if (!phoneNumber || phoneNumber.length < 10) {
+      toast.error("Phone Number required ", {
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+      return;
+    }
+
+    if (deliveryCheckbox && !address.hostel && !address.room) {
+      toast.error("Select address properly ", {
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+      return;
+    }
+    if (!deliveryCheckbox && !address.hostel) {
+      toast.error("Select proper location ", {
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+      return;
+    }
+    setConfirmModalOpen(true);
+  };
+  const placeOrderViaCod = async (e) => {
+    e.preventDefault();
+    const getAddress = () => {
+      if (deliveryCheckbox) {
+        return {
+          hostel: address.hostel,
+          room: address.room,
         };
-
-        const { data } = await axios.post(`${BASE_URL}order/verifyOrder`, {
-          checkoutRes: response,
-          orderId: res.data.id,
-          deliveryCheckbox,
-          address,
-          paymentInfo,
-        });
-        console.log(data);
-        if (data.success === true) {
-          toast.success("Order Placed Successfully", {
-            autoClose: 1500,
-            hideProgressBar: true,
-          });
-
-          setOrderPlacedId(data.order.vendor);
-        } else {
-          toast.error("Payment Failed", {
-            autoClose: 1500,
-            hideProgressBar: true,
-          });
-          navigate("/");
-        }
-      },
-      theme: {
-        color: "#E11D48",
-      },
+      }
+      return {
+        hostel: address.hostel,
+        room: "000",
+      };
     };
-
-    let razorpayObject = new window.Razorpay(options);
-    console.log(razorpayObject);
-    razorpayObject.on("payment.failed", function (response) {
-      console.log(response);
-      alert("This step of Payment Failed");
-    });
-
-    razorpayObject.open();
+    const data1 = {
+      deliveryCheckbox: true,
+      address: getAddress(),
+      paymentInfo: {
+        id: "COD",
+        status: "COD",
+      },
+      phoneNumber,
+    };
+    const data = await axios.post(`${BASE_URL}order/OrderviaCash`, data1);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -272,6 +266,7 @@ const Checkout = () => {
     }
   }, [deliveryCheckbox]);
 
+  console.log(cartItems);
   return (
     <>
       <div className="h-20 w-full hidden sm:block"></div>
@@ -329,13 +324,24 @@ const Checkout = () => {
               <input
                 className="w-[70%] ml-3 border border-gray-300 h-10 rounded p-5"
                 type="number"
-                min="1000000000"
+                maxLength={10}
                 placeholder="9876543210"
                 value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                required
+                onChange={(e) => {
+                  const inputValue = e.target.value;
+                  if (inputValue.length <= 10) {
+                    setPhoneNumber(inputValue);
+                  }
+                }}
                 id="checkboxDefault"
               />
             </div>
+            {phoneNumber.length < 10 && (
+              <h5 className="text-xs text-right px-7 font-bold pb-5 w-full text-rose-500">
+                * minimum 10 digits required
+              </h5>
+            )}
 
             <p className="text-xs  mt-3 text-rose-500">
               Please ensure the accuracy of your provided phone number, as any
@@ -344,26 +350,66 @@ const Checkout = () => {
             </p>
           </div>
 
-          <div className="w-full flex justify-center items-center mt-7 bg-gray-50 p-5  rounded-md">
-            <input
-              className="w-7 h-7 mr-3"
-              type="checkbox"
-              value={deliveryCheckbox}
-              onChange={() =>
-                deliveryCheckbox
-                  ? setDeliveryCheckbox(0)
-                  : setDeliveryCheckbox(1)
-              }
-              id="checkboxDefault"
-            />
-            <label
-              className="inline-block pl-[0.15rem] hover:cursor-pointer"
-              for="checkboxDefault"
-            >
-              {" "}
-              Want You Food to get delivered to your room?
-            </label>
-          </div>
+          {!deliveryCheckbox && (
+            <div className="p-5 mt-5 rounded-lg border  border-black">
+              <div>
+                <div className="md:w-full bg-white flex flex-col md:ml-auto w-full md:py-8 md:mt-0">
+                  <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
+                    Delivery / Pickup
+                  </h2>
+                  <div className="relative mb-4">
+                    <label
+                      for="name"
+                      className="leading-7 text-sm text-gray-600"
+                    >
+                      Location :
+                    </label>
+                    <select
+                      className="border ml-2 w-9/12 p-3 rounded"
+                      name="hostel"
+                      value={address.hostel}
+                      onChange={(e) => handleAddressChange(e)}
+                    >
+                      <option value="" selected disabled>
+                        Select Hostel Name
+                      </option>
+                      {deliveryData &&
+                        deliveryData.deliveryLocations.map((val, id) => {
+                          return (
+                            <option key={id} value={val}>
+                              {val}
+                            </option>
+                          );
+                        })}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {deliveryData && !deliveryData.roomDelivery && (
+            <div className="w-full flex justify-center items-center mt-7 bg-gray-50 p-5  rounded-md">
+              <input
+                className="w-7 h-7 mr-3"
+                type="checkbox"
+                value={deliveryCheckbox}
+                onChange={() =>
+                  deliveryCheckbox
+                    ? setDeliveryCheckbox(0)
+                    : setDeliveryCheckbox(1)
+                }
+                id="checkboxDefault"
+              />
+              <label
+                className="inline-block pl-[0.15rem] hover:cursor-pointer"
+                for="checkboxDefault"
+              >
+                {" "}
+                Want You Food to get delivered to your room?
+              </label>
+            </div>
+          )}
           {deliveryCheckbox ? (
             <div className="p-5 mt-5 rounded-lg border  border-black">
               <div>
@@ -455,7 +501,7 @@ const Checkout = () => {
             onClick={() => handlePlaceOrderClick()}
             className="mt-4 mb-8 w-full rounded-md bg-rose-600 hover:bg-rose-700 px-6 py-3 font-medium text-white"
           >
-            Place Order
+            Place Order via COD
           </button>
         </div>
       </div>
@@ -492,7 +538,7 @@ const Checkout = () => {
                       <p className="text-sm text-gray-500">
                         Order Value : {totalPrice}
                         <br />
-                        Order Address : {`${address.hostel} - ${address.room}`}
+                        Order Address : {`${address.hostel}  ${address.room}`}
                       </p>
                       <p className="text-sm text-gray-500 border-t">
                         Do you want to Proceed?
@@ -503,10 +549,18 @@ const Checkout = () => {
               </div>
 
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                <button
+                  onClick={(e) => placeOrderViaCod(e)}
+                  type="button"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
                   Proceed
                 </button>
-                <button type="button" onClick={()=>setConfirmModalOpen(false)} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                <button
+                  type="button"
+                  onClick={() => setConfirmModalOpen(false)}
+                  className="mt-2 md:mt-0 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
                   Close
                 </button>
               </div>
