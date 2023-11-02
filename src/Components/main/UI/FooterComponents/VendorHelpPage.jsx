@@ -37,7 +37,7 @@ const VendorHelpPage = () => {
             <a className="text-[blue]" href="mailto:vendorsupport@cufood.com">vendorsupport@cufood.com</a>
           </li>
           <li>
-            Phone: <a href="tel:+123456789">+91 7737308877</a>
+            Phone: <a href="tel:+917737308877">+91 7737308877</a>
           </li>
           <li>
             Live Chat: Click the chat icon in the bottom right corner of the

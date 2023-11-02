@@ -185,6 +185,7 @@ const Checkout = () => {
 
   //   razorpayObject.open();
   // };
+
   const handlePlaceOrderClick = async () => {
     if (shopStatus === "closed") {
       toast.error("Shop is closed", {
@@ -226,31 +227,49 @@ const Checkout = () => {
     }
     setConfirmModalOpen(true);
   };
+
+  //ORDER VIA COD
   const placeOrderViaCod = async (e) => {
     e.preventDefault();
-    const getAddress = () => {
-      if (deliveryCheckbox) {
+
+    try {
+      const getAddress = () => {
+        if (deliveryCheckbox) {
+          return {
+            hostel: address.hostel,
+            room: address.room,
+          };
+        }
         return {
           hostel: address.hostel,
-          room: address.room,
+          room: "000",
         };
-      }
-      return {
-        hostel: address.hostel,
-        room: "000",
       };
-    };
-    const data1 = {
-      deliveryCheckbox: true,
-      address: getAddress(),
-      paymentInfo: {
-        id: "COD",
-        status: "COD",
-      },
-      phoneNumber,
-    };
-    const data = await axios.post(`${BASE_URL}order/OrderviaCash`, data1);
-    console.log(data);
+      const data1 = {
+        deliveryCheckbox: true,
+        address: getAddress(),
+        paymentInfo: {
+          id: "COD",
+          status: "COD",
+        },
+        phoneNumber,
+      };
+      const {data} = await axios.post(`${BASE_URL}order/OrderviaCash`, data1);
+
+      // toast.success("Order Placed Successfully", {
+      //   autoClose: 1500,
+      //   hideProgressBar: true,
+      // });
+
+      setOrderPlacedId(data.order.vendor);
+
+    } catch (err) {
+      console.log("Error:-", err);
+      toast.error("Internal Server error. Please try again", {
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
+    }
   };
 
   useEffect(() => {
@@ -266,7 +285,6 @@ const Checkout = () => {
     }
   }, [deliveryCheckbox]);
 
-  console.log(cartItems);
   return (
     <>
       <div className="h-20 w-full hidden sm:block"></div>
