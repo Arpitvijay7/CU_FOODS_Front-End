@@ -64,7 +64,7 @@ const OrderItem = ({
     clipPath: "polygon(40% 50%, 100% 100%, 100% 0)",
     width: "20px",
     height: "100%",
-    backgroundColor: "#F0F2F2"  ,
+    backgroundColor: "#F0F2F2",
     color: "white",
     position: "absolute",
     right: "0",
@@ -72,9 +72,17 @@ const OrderItem = ({
 
   return (
     <>
-      <div className="md:w-[60%] md:mx-auto rounded-md border-[1px] border-[#D5D9D9]">
-        <div className="flex flex-col ">
-          <div className="flex justify-between rounded-t-md p-4 border-b-[1px] border-b-[#D5D9D9] text-[#565959] bg-[#F0F2F2]">
+      <div className="md:w-[60%] md:mx-auto rounded-md border-[1px] border-[#D5D9D9] overflow-hidden">
+        <div className="flex flex-col">
+          {orderStatus === "Placed" && (
+            <p className="px-5 text-xs py-2 bg-[#F0F2F2] rounded-t-md border-b-2 border-dashed text-red-500">
+              Did'nt recieve confirmation call? Contact :{" "}
+              <a href="tel:+917737308877" className="underline">
+                +91 7737308877
+              </a>
+            </p>
+          )}
+          <div className="flex justify-between p-4 border-b-[1px] border-b-[#D5D9D9] text-[#565959] bg-[#F0F2F2]">
             <div className="flex space-x-7 leading-4 font-semibold">
               <p className="flex flex-col text-[12px]">
                 ORDER PLACED{" "}
@@ -218,5 +226,4 @@ const OrderItem = ({
     </>
   );
 };
-
 export default OrderItem;

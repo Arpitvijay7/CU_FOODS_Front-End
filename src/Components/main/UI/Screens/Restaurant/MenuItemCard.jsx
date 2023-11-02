@@ -48,6 +48,7 @@ const MenuItemCard = ({
   };
   const handleReplaceCartRejection = () => {
     setReplaceCartToggle(0);
+    setLoading(false);
   };
 
   const handleAddToCartAction = async () => {
@@ -247,7 +248,7 @@ const MenuItemCard = ({
         </div>
       </div>
       {replaceCartToggle ? (
-        <div className="backdrop-blur w-screen h-screen fixed top-0 left-0 right-0 grid place-items-center">
+        <div className="backdrop-blur w-screen h-screen fixed top-0 left-0 right-0 grid place-items-center z-50">
           <div className="h-max w-[80vw] sm:w-[50vw] lg:w-[30vw] bg-white border-2 rounded-lg border-rose-400 shadow-xl py-10 px-10 md:px-20">
             <div className="font-bold text-xl text-center">
               There is already an item from different shop. Do you want to
