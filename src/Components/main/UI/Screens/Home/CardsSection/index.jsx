@@ -29,6 +29,8 @@ const CardsSection = ({ data, setData, load }) => {
                             address={val.description}
                             rating={val.rating}
                             status={val.status}
+                            roomDelivery={val.roomDelivery}
+                            deliveryLocation={val.DeliveryLocation}
                           />
                         );
                       })

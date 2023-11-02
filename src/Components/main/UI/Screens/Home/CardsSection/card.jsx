@@ -15,7 +15,7 @@ const Card = (props) => {
                 props.status === "closed" && "grayscale-[85%]"
               }`}
               loading="lazy"
-              src={pic}
+              src={props.image.path}
             ></img>
             <div className="absolute bottom-4 right-4 bg-gray-200 text-gray-700 px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
               <svg
@@ -59,8 +59,11 @@ const Card = (props) => {
                   <span>Room</span> delivery
                 </p>
               ) : (
-                <p className="text-red-500">
-                  <span>Delivery</span> Locations Available
+                <p className="text-red-500 flex flex-wrap gap-x-2 underline">
+                  {props.deliveryLocation &&
+                    props.deliveryLocation.map((val, index) => (
+                      <span key={index}>{val}</span>
+                    ))}
                 </p>
               )}
             </div>
