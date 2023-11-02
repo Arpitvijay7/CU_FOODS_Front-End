@@ -6,11 +6,13 @@ import OrderItem from "./orderItem.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { LoaderIcon } from "react-hot-toast";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [Deliveredorders, setDeliveredOrders] = useState([]);
   const [toogle, setToogle] = useState("live");
+  const [loading, setLoading] = useState(true);
   const queryParams = new URLSearchParams(window.location.search);
   const status = queryParams.get("status");
   const navigate = useNavigate();
@@ -38,6 +40,7 @@ const MyOrders = () => {
     async function fetchOrders() {
       const res = await axios.get(`${BASE_URL}order/myOrders`);
       setOrders(res.data.orders);
+      setLoading(false);
     }
 
     fetchOrders();
@@ -58,8 +61,7 @@ const MyOrders = () => {
       const res = await axios.get(`${BASE_URL}order/myDeliveredOrders`);
 
       setDeliveredOrders(res.data.orders);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   return (
@@ -82,46 +84,55 @@ const MyOrders = () => {
           Delivered
         </button>
       </div>
-      <div className="grid place-items-center w-full">
-        <section className="text-gray-600 body-font w-full  pb-20">
-          <div className="px-5 pb-24 mx-auto overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px] m-5">
-            {orders &&
-              toogle === "live" &&
-              orders.map((order) => {
-                return (
-                  <OrderItem
-                    key={order._id}
-                    OrderItems={order.OrderItems}
-                    Otp={order.Otp}
-                    orderStatus={order.orderStatus}
-                    createdAt={order.createdAt}
-                    totalPrice={order.totalPrice}
-                    _id={order._id}
-                    toogle={toogle}
-                  />
-                );
-              })}
-            {Deliveredorders &&
-              toogle === "Delivered" &&
-              Deliveredorders.map((order) => {
-                return (
-                  <OrderItem
-                    key={order._id}
-                    OrderItems={order.OrderItems}
-                    Otp={order.Otp}
-                    orderStatus={order.orderStatus}
-                    createdAt={order.createdAt}
-                    totalPrice={order.totalPrice}
-                    _id={order._id}
-                    toogle={toogle}
-                    review={order.review}
-                    getDeliveredOrders={getDeliveredOrders}
-                  />
-                );
-              })}
-          </div>
-        </section>
-      </div>
+      {loading ? (
+        <div className="w-screen h-96 grid place-items-center">
+          <div
+            className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-rose-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
+          ></div>
+        </div>
+      ) : (
+        <div className="grid place-items-center w-full">
+          <section className="text-gray-600 body-font w-full  pb-20">
+            <div className="px-5 pb-24 mx-auto overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px] m-5">
+              {orders &&
+                toogle === "live" &&
+                orders.map((order) => {
+                  return (
+                    <OrderItem
+                      key={order._id}
+                      OrderItems={order.OrderItems}
+                      Otp={order.Otp}
+                      orderStatus={order.orderStatus}
+                      createdAt={order.createdAt}
+                      totalPrice={order.totalPrice}
+                      _id={order._id}
+                      toogle={toogle}
+                    />
+                  );
+                })}
+              {Deliveredorders &&
+                toogle === "Delivered" &&
+                Deliveredorders.map((order) => {
+                  return (
+                    <OrderItem
+                      key={order._id}
+                      OrderItems={order.OrderItems}
+                      Otp={order.Otp}
+                      orderStatus={order.orderStatus}
+                      createdAt={order.createdAt}
+                      totalPrice={order.totalPrice}
+                      _id={order._id}
+                      toogle={toogle}
+                      review={order.review}
+                      getDeliveredOrders={getDeliveredOrders}
+                    />
+                  );
+                })}
+            </div>
+          </section>
+        </div>
+      )}
       <ToastContainer autoClose={1500} hideProgressBar={true} />
     </>
   );

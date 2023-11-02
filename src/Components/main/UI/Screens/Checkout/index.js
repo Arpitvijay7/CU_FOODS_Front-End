@@ -254,7 +254,7 @@ const Checkout = () => {
         },
         phoneNumber,
       };
-      const {data} = await axios.post(`${BASE_URL}order/OrderviaCash`, data1);
+      const { data } = await axios.post(`${BASE_URL}order/OrderviaCash`, data1);
 
       // toast.success("Order Placed Successfully", {
       //   autoClose: 1500,
@@ -262,7 +262,6 @@ const Checkout = () => {
       // });
 
       setOrderPlacedId(data.order.vendor);
-
     } catch (err) {
       console.log("Error:-", err);
       toast.error("Internal Server error. Please try again", {
@@ -581,6 +580,11 @@ const Checkout = () => {
                 >
                   Close
                 </button>
+                <div>
+                  <p className="text-xs text-red-500 font-bold text-left w-[80%]">
+                    You will get a confirmation call withing 5 minutes.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

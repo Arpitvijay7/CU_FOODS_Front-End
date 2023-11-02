@@ -10,7 +10,13 @@ const Card = (props) => {
       >
         <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden">
           <div className="relative">
-            <img className=" h-48 w-full" loading="lazy" src={pic}></img>
+            <img
+              className={`h-48 w-full ${
+                props.status === "closed" && "grayscale-[85%]"
+              }`}
+              loading="lazy"
+              src={pic}
+            ></img>
             <div className="absolute bottom-4 right-4 bg-gray-200 text-gray-700 px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +40,7 @@ const Card = (props) => {
               </div>
             )}
           </div>
-          <div className="p-4">
+          <div className="p-4 flex flex-col gap-y-2">
             <div className="grid grid-cols-10">
               <div className="text-start col-span-7">
                 <p className="text-xl font-semibold text-black">{props.name}</p>
@@ -46,6 +52,17 @@ const Card = (props) => {
                   : "N.A"}{" "}
                 ★
               </div>
+            </div>
+            <div className="border-t border-gray-400 border-dashed text-start text-blue-500 text-xs font-bold pt-2">
+              {props.roomDelivery ? (
+                <p>
+                  <span>Room</span> delivery
+                </p>
+              ) : (
+                <p className="text-red-500">
+                  <span>Delivery</span> Locations Available
+                </p>
+              )}
             </div>
           </div>
         </div>
