@@ -388,7 +388,7 @@ const Checkout = () => {
             </div>
           )}
 
-          {deliveryData && !deliveryData.roomDelivery && (
+          {deliveryData && deliveryData.roomDelivery && (
             <div className="w-full flex justify-center items-center mt-7 bg-gray-50 p-5  rounded-md">
               <input
                 className="w-7 h-7 mr-3"
@@ -559,7 +559,7 @@ const Checkout = () => {
                 <button
                   type="button"
                   onClick={() => setConfirmModalOpen(false)}
-                  className="mt-2 md:mt-0 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="mt-2 sm:mt-0 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Close
                 </button>
