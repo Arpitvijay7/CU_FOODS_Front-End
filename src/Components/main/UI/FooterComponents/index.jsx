@@ -106,14 +106,14 @@ const Footer = () => {
         <div class="bg-gray-100">
           <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p class="text-gray-500 text-sm text-center sm:text-left">
-              © 2023 CU FOODS —
+              © 2023 CU FOODZ —
               <a
                 href="https://twitter.com/"
                 rel="noopener noreferrer"
                 class="text-gray-600 ml-1"
                 target="_blank"
               >
-                @CU FOODS
+                @CU FOODZ
               </a>
             </p>
             <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">

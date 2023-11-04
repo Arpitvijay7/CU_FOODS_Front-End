@@ -30,8 +30,8 @@ const ContactUs = () => {
         
         <p>
           E-Mail ID:{" "}
-          <a href="mailto:support@cufood.com" className="text-[blue] inline">
-            support@cufood.com
+          <a href="mailto:support@cufoodz.com" className="text-[blue] inline">
+            support@cufoodz.com
           </a>
         </p>
       </div>

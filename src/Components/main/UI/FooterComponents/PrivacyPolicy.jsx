@@ -142,7 +142,7 @@ const PrivacyPolicy = () => {
             If you have previously agreed to us using your personal information
             for direct marketing purposes, you may change your mind at any time
             by writing to or emailing us at{" "}
-            <a href="mailto:support@cufood.com" className="text-[blue]">support@cufood.com</a>.
+            <a href="mailto:support@cufoodz.com" className="text-[blue]">support@cufoodz.com</a>.
           </li>
         </ul>
 
@@ -162,7 +162,7 @@ const PrivacyPolicy = () => {
         </p>
         <p className="text-gray-700 mb-4">
           If you would like a copy of the information held on you, please write
-          to <a href="mailto:support@cufood.com" className="text-[blue]">support@cufood.com</a>.
+          to <a href="mailto:support@cufoodz.com" className="text-[blue]">support@cufoodz.com</a>.
         </p>
         <p className="text-gray-700">
           If you believe that any information we are holding on you is incorrect

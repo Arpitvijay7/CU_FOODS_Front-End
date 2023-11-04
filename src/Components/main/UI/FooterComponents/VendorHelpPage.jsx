@@ -34,7 +34,7 @@ const VendorHelpPage = () => {
         <ul className="list-disc list-inside mb-4">
           <li>
             Email:{" "}
-            <a className="text-[blue]" href="mailto:vendorsupport@cufood.com">vendorsupport@cufood.com</a>
+            <a className="text-[blue]" href="mailto:vendorsupport@cufoodz.com">vendorsupport@cufoodz.com</a>
           </li>
           <li>
             Phone: <a href="tel:+917737308877">+91 7737308877</a>

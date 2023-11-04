@@ -102,7 +102,7 @@ const RefundsAndReturns = () => {
             If you have previously agreed to us using your personal information
             for direct marketing purposes, you may change your mind at any time
             by writing to or emailing us at{" "}
-            <a href="mailto:support@cufood.com" className="text-[blue]">support@cufood.com</a>
+            <a href="mailto:support@cufoodz.com" className="text-[blue]">support@cufoodz.com</a>
           </li>
         </ul>
         <p>

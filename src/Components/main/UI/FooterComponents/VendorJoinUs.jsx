@@ -17,8 +17,8 @@ const VendorJoinUsPage = () => {
         </p>
         <p className="mb-4">
           <strong>Contact Email:</strong>{" "}
-          <a className="text-[blue]" href="mailto:onboarding@cufood.com">
-            onboarding@cufood.com
+          <a className="text-[blue]" href="mailto:onboarding@cufoodz.com">
+            onboarding@cufoodz.com
           </a>
         </p>
       </div>

@@ -92,7 +92,7 @@ const HeroSection = ({ search, setSearch }) => {
         <div className="mt-10 md:mt-5 h-2/3">
           <div className="h-full flex flex-col place-items-center">
             <div className="w-full text-white">
-              <div className="text-6xl font-black">CU FOODS</div>
+              <div className="text-6xl font-black">CU FOODZ</div>
               <div className="pt-8">
                 <p className="font-semibold text-xl md:text-4xl">
                   Discover the best food & drinks in

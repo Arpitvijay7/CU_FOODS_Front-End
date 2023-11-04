@@ -261,7 +261,7 @@ const LScontainer = () => {
               </button>
               <div className="flex justify-between">
                 <div className="flex space justify-start">
-                  <span className="md:block hidden">New to CU Foods ? </span>
+                  <span className="md:block hidden">New to CU Foodz ? </span>
                   <span
                     className="hover:cursor-pointer flex ml-[5px] justify-start underline text-rose-500"
                     onClick={() => dispatch(signupToggle())}

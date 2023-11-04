@@ -138,7 +138,7 @@ const Checkout = () => {
   //     key: "rzp_test_RkPAAly768WLy7",
   //     amount: Number(totalPrice * 100),
   //     currency: "INR",
-  //     name: "CU FOODS",
+  //     name: "CU FOODZ",
   //     description: "Pay & Checkout",
   //     image: "",
   //     order_id: res.data.id,

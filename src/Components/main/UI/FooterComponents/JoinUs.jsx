@@ -151,8 +151,8 @@ const JoinUs = () => {
           </div>
           <p>
             Note: You can also contect us at{" "}
-            <a href="mailto:hr@cufood.com" className="text-[blue]">
-              hr@cufood.com
+            <a href="mailto:hr@cufoodz.com" className="text-[blue]">
+              hr@cufoodz.com
             </a>
           </p>
           <div className="text-center">
