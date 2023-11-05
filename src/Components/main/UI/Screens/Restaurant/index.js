@@ -15,6 +15,9 @@ const Restaurant = () => {
   const [menuLength, setMenuLength] = useState();
 
   const fetchMenu = async () => {
+    if (page !== 1) {
+      setPaginationLoading(true);
+    }
     const { data } = await axios(`${BASE_URL}shop/getMenu/${id}?page=${page}`);
 
     if (data.message === "Success") {
@@ -27,6 +30,7 @@ const Restaurant = () => {
       setShopName(data.shopName);
       setLoad(0);
     }
+    setPaginationLoading(false);
   };
 
   const handleSearch = async () => {
@@ -60,18 +64,16 @@ const Restaurant = () => {
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
   }, []);
   useEffect(() => {
-    if (menuLength >= data.length) {
-      setPaginationLoading(true);
+    if (menuLength > data.length || page === 1) {
       fetchMenu();
-      setPaginationLoading(false);
     }
   }, [page]);
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchMenu();
   }, []);
   useEffect(() => {
-    handleSearch();
+    // handleSearch();
+    // yahi pe dikkat hai
   }, [search]);
   return (
     <>
