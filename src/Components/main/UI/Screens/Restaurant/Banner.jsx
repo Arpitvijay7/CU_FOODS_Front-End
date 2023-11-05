@@ -41,9 +41,16 @@ const Banner = ({ id, setSearch, search, shopName }) => {
         );
   return (
     <>
-      <div className="w-screen flex flex-col border-t  shadow-md pb-5 sticky top-0 z-10 bg-white">
+      <div
+        className="w-screen flex flex-col border-t pb-10 sticky top-0"
+        style={{
+          background: " rgb(226,55,68)",
+          background:
+            "linear-gradient(180deg, rgba(226,55,68,0.590095413165266) 0%, rgba(226,55,68,0.31838672969187676) 51%,  rgba(226,55,68,0) 100%)",
+        }}
+      >
         <div className="pt-10 sm:pt-0">
-          <div class="px-4 rounded-lg md:mt-0 md:rounded-none w-full bg-[white] flex justify-between">
+          <div class="px-4 rounded-lg md:mt-0 md:rounded-none w-full flex justify-between">
             <div className="md:w-[30vw] md:pt-3">
               <h2 class="text-gray-900 title-font text-2xl font-bold pb-2">
                 {shop.name}

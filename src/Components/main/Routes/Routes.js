@@ -36,6 +36,7 @@ const Routings = () => {
   const isHome = location.pathname === "/";
   const isResetPwd = location.pathname === "/resetpassword";
   const verifyEmail = location.pathname === "/verifyEmail";
+  const isRestaurant = location.pathname.includes("restaurant");
 
   const dispatch = useDispatch();
 
@@ -88,7 +89,7 @@ const Routings = () => {
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      {!isResetPwd && <Footer />}
+      {!isResetPwd && !isRestaurant && <Footer />}
     </>
   );
 };

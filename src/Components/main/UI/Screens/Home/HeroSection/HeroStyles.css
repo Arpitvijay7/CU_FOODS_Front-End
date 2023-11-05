@@ -1,5 +1,12 @@
-.HeroSection{
-    background: url("../../../../../../Assets/Homepage/heroimg.jpg");
+.HeroSection {
+    background: url("../../../../../../Assets/Homepage/PC_Banner.jpg");
     background-size: cover;
     background-position: center;
+}
+
+@media (max-width: 768px) {
+    .HeroSection{
+        background: url("../../../../../../Assets/Homepage/MB_Banner.jpg");
+        background-size: cover;
+    }
 }
