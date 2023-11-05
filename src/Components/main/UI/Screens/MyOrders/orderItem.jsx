@@ -182,6 +182,7 @@ const OrderItem = ({
                         className="w-[100px] h-[100px]"
                         src={item.image && item.image.path}
                         alt="food image"
+                        loading="lazy"
                       />
                     </div>
                     <div className="flex flex-wrap md:space-x-20 ">

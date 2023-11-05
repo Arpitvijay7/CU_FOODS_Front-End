@@ -67,7 +67,7 @@ const ResetPwd = () => {
     <div className="mainDiv">
       <div className="cardStyle">
         <form action="" name="signupForm" id="signupForm">
-          <img src={logo} className="w-[150px]" id="signupLogo" />
+          <img src={logo} className="w-[150px]" id="signupLogo" loading="lazy"/>
 
           <h2 className="formTitle">Login to your account</h2>
 

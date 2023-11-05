@@ -138,7 +138,7 @@ const MobileSearch = () => {
                 className=" py-5 rounded-xl shadow-md px-2"
               >
                 <div className="flex justify-center items-center gap-4">
-                  <img className="w-1/4 rounded-lg" src={val.image.path} />
+                  <img className="w-1/4 rounded-lg" src={val.image.path} loading="lazy"/>
                   <div className="w-2/3">
                     <p className="font-bold text-xl">{val.name}</p>
                     {val.status === "closed" ? (

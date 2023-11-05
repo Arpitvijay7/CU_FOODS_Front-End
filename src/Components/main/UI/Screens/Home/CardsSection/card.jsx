@@ -11,7 +11,7 @@ const Card = (props) => {
       setCardColor("bg-green-700");
     } else if (rating > 2.5 && rating <= 3.5) {
       setCardColor("bg-yellow-300");
-    } else if ( rating <= 2.5) {
+    } else if (rating <= 2.5) {
       setCardColor("bg-red-600");
     }
   }, [rating, props.rating]);
@@ -25,6 +25,7 @@ const Card = (props) => {
         <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden">
           <div className="relative">
             <img
+            
               className={`h-48 w-full ${
                 props.status === "closed" && "grayscale-[100%]"
               }`}
@@ -96,29 +97,48 @@ const Card = (props) => {
                 ★
               </div>
             </div>
-            <div className="border-b border-gray-400 border-dashed text-start text-blue-500 text-xs font-bold pb-2 flex items-center gap-x-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <rect width="24" height="24" fill="white" />
-                <path
-                  d="M19.9148 18.0003L22 18V13.8571L18.5 10H15V18M19.9148 18.0003C19.7089 17.4175 19.1532 17 18.5 17M19.9148 18.0003C19.97 18.1566 20 18.3248 20 18.5M18.5 17C17.8468 17 17.2911 17.4175 17.0852 18.0003M18.5 17C19.3284 17 20 17.6716 20 18.5M18.5 17C17.6716 17 17 17.6716 17 18.5M17.0852 18.0003L15 18M17.0852 18.0003C17.03 18.1566 17 18.3248 17 18.5M15 18V6H1M15 18L7.91475 18.0003M7.91475 18.0003C7.70891 17.4175 7.15322 17 6.5 17M7.91475 18.0003C7.96996 18.1566 8 18.3248 8 18.5M6.5 17C5.84678 17 5.29109 17.4175 5.08525 18.0003M6.5 17C7.32843 17 8 17.6716 8 18.5M6.5 17C5.67157 17 5 17.6716 5 18.5M5.08525 18.0003L4 18M5.08525 18.0003C5.03004 18.1566 5 18.3248 5 18.5M20 18.5C20 19.3284 19.3284 20 18.5 20C17.6716 20 17 19.3284 17 18.5M8 18.5C8 19.3284 7.32843 20 6.5 20C5.67157 20 5 19.3284 5 18.5M4.5 12H3M4.5 15H4M4.5 9H2"
-                  stroke="#E23744"
-                  stroke-linecap="round"
-                />
-              </svg>
+            <div className="border-b border-gray-400 border-dashed text-start text-red-500 text-xs font-bold pb-2 flex items-center gap-x-1">
               {props.roomDelivery ? (
-                <p>
-                  <span>Room</span> Delivery
-                </p>
+                <>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+                    />
+                  </svg>
+                  <p>
+                    <span>Room</span> Delivery
+                  </p>
+                </>
               ) : (
-                <p className="text-red-500 flex flex-wrap gap-x-2">
-                  <span>Regular Delivery</span>
-                </p>
+                <>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <rect width="24" height="24" fill="white" />
+                    <path
+                      d="M19.9148 18.0003L22 18V13.8571L18.5 10H15V18M19.9148 18.0003C19.7089 17.4175 19.1532 17 18.5 17M19.9148 18.0003C19.97 18.1566 20 18.3248 20 18.5M18.5 17C17.8468 17 17.2911 17.4175 17.0852 18.0003M18.5 17C19.3284 17 20 17.6716 20 18.5M18.5 17C17.6716 17 17 17.6716 17 18.5M17.0852 18.0003L15 18M17.0852 18.0003C17.03 18.1566 17 18.3248 17 18.5M15 18V6H1M15 18L7.91475 18.0003M7.91475 18.0003C7.70891 17.4175 7.15322 17 6.5 17M7.91475 18.0003C7.96996 18.1566 8 18.3248 8 18.5M6.5 17C5.84678 17 5.29109 17.4175 5.08525 18.0003M6.5 17C7.32843 17 8 17.6716 8 18.5M6.5 17C5.67157 17 5 17.6716 5 18.5M5.08525 18.0003L4 18M5.08525 18.0003C5.03004 18.1566 5 18.3248 5 18.5M20 18.5C20 19.3284 19.3284 20 18.5 20C17.6716 20 17 19.3284 17 18.5M8 18.5C8 19.3284 7.32843 20 6.5 20C5.67157 20 5 19.3284 5 18.5M4.5 12H3M4.5 15H4M4.5 9H2"
+                      stroke="#E23744"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+
+                  <p className="text-red-500 flex flex-wrap gap-x-2">
+                    <span>Regular Delivery</span>
+                  </p>
+                </>
               )}
             </div>
             <div className="text-start text-blue-500 text-xs font-bold flex items-center gap-x-1">
