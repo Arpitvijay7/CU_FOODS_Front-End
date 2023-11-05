@@ -129,7 +129,7 @@ const MobileSearch = () => {
                 <div className="flex justify-center items-center gap-4">
                   <img
                     className="w-1/4 rounded-lg"
-                    src={val.img ? val.img : "https://picsum.photos/536/354"}
+                    src={val.image.path}
                   />
                   <div className="w-2/3">
                     <p className="font-bold text-xl">{val.name}</p>
