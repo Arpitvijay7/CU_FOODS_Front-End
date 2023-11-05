@@ -120,6 +120,17 @@ const MobileSearch = () => {
           search.length > 0 &&
           !load &&
           data.map((val, index) => {
+            const rating = val.rating.avgRating;
+            let ratingColor;
+            if (rating > 3.5 && rating <= 4.5) {
+              ratingColor = "bg-lime-400";
+            } else if (rating > 4.5) {
+              ratingColor = "bg-green-700";
+            } else if (rating > 2.5 && rating <= 3.5) {
+              ratingColor = "bg-yellow-300";
+            } else if (rating <= 2.5) {
+              ratingColor = "bg-red-600";
+            }
             return (
               <Link
                 to={`/restaurant/${val._id}`}
@@ -127,21 +138,20 @@ const MobileSearch = () => {
                 className=" py-5 rounded-xl shadow-md px-2"
               >
                 <div className="flex justify-center items-center gap-4">
-                  <img
-                    className="w-1/4 rounded-lg"
-                    src={val.img ? val.img : "https://picsum.photos/536/354"}
-                  />
+                  <img className="w-1/4 rounded-lg" src={val.image.path} loading="lazy"/>
                   <div className="w-2/3">
                     <p className="font-bold text-xl">{val.name}</p>
                     {val.status === "closed" ? (
-                      <p className="bg-rose-500 text-white rounded font-bold w-max px-5">
+                      <p className="bg-rose-500 text-white rounded font-medium w-max px-2">
                         Closed
                       </p>
                     ) : (
                       <p className="font-semibold">{val.description}</p>
                     )}
                   </div>
-                  <div className="bg-green-700 text-white font-semibold rounded-md text-xs p-2 w-20">
+                  <div
+                    className={`text-white font-semibold rounded-md text-xs text-center py-2 w-16 ${ratingColor}`}
+                  >
                     {val.rating && val.rating.avgRating
                       ? val.rating.avgRating
                       : "N.A"}{" "}

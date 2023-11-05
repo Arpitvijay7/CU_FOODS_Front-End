@@ -4,7 +4,6 @@ import logo from "./../../../../Assets/Logo/CU_FOODS_WHITE_TRANSPARENT.png";
 
 const Footer = () => {
   const path=useLocation()
-  console.log(path)
   return (
     <>
       <footer class="text-gray-600 body-font">

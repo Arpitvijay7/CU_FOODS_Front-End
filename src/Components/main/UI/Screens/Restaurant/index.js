@@ -10,15 +10,27 @@ const Restaurant = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(1);
   const [shopName, setShopName] = useState("");
-
+  const [page, setPage] = useState(1);
+  const [paginationLoading, setPaginationLoading] = useState(false);
+  const [menuLength, setMenuLength] = useState();
+  const [searchItems, setSearchItems] = useState([]);
   const fetchMenu = async () => {
-    const { data } = await axios(`${BASE_URL}shop/getMenu/${id}`);
+    if (page !== 1) {
+      setPaginationLoading(true);
+    }
+    const { data } = await axios(`${BASE_URL}shop/getMenu/${id}?page=${page}`);
 
     if (data.message === "Success") {
-      setData(data.Menu);
+      // setData(data.Menu);
+      setData((prev) => {
+        const newData = data.Menu;
+        return [...prev, ...newData];
+      });
+      setMenuLength(data.MenuLength);
       setShopName(data.shopName);
       setLoad(0);
     }
+    setPaginationLoading(false);
   };
 
   const handleSearch = async () => {
@@ -27,10 +39,10 @@ const Restaurant = () => {
     const data = await res.json();
     if (search.length > 0) {
       if (data["Menu"].length !== 0) {
-        setData(data.Menu);
+        setSearchItems(data.Menu);
         setShopName(data.shopName);
       } else {
-        setData([]);
+        setSearchItems([]);
         setShopName(data.shopName);
       }
     } else {
@@ -39,13 +51,31 @@ const Restaurant = () => {
     }
     setLoad(0);
   };
-
+  const handleInfiniteScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.scrollHeight
+    ) {
+      setPage((prev) => prev + 1);
+    }
+  };
   useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchMenu();
+    window.addEventListener("scroll", handleInfiniteScroll);
+    return () => window.removeEventListener("scroll", handleInfiniteScroll);
   }, []);
   useEffect(() => {
-    handleSearch();
+    if (menuLength > data.length || page === 1) {
+      fetchMenu();
+    }
+  }, [page]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
+    if (search.length > 0) {
+      handleSearch();
+    }
+    // yahi pe dikkat hai
   }, [search]);
   return (
     <>
@@ -55,7 +85,30 @@ const Restaurant = () => {
         setSearch={setSearch}
         shopName={shopName}
       />
-      <Menu data={data} id={id} load={load} shopName={shopName} />
+      <Menu
+        data={search.length === 0 ? data : searchItems}
+        id={id}
+        load={load}
+        shopName={shopName}
+      />
+      {paginationLoading && (
+        <div className="pb-20 grid place-items-center">
+          <div class="lds-spinner-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
