@@ -214,6 +214,7 @@ const LScontainer = () => {
                 Login
               </span>
             </p>
+
             <button
               className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
               onClick={(e) => handleRegister(e)}
@@ -227,6 +228,17 @@ const LScontainer = () => {
                 "Register"
               )}
             </button>
+            <div className="login_with_google">
+              <p className="seprater--text"> Or sign In With </p>
+
+              <button
+                type="button"
+                className="login-with-google-btn"
+                onClick={googleLoginHandler}
+              >
+                Sign in with Google
+              </button>
+            </div>
           </form>
         ) : (
           click !== 3 && (
@@ -336,7 +348,7 @@ const LScontainer = () => {
           ""
         )}
       </div>
-     <Toaster/>
+      <Toaster />
     </div>
   );
 };
