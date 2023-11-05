@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import { useLocation , useNavigate} from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import "./styles.css";
 import ButtonLoader from "../../../../../Assets/ButtonLoader/ButtonLoader";
@@ -49,8 +47,7 @@ const ResetPwd = () => {
       });
       setLoad(0);
       toast.success("Password Reset Successfully", {
-        autoClose: 1000,
-        hideProgressBar: true,
+        duration: 1000,
       });
       setTimeout(() => {
         dispatch(loginUser());
@@ -115,7 +112,7 @@ const ResetPwd = () => {
           </div>
         </form>
       </div>
-      <ToastContainer />
+      <Toaster />
     </div>
   );
 };

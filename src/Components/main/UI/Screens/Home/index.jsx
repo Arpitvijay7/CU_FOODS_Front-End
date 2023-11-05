@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HeroSection from "./HeroSection/index";
 import CardsSection from "./CardsSection/index";
 import { BASE_URL } from "../../../../Core/API/endpoint";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -26,35 +26,32 @@ const Home = () => {
 
   useEffect(() => {
     if (verify) {
-      toast.success("Email Verification completed and loging In.", {
-        autoClose: 2000,
-        hideProgressBar: true,
+      toast.success("Verification completed You are logged In", {
+        duration: 1000,
       });
 
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 1000);
     }
   }, []);
 
   useEffect(() => {
     if (verifyError) {
       toast.error(verifyError, {
-        autoClose: 2000,
-        hideProgressBar: true,
+        duration: 1000,
       });
 
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 1000);
     }
   }, []);
 
   useEffect(() => {
     if (notauth) {
-      toast.error('You need to login to access this resource', {
-        autoClose: 1000,
-        hideProgressBar: true,
+      toast.error('Please Login first', {
+        duration: 1000,
       });
 
       setTimeout(() => {
@@ -96,7 +93,7 @@ const Home = () => {
     <div className="text-center">
       <HeroSection search={search} setSearch={setSearch} />
       <CardsSection data={data} setData={setData} load={load} />
-      <ToastContainer autoClose={1500} hideProgressBar={true} />
+      <Toaster />
     </div>
   );
 };

@@ -3,8 +3,7 @@ import CartItem from "./cartItemCard";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import socketIO from "socket.io-client";
 const ENDPOINT = "https://api.cufoodz.com";
 let socket;
@@ -113,16 +112,16 @@ const Checkout = () => {
   // const handlePayNowPlaceOrderClick = async () => {
   //   if (shopStatus === "closed") {
   //     toast.error("Shop is closed", {
-  //       autoClose: 1500,
-  //       hideProgressBar: true,
+  //       duration: 1000,
+  //
   //     });
   //     return;
   //   }
 
   //   if (!shopStatus) {
   //     toast.error("Cart is Empty", {
-  //       autoClose: 1500,
-  //       hideProgressBar: true,
+  //       duration: 1000,
+  //
   //     });
   //     return;
   //   }
@@ -158,15 +157,15 @@ const Checkout = () => {
   //       console.log(data);
   //       if (data.success === true) {
   //         toast.success("Order Placed Successfully", {
-  //           autoClose: 1500,
-  //           hideProgressBar: true,
+  //          duration: 1000,
+  //
   //         });
 
   //         setOrderPlacedId(data.order.vendor);
   //       } else {
-  //         toast.error("Payment Failed", {
-  //           autoClose: 1500,
-  //           hideProgressBar: true,
+  //         .error("Payment Failed", {
+  //           duration: 1000,
+  //
   //         });
   //         navigate("/");
   //       }
@@ -189,39 +188,34 @@ const Checkout = () => {
   const handlePlaceOrderClick = async () => {
     if (shopStatus === "closed") {
       toast.error("Shop is closed", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
       return;
     }
 
     if (!shopStatus) {
       toast.error("Cart is Empty", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
       return;
     }
 
     if (!phoneNumber || phoneNumber.length < 10) {
       toast.error("Phone Number required ", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
       return;
     }
 
     if (deliveryCheckbox && !address.hostel && !address.room) {
       toast.error("Select address properly ", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
       return;
     }
     if (!deliveryCheckbox && !address.hostel) {
       toast.error("Select proper location ", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
       return;
     }
@@ -257,16 +251,15 @@ const Checkout = () => {
       const { data } = await axios.post(`${BASE_URL}order/OrderviaCash`, data1);
 
       // toast.success("Order Placed Successfully", {
-      //   autoClose: 1500,
-      //   hideProgressBar: true,
+      //   duration: 1000,
+      //
       // });
 
       setOrderPlacedId(data.order.vendor);
     } catch (err) {
       console.log("Error:-", err);
       toast.error("Internal Server error. Please try again", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
     }
   };
@@ -522,7 +515,6 @@ const Checkout = () => {
           </button>
         </div>
       </div>
-      <ToastContainer autoClose={1500} hideProgressBar={true} />
       {confirmModalOpen && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -590,6 +582,7 @@ const Checkout = () => {
           </div>
         </div>
       )}
+      <Toaster />
     </>
   );
 };

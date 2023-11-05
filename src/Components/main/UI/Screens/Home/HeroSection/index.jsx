@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
 import { useSelector, useDispatch } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
 
 import { BASE_URL } from "../../../../../Core/API/endpoint";
 import {
@@ -15,7 +14,7 @@ import {
   loginUser,
   logoutUser,
 } from "../../../../../Core/store/slice/userSlice";
-import { ToastContainer, toast } from "react-toastify";
+import toast ,{ Toaster } from "react-hot-toast";
 import axios from "axios";
 
 const HeroSection = ({ search, setSearch }) => {
@@ -32,11 +31,12 @@ const HeroSection = ({ search, setSearch }) => {
     try {
       const { data } = axios.get(`${BASE_URL}user/logout`);
       toast.success("Logout Successfull", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
     } catch (error) {
-      toast.error("Logout Unsuccessfull");
+      toast.error("Logout Unsuccessfull", {
+        duration: 1000,
+      });
     }
     dispatch(logoutUser());
   };
@@ -136,7 +136,7 @@ const HeroSection = ({ search, setSearch }) => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={1500} hideProgressBar={true} />
+      <Toaster />
     </>
   );
 };

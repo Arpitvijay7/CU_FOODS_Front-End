@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import OrderItem from "./orderItem.jsx";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { LoaderIcon } from "react-hot-toast";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -24,14 +22,13 @@ const MyOrders = () => {
   useEffect(() => {
     if (status === "placed") {
       toast.success("Order Placed Successfully", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
     }
 
     setTimeout(() => {
       navigate("/myorders");
-    }, 1500);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -133,7 +130,7 @@ const MyOrders = () => {
           </section>
         </div>
       )}
-      <ToastContainer autoClose={1500} hideProgressBar={true} />
+      <Toaster />
     </>
   );
 };

@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import "./styles.css";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import { toast } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -48,13 +48,11 @@ const OrderItem = ({
     } catch (error) {
       if (e.respose) {
         toast.error(error.response.data.message, {
-          autoClose: 1000,
-          hideProgressBar: true,
+          duration: 1000,
         });
       } else {
         toast.error("Internal Server Error", {
-          autoClose: 1000,
-          hideProgressBar: true,
+          duration: 1000,
         });
       }
     }
@@ -223,6 +221,7 @@ const OrderItem = ({
           )}
         </div>
       </div>
+      <Toaster/>
     </>
   );
 };

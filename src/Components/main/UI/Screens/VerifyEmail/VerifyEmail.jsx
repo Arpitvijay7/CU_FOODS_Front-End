@@ -1,13 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
 import Home from "../Home";
-import { ToastContainer } from "react-toastify";
+import toast, { Toaster } from "react-hot-toast";
 
 const VerifyEmail = () => {
   const location = useLocation();
@@ -50,7 +48,7 @@ const VerifyEmail = () => {
   return (
     <>
       <Home />
-      <ToastContainer autoClose={1500} hideProgressBar={true} />
+      <Toaster />
     </>
   );
 };

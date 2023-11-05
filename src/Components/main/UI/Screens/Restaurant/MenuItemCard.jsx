@@ -3,9 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import axios from "axios";
 import numeral from "numeral";
-
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 

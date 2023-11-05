@@ -15,8 +15,7 @@ import {
 } from "../../../Core/store/slice/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import ButtonLoader from "../../../../Assets/ButtonLoader/ButtonLoader";
 
 axios.defaults.withCredentials = true;
@@ -71,11 +70,12 @@ const LScontainer = () => {
       dispatch(loginUser());
       dispatch(closeToggle());
       toast.success("Login Successfull", {
-        autoClose: 1500,
-        hideProgressBar: true,
+        duration: 1000,
       });
     } catch (error) {
-      alert("login unsuccessfull");
+      toast.error("login unsuccessfull", {
+        duration: 1000,
+      });
       dispatch(logoutUser());
     }
   };
@@ -123,14 +123,12 @@ const LScontainer = () => {
     } catch (err) {
       if (err.response) {
         toast.error(err.response.data.message, {
-          autoClose: 1500,
-          hideProgressBar: true,
+          duration: 1000,
         });
         setLoad(false);
       } else {
         toast.error("Something went wrong", {
-          autoClose: 1500,
-          hideProgressBar: true,
+          duration: 1000,
         });
         setLoad(false);
       }
@@ -338,7 +336,7 @@ const LScontainer = () => {
           ""
         )}
       </div>
-      <ToastContainer autoClose={1500} hideProgressBar={true} />
+     <Toaster/>
     </div>
   );
 };
