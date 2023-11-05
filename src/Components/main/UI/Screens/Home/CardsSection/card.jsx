@@ -12,7 +12,7 @@ const Card = (props) => {
           <div className="relative">
             <img
               className={`h-48 w-full ${
-                props.status === "closed" && "grayscale-[85%]"
+                props.status === "closed" && "grayscale-[100%]"
               }`}
               loading="lazy"
               src={props.image.path}
@@ -53,19 +53,19 @@ const Card = (props) => {
                 ★
               </div>
             </div>
-            <div className="border-t border-gray-400 border-dashed text-start text-blue-500 text-xs font-bold pt-2">
+            <div className="border-b border-gray-400 border-dashed text-start text-blue-500 text-xs font-bold pb-2">
               {props.roomDelivery ? (
                 <p>
-                  <span>Room</span> delivery
+                  <span>Room</span> Delivery
                 </p>
               ) : (
-                <p className="text-red-500 flex flex-wrap gap-x-2 underline">
-                  {props.deliveryLocation &&
-                    props.deliveryLocation.map((val, index) => (
-                      <span key={index}>{val}</span>
-                    ))}
+                <p className="text-red-500 flex flex-wrap gap-x-2">
+                  <span>Regular Delivery</span>
                 </p>
               )}
+            </div>
+            <div className="text-start text-blue-500 text-xs font-bold">
+              <p>Free Delivery after min order value ₹200</p>
             </div>
           </div>
         </div>
