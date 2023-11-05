@@ -13,7 +13,7 @@ const Restaurant = () => {
   const [page, setPage] = useState(1);
   const [paginationLoading, setPaginationLoading] = useState(false);
   const [menuLength, setMenuLength] = useState();
-
+  const [searchItems, setSearchItems] = useState([]);
   const fetchMenu = async () => {
     if (page !== 1) {
       setPaginationLoading(true);
@@ -39,10 +39,10 @@ const Restaurant = () => {
     const data = await res.json();
     if (search.length > 0) {
       if (data["Menu"].length !== 0) {
-        setData(data.Menu);
+        setSearchItems(data.Menu);
         setShopName(data.shopName);
       } else {
-        setData([]);
+        setSearchItems([]);
         setShopName(data.shopName);
       }
     } else {
@@ -72,7 +72,9 @@ const Restaurant = () => {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    // handleSearch();
+    if (search.length > 0) {
+      handleSearch();
+    }
     // yahi pe dikkat hai
   }, [search]);
   return (
@@ -83,7 +85,12 @@ const Restaurant = () => {
         setSearch={setSearch}
         shopName={shopName}
       />
-      <Menu data={data} id={id} load={load} shopName={shopName} />
+      <Menu
+        data={search.length === 0 ? data : searchItems}
+        id={id}
+        load={load}
+        shopName={shopName}
+      />
       {paginationLoading && (
         <div className="pb-20 grid place-items-center">
           <div class="lds-spinner-menu">
