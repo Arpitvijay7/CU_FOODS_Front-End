@@ -44,9 +44,7 @@ const Banner = ({ id, setSearch, search, shopName }) => {
       <div
         className="w-screen flex flex-col border-t pb-10 sticky top-0 z-10"
         style={{
-          background: " rgb(226,55,68)",
-          background:
-            "linear-gradient(180deg, rgba(226,55,68,0.590095413165266) 0%, rgba(226,55,68,0.31838672969187676) 51%,  rgba(226,55,68,0) 100%)",
+          background: "white",
         }}
       >
         <div className="pt-10 sm:pt-0">
