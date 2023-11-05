@@ -105,7 +105,6 @@ const Checkout = () => {
       setShopStatus(cartData.shopStatus);
       setDeliveryData(cartData.deliveryData);
     }
-    console.log(cartData);
     setLoading(0);
   };
 

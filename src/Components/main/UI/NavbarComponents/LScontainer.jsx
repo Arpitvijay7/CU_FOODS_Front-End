@@ -66,7 +66,6 @@ const LScontainer = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(`${BASE_URL}user/login`, loginData);
-      console.log(data);
       dispatch(loginUser());
       dispatch(closeToggle());
       toast.success("Login Successfull", {

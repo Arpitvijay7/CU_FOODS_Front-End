@@ -10,12 +10,20 @@ const Restaurant = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(1);
   const [shopName, setShopName] = useState("");
+  const [page, setPage] = useState(1);
+  const [paginationLoading, setPaginationLoading] = useState(false);
+  const [menuLength, setMenuLength] = useState();
 
   const fetchMenu = async () => {
-    const { data } = await axios(`${BASE_URL}shop/getMenu/${id}`);
+    const { data } = await axios(`${BASE_URL}shop/getMenu/${id}?page=${page}`);
 
     if (data.message === "Success") {
-      setData(data.Menu);
+      // setData(data.Menu);
+      setData((prev) => {
+        const newData = data.Menu;
+        return [...prev, ...newData];
+      });
+      setMenuLength(data.MenuLength);
       setShopName(data.shopName);
       setLoad(0);
     }
@@ -39,7 +47,25 @@ const Restaurant = () => {
     }
     setLoad(0);
   };
-
+  const handleInfiniteScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.scrollHeight
+    ) {
+      setPage((prev) => prev + 1);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleInfiniteScroll);
+    return () => window.removeEventListener("scroll", handleInfiniteScroll);
+  }, []);
+  useEffect(() => {
+    if (menuLength >= data.length) {
+      setPaginationLoading(true);
+      fetchMenu();
+      setPaginationLoading(false);
+    }
+  }, [page]);
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchMenu();
@@ -56,6 +82,24 @@ const Restaurant = () => {
         shopName={shopName}
       />
       <Menu data={data} id={id} load={load} shopName={shopName} />
+      {paginationLoading && (
+        <div className="pb-20 grid place-items-center">
+          <div class="lds-spinner-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

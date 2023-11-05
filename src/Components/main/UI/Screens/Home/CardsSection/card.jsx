@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 const Card = (props) => {
   const [cardColor, setCardColor] = useState("");
   const rating = props.rating.avgRating;
-  console.log(rating)
 
   useEffect(() => {
-    console.log("color func")
     if (rating > 3.5 && rating <= 4.5) {
       setCardColor("bg-lime-400");
     } else if (rating > 4.5) {

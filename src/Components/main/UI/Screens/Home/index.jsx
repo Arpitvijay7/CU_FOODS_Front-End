@@ -18,8 +18,6 @@ const Home = () => {
   const verify = queryParam.get("verify");
   const verifyError = queryParam.get("verifyError");
 
-  console.log(notauth);
-
   useEffect(() => {
     document.title = "Cu Foodz";
   }, []);

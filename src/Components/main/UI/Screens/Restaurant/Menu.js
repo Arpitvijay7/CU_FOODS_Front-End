@@ -14,7 +14,7 @@ const Menu = ({ id, data, load, shopName }) => {
         <>
           <div className="">
             <section className="text-gray-600 body-font">
-              <div className="md:pt-10 pt-1 pb-24">
+              <div className="md:pt-10 pt-1 pb-10">
                 {/* <div className="flex flex-col md:flex-row flex-wrap justify-center gap-2"> */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-2">
                   {data &&
