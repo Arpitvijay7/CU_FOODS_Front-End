@@ -90,7 +90,7 @@ const Banner = ({ id, setSearch, search }) => {
   return (
     <>
       <div
-        className="w-screen flex flex-col border-t pb-10 sticky top-0 z-10 px-2"
+        className="w-screen flex flex-col border-t pb-10 z-10 px-2"
         style={{
           background: "white",
         }}
