@@ -31,6 +31,7 @@ const CardsSection = ({ data, setData, load }) => {
                             status={val.status}
                             roomDelivery={val.roomDelivery}
                             deliveryLocation={val.DeliveryLocation}
+                            minDeliveryOrder={val.minDeliveryOrder}
                           />
                         );
                       })

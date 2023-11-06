@@ -25,7 +25,6 @@ const Card = (props) => {
         <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden">
           <div className="relative">
             <img
-            
               className={`h-48 w-full ${
                 props.status === "closed" && "grayscale-[100%]"
               }`}
@@ -162,7 +161,9 @@ const Card = (props) => {
                 />
               </svg>
 
-              <p>Free Delivery after min order value ₹200</p>
+              <p>
+                Free Delivery after min order value {props.minDeliveryOrder}
+              </p>
             </div>
           </div>
         </div>
