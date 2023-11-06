@@ -14,6 +14,7 @@ const Restaurant = () => {
   const [paginationLoading, setPaginationLoading] = useState(false);
   const [menuLength, setMenuLength] = useState();
   const [searchItems, setSearchItems] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
   const fetchMenu = async () => {
     if (page !== 1) {
       setPaginationLoading(true);
@@ -27,12 +28,14 @@ const Restaurant = () => {
         return [...prev, ...newData];
       });
       setMenuLength(data.MenuLength);
+      setTotalPage((prev) => {
+        return Math.ceil(data.MenuLength / 9);
+      });
       setShopName(data.shopName);
       setLoad(0);
     }
     setPaginationLoading(false);
   };
-
   const handleSearch = async () => {
     setLoad(true);
     const res = await fetch(`${BASE_URL}shop/getMenu/${id}?keyword=${search}`);
@@ -56,13 +59,17 @@ const Restaurant = () => {
       window.innerHeight + document.documentElement.scrollTop >=
       document.documentElement.scrollHeight
     ) {
-      setPage((prev) => prev + 1);
+      console.log(page, totalPage);
+      if (paginationLoading === false && page < totalPage) {
+        console.log(page);
+        setPage((prev) => prev + 1);
+      }
     }
   };
   useEffect(() => {
     window.addEventListener("scroll", handleInfiniteScroll);
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, []);
+  }, [data]);
   useEffect(() => {
     if (menuLength > data.length || page === 1) {
       fetchMenu();
