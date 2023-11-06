@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
 import MenuItemCard from "./MenuItemCard";
 const Menu = ({ id, data, load, shopName }) => {
+  {
+    /* <div className="w-screen h-96 grid place-items-center">
+          <div
+            className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-rose-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
+          ></div>
+        </div> */
+  }
   return (
-    <div className="p-2 pt-10">
+    <div className="p-2 pt-5">
       {load ? (
         <div className="w-screen h-96 grid place-items-center">
           <div
             className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-rose-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
             role="status"
           ></div>
-        </div>
+        </div> 
       ) : (
         <>
           <div className="">

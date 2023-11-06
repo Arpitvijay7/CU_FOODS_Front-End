@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import numeral from "numeral";
 import Rating from "@mui/material/Rating";
@@ -7,6 +7,8 @@ import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 const Banner = ({ id, setSearch, search }) => {
+  const searchBarRef = useRef(null);
+  const [fixed, setFixed] = useState(false);
   const navigate = useNavigate();
   const currentURL = window.location.href;
   const [shop, setShop] = useState("");
@@ -90,7 +92,7 @@ const Banner = ({ id, setSearch, search }) => {
   return (
     <>
       <div
-        className="w-screen flex flex-col border-t pb-10 sticky top-0 z-10 px-2"
+        className="w-screen flex flex-col border-t z-10 px-2"
         style={{
           background: "white",
         }}
@@ -161,7 +163,7 @@ const Banner = ({ id, setSearch, search }) => {
               </button>
             </div>
           </div>
-          <div className="pt-5 flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <h1 className="text-center text-3xl font-semibold capitalize">
               {shop.name}
               <p className="text-sm tracking-widest text-gray-600 py-1 capitalize">
@@ -239,12 +241,23 @@ const Banner = ({ id, setSearch, search }) => {
                   d="M6 6h.008v.008H6V6z"
                 />
               </svg>
-              <p>Free Delivery after min. order value ₹200</p>
+              <p>
+                Free Delivery after min. order value {shop.minDeliveryOrder}
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="w-full bg-white md:w-1/2 lg:w-1/3 p-2 md:ml-5 flex border-2 rounded-lg border-rose-600">
+        <div
+          ref={searchBarRef}
+          onClick={() => {
+            if (searchBarRef.current) {
+              searchBarRef.current.scrollIntoView({ behavior: "smooth" });
+              setFixed(true);
+            }
+          }}
+          className="w-full bg-white md:w-1/2 lg:w-1/3 p-2 md:ml-5 flex border-2 rounded-lg border-rose-600"
+        >
           <p className="pl-3 pr-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -267,6 +280,7 @@ const Banner = ({ id, setSearch, search }) => {
             placeholder={`Search in ${shop.name}`}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onBlur={() => setFixed(false)}
           ></input>
         </div>
       </div>

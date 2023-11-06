@@ -78,7 +78,7 @@ const Restaurant = () => {
     // yahi pe dikkat hai
   }, [search]);
   return (
-    <>
+    <div className="h-[150vh]">
       <Banner
         id={id}
         search={search}
@@ -109,7 +109,7 @@ const Restaurant = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
