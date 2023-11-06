@@ -115,7 +115,7 @@ const Card = (props) => {
                     />
                   </svg>
                   <p>
-                    <span>Room</span> Delivery
+                    <span>Hostel Room</span> Delivery
                   </p>
                 </>
               ) : (
