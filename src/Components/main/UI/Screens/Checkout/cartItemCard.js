@@ -9,17 +9,21 @@ const CartItem = ({
   id,
   setTotalAmount,
   deliveryCheckbox,
+  DeliveryPrice,
+  setDeliveryPrice,
 }) => {
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const [loading, setLoading] = useState(0);
+
   const updateAmount = (amount) => {
     setTotalAmount(() => {
       if (deliveryCheckbox) {
-        return amount + 10;
+        return amount + DeliveryPrice;
       }
       return amount;
     });
   };
+
   const handleQuantityIncrease = async () => {
     setLoading(1);
 
@@ -28,12 +32,14 @@ const CartItem = ({
     );
     if (data.message === "quantity increased successfully") {
       setItemQuantity(1 + itemQuantity);
+      setDeliveryPrice(data.deliveryPrice);
       updateAmount(data.totalSum);
       setLoading(0);
     } else {
       setLoading(0);
     }
   };
+
   const handleQuantityDecrease = async () => {
     setLoading(1);
     const { data } = await axios(
@@ -41,21 +47,25 @@ const CartItem = ({
     );
     if (data.message === "quantity decreased successfully") {
       setItemQuantity(itemQuantity - 1);
+      setDeliveryPrice(data.deliveryPrice);
       updateAmount(data.totalSum);
     } else {
     }
     setLoading(0);
   };
+
   const handleRemoveItem = async () => {
     setLoading(1);
     const { data } = await axios.delete(`${BASE_URL}cart/removeFromCart/${id}`);
     if (data.message === "Product removed from cart Successfully") {
       setItemQuantity(0);
+      setDeliveryPrice(data.deliveryPrice);
       updateAmount(data.totalSum);
     } else {
     }
     setLoading(0);
   };
+  
   return (
     <div className={`${itemQuantity ? "" : "hidden"}`}>
       <div class={` flex flex-row rounded-lg bg-white justify-between mt-4`}>

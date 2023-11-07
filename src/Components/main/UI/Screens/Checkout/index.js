@@ -11,6 +11,7 @@ let socket;
 const Checkout = () => {
   const [deliveryCheckbox, setDeliveryCheckbox] = useState(false);
   const [deliveryData, setDeliveryData] = useState();
+  const [DeliveryPrice, setDeliveryPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(1);
@@ -99,11 +100,13 @@ const Checkout = () => {
       `${BASE_URL}cart/getAllfromCart`,
       {}
     );
+    console.log(cartData);
     if (cartData.message === "Your Cart Items") {
       setCartItems(cartData.cart);
       setTotalPrice(cartData.totalSum);
       setShopStatus(cartData.shopStatus);
       setDeliveryData(cartData.deliveryData);
+      setDeliveryPrice(cartData.deliveryPrice);
     }
     setLoading(0);
   };
@@ -312,7 +315,9 @@ const Checkout = () => {
                     return (
                       <CartItem
                         deliveryCheckbox={deliveryCheckbox}
+                        DeliveryPrice = {DeliveryPrice}
                         setTotalAmount={setTotalPrice}
+                        setDeliveryPrice={setDeliveryPrice}
                         key={index}
                         name={val.name}
                         price={val.price}
@@ -491,17 +496,17 @@ const Checkout = () => {
                   &#8377; {totalPrice}
                 </p>
               </div>
-              {deliveryCheckbox ? (
+              {true ? (
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Delivery</p>
-                  <p className="font-semibold text-gray-900">&#8377; 10.00</p>
+                  <p className="font-semibold text-gray-900">&#8377; {DeliveryPrice}</p>
                 </div>
               ) : null}
             </div>
             <div className="mt-6 flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
               <p className="text-2xl font-semibold text-gray-900">
-                &#8377; {totalPrice}
+                &#8377; {totalPrice + DeliveryPrice}
                 .00
               </p>
             </div>
