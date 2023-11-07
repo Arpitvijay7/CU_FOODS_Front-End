@@ -26,7 +26,8 @@ const LScontainer = () => {
   const navigate = useNavigate();
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
-
+  const [termsAndConditionCheckbox, setTermsAndConditionCheckbox] =
+    useState(true);
   const [RegisterVerification, setRegisterVerification] = useState(false);
   const [ForgetPasswordToggle, setForgetPasswordToggle] = useState(false);
   const [forgetPasswordEmail, setforgetPasswordEmail] = useState("");
@@ -106,7 +107,14 @@ const LScontainer = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
+    if (!termsAndConditionCheckbox) {
+      toast.error("Accept Terms & Conditions");
+      return;
+    }
+    if (signupData.password.length < 9) {
+      toast.error("Password less than 9 Characters");
+      return;
+    }
     setLoad(true);
     try {
       const { data } = await axios.post(`${BASE_URL}user/new`, signupData);
@@ -150,7 +158,7 @@ const LScontainer = () => {
         className="h-screen w-screen bg-opacity-60 backdrop-blur-md bg-black"
         onClick={() => dispatch(closeToggle())}
       ></div>
-      <div className="bg-white absolute top-[15%] z-20 w-[calc(100%-2rem)] md:w-1/3 rounded-lg">
+      <div className="bg-white absolute top-[10%] z-20 w-[calc(100%-2rem)] md:w-1/3 rounded-lg">
         <div className="flex justify-between p-5 text-3xl font-bold">
           <div>
             {click == 1 ? "Login" : click == 2 ? "Register" : "Forgot Password"}
@@ -203,6 +211,23 @@ const LScontainer = () => {
                 placeholder="Password:  *******"
                 className="p-4 text-xl w-full focus:outline-none"
               ></input>
+            </div>
+            <p className="text-xs w-full text-left -mt-2 pl-1 pb-2 text-red-500">
+              Minimum Password Length: 9
+            </p>
+            <div className="flex items-center px-2 pb-5 gap-x-2">
+              <input
+                id="t&c"
+                type="checkbox"
+                className="cursor-pointer"
+                onChange={() =>
+                  setTermsAndConditionCheckbox(!termsAndConditionCheckbox)
+                }
+                checked={termsAndConditionCheckbox}
+              ></input>
+              <label htmlFor="t&c" className="cursor-pointer">
+                Accept Terms and Conditions
+              </label>
             </div>
             <p>
               Already have an account?{" "}
