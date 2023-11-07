@@ -170,7 +170,7 @@ const LScontainer = () => {
         className="h-screen w-screen bg-opacity-60 backdrop-blur-md bg-black"
         onClick={() => dispatch(closeToggle())}
       ></div>
-      <div className="bg-white absolute top-[10%] z-20 w-[calc(100%-2rem)] md:w-1/3 rounded-lg">
+      <div className="bg-white absolute top-[5%] z-20 w-[calc(100%-2rem)] md:w-1/3 rounded-lg">
         <div className="flex justify-between p-5 text-3xl font-bold">
           <div>
             {click == 1 ? "Login" : click == 2 ? "Register" : "Forgot Password"}
