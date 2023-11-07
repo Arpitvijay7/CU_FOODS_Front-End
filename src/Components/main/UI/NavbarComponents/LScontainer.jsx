@@ -17,12 +17,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import ButtonLoader from "../../../../Assets/ButtonLoader/ButtonLoader";
-
+import ReCAPTCHA from "react-google-recaptcha";
 axios.defaults.withCredentials = true;
-
 const LScontainer = () => {
   const today = new Date();
   const futureDate = new Date(today);
+  const SITE_KEY = "6Lf4kQMpAAAAAHE0vFUs-B-7tA1TJRdd35zfCNuV";
   const navigate = useNavigate();
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
@@ -31,6 +31,7 @@ const LScontainer = () => {
   const [RegisterVerification, setRegisterVerification] = useState(false);
   const [ForgetPasswordToggle, setForgetPasswordToggle] = useState(false);
   const [forgetPasswordEmail, setforgetPasswordEmail] = useState("");
+  const [captchaValue, setCaptchaValue] = useState("");
   const [forgetPasswordEmailError, setforgetPasswordEmailError] =
     useState(false);
   const [forgetPasswordEmailErrorMessage, setforgetPasswordEmailErrorMessage] =
@@ -115,9 +116,17 @@ const LScontainer = () => {
       toast.error("Password less than 9 Characters");
       return;
     }
+    if (!captchaValue) {
+      toast.error("Complete Captch First");
+      return;
+    }
+
     setLoad(true);
     try {
-      const { data } = await axios.post(`${BASE_URL}user/new`, signupData);
+      const { data } = await axios.post(`${BASE_URL}user/new`, {
+        ...signupData,
+        captchaValue,
+      });
 
       setRegisterVerification(true);
       setLoad(false);
@@ -152,6 +161,9 @@ const LScontainer = () => {
     }
   };
 
+  const handleCaptchaChange = (value) => {
+    setCaptchaValue(value);
+  };
   return (
     <div className="fixed top-0 z-10 grid place-items-center">
       <div
@@ -215,6 +227,7 @@ const LScontainer = () => {
             <p className="text-xs w-full text-left -mt-2 pl-1 pb-2 text-red-500">
               Minimum Password Length: 9
             </p>
+            <ReCAPTCHA sitekey={SITE_KEY} onChange={handleCaptchaChange} />
             <div className="flex items-center px-2 pb-5 gap-x-2">
               <input
                 id="t&c"
