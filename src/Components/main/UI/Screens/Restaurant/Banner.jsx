@@ -247,17 +247,8 @@ const Banner = ({ id, setSearch, search }) => {
             </div>
           </div>
         </div>
-
-        <div
-          ref={searchBarRef}
-          onClick={() => {
-            if (searchBarRef.current) {
-              searchBarRef.current.scrollIntoView({ behavior: "smooth" });
-              setFixed(true);
-            }
-          }}
-          className="w-full bg-white md:w-1/2 lg:w-1/3 p-2 md:ml-5 flex border  rounded-lg shadow-lg"
-        >
+        <div className="py-2" ref={searchBarRef}></div>
+        <div className="w-full bg-white md:w-1/2 lg:w-1/3 p-2 md:ml-5 flex border  rounded-lg shadow-lg">
           <p className="pl-3 pr-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -275,6 +266,15 @@ const Banner = ({ id, setSearch, search }) => {
             </svg>
           </p>
           <input
+            onClick={() => {
+              setFixed(true);
+              if (searchBarRef.current) {
+                searchBarRef.current.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }}
             type="text"
             className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
             placeholder={`Search in ${shop.name}`}
