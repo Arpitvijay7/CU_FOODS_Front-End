@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../../Core/API/endpoint";
 import "./styles.css";
@@ -23,6 +23,7 @@ const LScontainer = () => {
   const today = new Date();
   const futureDate = new Date(today);
   const navigate = useNavigate();
+  const captchaRef = useRef(null);
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
   const [termsAndConditionCheckbox, setTermsAndConditionCheckbox] =
@@ -121,6 +122,7 @@ const LScontainer = () => {
     }
 
     setLoad(true);
+    captchaRef.current.reset();
     try {
       const { data } = await axios.post(`${BASE_URL}user/new`, {
         ...signupData,
