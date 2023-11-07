@@ -69,7 +69,7 @@ const Restaurant = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleInfiniteScroll);
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, [data]);
+  }, [data,paginationLoading]);
   useEffect(() => {
     if (menuLength > data.length || page === 1) {
       fetchMenu();
