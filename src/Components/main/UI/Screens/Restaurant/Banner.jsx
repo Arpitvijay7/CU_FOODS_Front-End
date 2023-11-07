@@ -277,7 +277,7 @@ const Banner = ({ id, setSearch, search }) => {
             }}
             type="text"
             className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
-            placeholder={`Search in ${shop.name}`}
+            placeholder={shop.name?`Search in ${shop.name}`:''}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onBlur={() => setFixed(false)}
