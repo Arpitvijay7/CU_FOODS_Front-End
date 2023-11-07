@@ -22,7 +22,6 @@ axios.defaults.withCredentials = true;
 const LScontainer = () => {
   const today = new Date();
   const futureDate = new Date(today);
-  const SITE_KEY = "6Lf4kQMpAAAAAHE0vFUs-B-7tA1TJRdd35zfCNuV";
   const navigate = useNavigate();
   futureDate.setDate(futureDate.getDate() + 30);
   const formattedDate = futureDate.toUTCString();
@@ -227,7 +226,7 @@ const LScontainer = () => {
             <p className="text-xs w-full text-left -mt-2 pl-1 pb-2 text-red-500">
               Minimum Password Length: 9
             </p>
-            <ReCAPTCHA sitekey={SITE_KEY} onChange={handleCaptchaChange} />
+            <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={handleCaptchaChange} />
             <div className="flex items-center px-2 pb-5 gap-x-2">
               <input
                 id="t&c"
