@@ -269,10 +269,7 @@ const Banner = ({ id, setSearch, search }) => {
             onClick={() => {
               setFixed(true);
               if (searchBarRef.current) {
-                searchBarRef.current.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
+                searchBarRef.current.scrollIntoView();
               }
             }}
             type="text"
