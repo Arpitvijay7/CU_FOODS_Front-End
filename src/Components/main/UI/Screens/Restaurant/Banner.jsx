@@ -256,7 +256,7 @@ const Banner = ({ id, setSearch, search }) => {
               setFixed(true);
             }
           }}
-          className="w-full bg-white md:w-1/2 lg:w-1/3 p-2 md:ml-5 flex border-2 rounded-lg border-rose-600"
+          className="w-full bg-white md:w-1/2 lg:w-1/3 p-2 md:ml-5 flex border  rounded-lg shadow-lg"
         >
           <p className="pl-3 pr-2">
             <svg

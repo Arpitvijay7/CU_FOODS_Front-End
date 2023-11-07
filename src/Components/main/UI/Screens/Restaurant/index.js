@@ -60,7 +60,6 @@ const Restaurant = () => {
       document.documentElement.scrollHeight
     ) {
       console.log(page, totalPage);
-      console.log(paginationLoading);
       if (paginationLoading === false && page < totalPage) {
         console.log(page);
         setPage((prev) => prev + 1);
@@ -70,8 +69,7 @@ const Restaurant = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleInfiniteScroll);
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, [data, paginationLoading]);
-  
+  }, [data]);
   useEffect(() => {
     if (menuLength > data.length || page === 1) {
       fetchMenu();
