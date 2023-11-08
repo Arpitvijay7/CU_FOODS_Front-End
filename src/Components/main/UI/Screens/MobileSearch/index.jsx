@@ -108,9 +108,10 @@ const MobileSearch = () => {
         <div className="px-5 text-neutral-500">
           Suggestions:
           <ol type="a" className="p-2">
-            <li>Punjabi Rasoi</li>
-            <li>Zaika</li>
-            <li>Food Republic</li>
+          <li>Noor Muskan Dhaba</li>
+            <li>Italian Affair</li>
+            <li>Vasano food</li>
+            <li>Musical chat bhandar</li>
           </ol>
         </div>
       )}
