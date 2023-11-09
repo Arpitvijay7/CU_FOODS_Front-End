@@ -37,7 +37,7 @@ const LScontainer = () => {
   const [forgetPasswordEmailErrorMessage, setforgetPasswordEmailErrorMessage] =
     useState("");
   const [load, setLoad] = useState(false);
-
+  const [resetPwdSent, SetResetPwdSent] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -66,8 +66,21 @@ const LScontainer = () => {
   const handleLogin = async (e) => {
     dispatch(loginRequest());
     e.preventDefault();
+    if (loginData.password.length < 9) {
+      toast.error("Password less than 9 Characters");
+      return;
+    }
+    if (!captchaValue) {
+      toast.error("Complete Captch First");
+      return;
+    }
+    setLoad(true);
+    captchaRef.current.reset();
     try {
-      const { data } = await axios.post(`${BASE_URL}user/login`, loginData);
+      const { data } = await axios.post(`${BASE_URL}user/login`, {
+        ...loginData,
+        captchaValue,
+      });
       dispatch(loginUser());
       dispatch(closeToggle());
       toast.success("Login Successfull", {
@@ -78,24 +91,28 @@ const LScontainer = () => {
         duration: 1000,
       });
       dispatch(logoutUser());
+    } finally {
+      setLoad(false);
     }
   };
 
   const handleForgetPassword = async (e) => {
     e.preventDefault();
+    if (!captchaValue) {
+      toast.error("Complete Captch First");
+      return;
+    }
     setLoad(true);
+    captchaRef.current.reset();
     try {
       const { data } = await axios.post(`${BASE_URL}user/password/forgot`, {
         email: forgetPasswordEmail,
+        captchaValue,
       });
       if (data.success) {
-        alert("Password reset link sent to your email");
         setForgetPasswordToggle(true);
       }
-      setLoad(false);
     } catch (err) {
-      setLoad(false);
-
       if (err.response) {
         setforgetPasswordEmailError(true);
         setforgetPasswordEmailErrorMessage(err.response.data.message);
@@ -103,6 +120,9 @@ const LScontainer = () => {
         setforgetPasswordEmailError(true);
         setforgetPasswordEmailErrorMessage("Something went wrong");
       }
+    } finally {
+      setLoad(false);
+      SetResetPwdSent(true);
     }
   };
 
@@ -130,7 +150,6 @@ const LScontainer = () => {
       });
 
       setRegisterVerification(true);
-      setLoad(false);
 
       // if (data.success) {
       //   alert("registration Successfull");
@@ -140,18 +159,17 @@ const LScontainer = () => {
     } catch (error) {
       if (error.response && error.response.status === 429) {
         navigate("/tooManyRequests");
-        setLoad(false);
       } else if (error.response) {
         toast.error(error.response.data.message, {
           duration: 1000,
         });
-        setLoad(false);
       } else {
         toast.error("Something went wrong", {
           duration: 1000,
         });
-        setLoad(false);
       }
+    } finally {
+      setLoad(false);
     }
   };
 
@@ -234,6 +252,7 @@ const LScontainer = () => {
             <ReCAPTCHA
               sitekey={process.env.REACT_APP_SITE_KEY}
               onChange={handleCaptchaChange}
+              ref={captchaRef}
             />
             <div className="flex items-center px-2 pb-5 gap-x-2">
               <input
@@ -307,7 +326,13 @@ const LScontainer = () => {
                   className="p-4 text-xl w-full focus:outline-none"
                 ></input>
               </div>
+              <ReCAPTCHA
+                sitekey={process.env.REACT_APP_SITE_KEY}
+                onChange={handleCaptchaChange}
+                ref={captchaRef}
+              />
               <button
+                disabled={load}
                 className="w-full p-5 border rounded-lg my-4 bg-rose-500 hover:bg-rose-700 text-xl text-white"
                 onClick={(e) => handleLogin(e)}
               >
@@ -365,7 +390,35 @@ const LScontainer = () => {
                 {forgetPasswordEmailErrorMessage}
               </p>
             )}
-            <p>
+            <ReCAPTCHA
+              sitekey={process.env.REACT_APP_SITE_KEY}
+              onChange={handleCaptchaChange}
+              ref={captchaRef}
+            />
+
+            {resetPwdSent ? (
+              <button
+                disabled
+                className="w-full p-5 border rounded-lg my-4 bg-rose-500 outline-8   hover:bg-rose-700 text-xl text-white"
+              >
+                Mail sended To your email, check you email
+              </button>
+            ) : (
+              <button
+                disabled={load}
+                className="w-full p-5 border rounded-lg my-4 bg-rose-500 outline-8   hover:bg-rose-700 text-xl text-white"
+                onClick={(e) => handleForgetPassword(e)}
+              >
+                {load ? (
+                  <ButtonLoader />
+                ) : ForgetPasswordToggle ? (
+                  "Mail sended To your email, check you email"
+                ) : (
+                  "Send Mail"
+                )}
+              </button>
+            )}
+            <p className="pt-2 ">
               Back to Login?{" "}
               <span
                 className="hover:cursor-pointer underline text-rose-500"
@@ -374,19 +427,6 @@ const LScontainer = () => {
                 Login
               </span>
             </p>
-
-            <button
-              className="w-full p-5 border rounded-lg my-4 bg-rose-500 outline-8   hover:bg-rose-700 text-xl text-white"
-              onClick={(e) => handleForgetPassword(e)}
-            >
-              {load ? (
-                <ButtonLoader />
-              ) : ForgetPasswordToggle ? (
-                "Mail sended To your email, check you email"
-              ) : (
-                "Send Mail"
-              )}
-            </button>
           </form>
         ) : (
           ""
