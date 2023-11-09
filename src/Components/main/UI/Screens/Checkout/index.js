@@ -258,11 +258,18 @@ const Checkout = () => {
       // });
 
       setOrderPlacedId(data.order.vendor);
-    } catch (err) {
-      console.log("Error:-", err);
-      toast.error("Internal Server error. Please try again", {
-        duration: 1000,
-      });
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        navigate("/tooManyRequests");
+      } else if (error.response) {
+        toast.error(error.response.data.message, {
+          duration: 1000,
+        });
+      } else {
+        toast.error("Something went wrong", {
+          duration: 1000,
+        });
+      }
     }
   };
 
@@ -315,7 +322,7 @@ const Checkout = () => {
                     return (
                       <CartItem
                         deliveryCheckbox={deliveryCheckbox}
-                        DeliveryPrice = {DeliveryPrice}
+                        DeliveryPrice={DeliveryPrice}
                         setTotalAmount={setTotalPrice}
                         setDeliveryPrice={setDeliveryPrice}
                         key={index}
@@ -499,7 +506,9 @@ const Checkout = () => {
               {true ? (
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-gray-900">Delivery</p>
-                  <p className="font-semibold text-gray-900">&#8377; {DeliveryPrice}</p>
+                  <p className="font-semibold text-gray-900">
+                    &#8377; {DeliveryPrice}
+                  </p>
                 </div>
               ) : null}
             </div>

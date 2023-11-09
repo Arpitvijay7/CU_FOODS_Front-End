@@ -29,6 +29,7 @@ import VendorJoinUsPage from "../UI/FooterComponents/VendorJoinUs";
 import HearfromOurInterns from "../UI/FooterComponents/HearfromOurInterns";
 import VerifyEmail from "../UI/Screens/VerifyEmail/VerifyEmail";
 import MobileSearch from "../UI/Screens/MobileSearch";
+import TooManyRequests from "../../../Assets/TooManyRequests/TooManyRequests";
 axios.defaults.withCredentials = true;
 
 const Routings = () => {
@@ -72,6 +73,7 @@ const Routings = () => {
         </Route>
         <Route path="/restaurant/:id" element={<Restaurant />} />
         <Route path="/" element={<Home />} />
+        <Route path="/tooManyRequests" element={<TooManyRequests />} />
         <Route path="/mobileSearch" element={<MobileSearch />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/login" element={<Login />} />

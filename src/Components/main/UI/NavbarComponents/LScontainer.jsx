@@ -137,9 +137,12 @@ const LScontainer = () => {
       //   dispatch(signinToggle());
       //   dispatch(loginUser());
       // }
-    } catch (err) {
-      if (err.response) {
-        toast.error(err.response.data.message, {
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        navigate("/tooManyRequests");
+        setLoad(false);
+      } else if (error.response) {
+        toast.error(error.response.data.message, {
           duration: 1000,
         });
         setLoad(false);
@@ -228,7 +231,10 @@ const LScontainer = () => {
             <p className="text-xs w-full text-left -mt-2 pl-1 pb-2 text-red-500">
               Minimum Password Length: 9
             </p>
-            <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={handleCaptchaChange} />
+            <ReCAPTCHA
+              sitekey={process.env.REACT_APP_SITE_KEY}
+              onChange={handleCaptchaChange}
+            />
             <div className="flex items-center px-2 pb-5 gap-x-2">
               <input
                 id="t&c"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Banner from "./Banner";
 import Menu from "./Menu.js";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint.js";
 import axios from "axios";
 const Restaurant = () => {
@@ -15,26 +15,40 @@ const Restaurant = () => {
   const [menuLength, setMenuLength] = useState();
   const [searchItems, setSearchItems] = useState([]);
   const [totalPage, setTotalPage] = useState(1);
-  const fetchMenu = async () => {
-    if (page !== 1) {
-      setPaginationLoading(true);
-    }
-    const { data } = await axios(`${BASE_URL}shop/getMenu/${id}?page=${page}`);
 
-    if (data.message === "Success") {
-      // setData(data.Menu);
-      setData((prev) => {
-        const newData = data.Menu;
-        return [...prev, ...newData];
-      });
-      setMenuLength(data.MenuLength);
-      setTotalPage((prev) => {
-        return Math.ceil(data.MenuLength / 9);
-      });
-      setShopName(data.shopName);
-      setLoad(0);
+  const navigate = useNavigate();
+
+  const fetchMenu = async () => {
+    try {
+      if (page !== 1) {
+        setPaginationLoading(true);
+      }
+      const { data } = await axios(
+        `${BASE_URL}shop/getMenu/${id}?page=${page}`
+      );
+
+      if (data.message === "Success") {
+        // setData(data.Menu);
+        setData((prev) => {
+          const newData = data.Menu;
+          return [...prev, ...newData];
+        });
+        setMenuLength(data.MenuLength);
+        setTotalPage((prev) => {
+          return Math.ceil(data.MenuLength / 9);
+        });
+        setShopName(data.shopName);
+        setLoad(0);
+      }
+      setPaginationLoading(false);
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle the rate limiting error
+        navigate("/tooManyRequests");
+      }else {
+        alert("Internal Server Error");
+      }
     }
-    setPaginationLoading(false);
   };
   const handleSearch = async () => {
     setLoad(true);
@@ -69,7 +83,7 @@ const Restaurant = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleInfiniteScroll);
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, [data,paginationLoading]);
+  }, [data, paginationLoading]);
   useEffect(() => {
     if (menuLength > data.length || page === 1) {
       fetchMenu();
