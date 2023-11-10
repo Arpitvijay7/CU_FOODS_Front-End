@@ -277,15 +277,6 @@ const Checkout = () => {
     window.scrollTo(0, 0);
     fetchUserCart();
   }, []);
-
-  useEffect(() => {
-    if (deliveryCheckbox) {
-      setTotalPrice((prev) => prev + 10);
-    } else {
-      setTotalPrice((prev) => prev - 10);
-    }
-  }, [deliveryCheckbox]);
-
   return (
     <>
       <div className="h-20 w-full hidden sm:block"></div>
