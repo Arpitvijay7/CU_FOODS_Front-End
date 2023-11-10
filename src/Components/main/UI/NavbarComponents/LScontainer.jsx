@@ -87,10 +87,17 @@ const LScontainer = () => {
         duration: 1000,
       });
     } catch (error) {
-      toast.error("login unsuccessfull", {
-        duration: 1000,
-      });
-      dispatch(logoutUser());
+      if (error.response && error.response.status === 429) {
+        navigate("/tooManyRequests");
+      } else if (error.response) {
+        toast.error(error.response.data.message, {
+          duration: 1000,
+        });
+      } else {
+        toast.error("Something went wrong", {
+          duration: 1000,
+        });
+      }
     } finally {
       setLoad(false);
     }
@@ -112,10 +119,14 @@ const LScontainer = () => {
       if (data.success) {
         setForgetPasswordToggle(true);
       }
-    } catch (err) {
-      if (err.response) {
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
         setforgetPasswordEmailError(true);
-        setforgetPasswordEmailErrorMessage(err.response.data.message);
+        setforgetPasswordEmailErrorMessage(error.response.data.message);
+        navigate("/tooManyRequests");
+      } else if (error.response) {
+        setforgetPasswordEmailError(true);
+        setforgetPasswordEmailErrorMessage(error.response.data.message);
       } else {
         setforgetPasswordEmailError(true);
         setforgetPasswordEmailErrorMessage("Something went wrong");
