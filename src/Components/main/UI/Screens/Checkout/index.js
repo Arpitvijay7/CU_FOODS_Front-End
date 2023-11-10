@@ -427,7 +427,7 @@ const Checkout = () => {
                 for="checkboxDefault"
               >
                 {" "}
-                Want You Food to get delivered to your room?
+                Want You'r Food to get delivered to your room?
               </label>
             </div>
           )}
