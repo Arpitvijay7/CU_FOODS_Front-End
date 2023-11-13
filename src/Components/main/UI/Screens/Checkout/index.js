@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import socketIO from "socket.io-client";
+import PhoneNumberComponent from "./phoneNumberComponent";
 const ENDPOINT = "https://api.cufoodz.com";
 let socket;
 
@@ -328,39 +329,10 @@ const Checkout = () => {
               </>
             )}
           </div>
-          <div className="w-full flex flex-col justify-center items-center mt-7 border  p-5  rounded-md">
-            <div className="flex justify-start items-start w-full">
-              <label className="h-full pl-[0.15rem] flex justify-center items-center hover:cursor-pointer">
-                Phone Number :
-              </label>
-              <input
-                className="w-[70%] ml-3 border border-gray-300 h-10 rounded p-5"
-                type="number"
-                maxLength={10}
-                placeholder="9876543210"
-                value={phoneNumber}
-                required
-                onChange={(e) => {
-                  const inputValue = e.target.value;
-                  if (inputValue.length <= 10) {
-                    setPhoneNumber(inputValue);
-                  }
-                }}
-                id="checkboxDefault"
-              />
-            </div>
-            {phoneNumber.length < 10 && (
-              <h5 className="text-xs text-right px-7 font-bold pb-5 w-full text-rose-500">
-                * minimum 10 digits required
-              </h5>
-            )}
-
-            <p className="text-xs  mt-3 text-rose-500">
-              Please ensure the accuracy of your provided phone number, as any
-              errors may impact the success of your delivery. We will not be
-              responsible in that case.
-            </p>
-          </div>
+          <PhoneNumberComponent
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
+          />
 
           {!deliveryCheckbox && (
             <div className="p-5 mt-5 rounded-lg border  border-black">
