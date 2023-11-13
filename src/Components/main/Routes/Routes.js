@@ -48,7 +48,7 @@ const Routings = () => {
       const { data } = await axios.get(`${BASE_URL}user/logedInUser`);
 
       if (data.success) {
-        dispatch(loginUser());
+        dispatch(loginUser(data.user));
       }
     } catch (error) {
       dispatch(logoutUser());
