@@ -59,7 +59,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
       setLoading(2);
       const { data } = await axios.post(`${BASE_URL}user/OtpVerify`, {
         otp,
-        phoneNumber
+        phoneNumber,
       });
       console.log(data);
       if (data.success) {
@@ -181,7 +181,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
-                  <div className="bg-white w-[60vw] h-full flex justify-center flex-col items-center gap-y-5">
+                  <form className="bg-white w-[60vw] h-full flex justify-center flex-col items-center gap-y-5">
                     <h1 className="font-bold text-sm">
                       Please enter the OTP sent to your Phone Number
                     </h1>
@@ -189,24 +189,27 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
                       value={otp}
                       onChange={setOtp}
                       numInputs={6}
-                      renderSeparator={<span className="mx-2">-</span>}
+                      renderSeparator={<span className="p-1"></span>}
                       renderInput={(props) => (
-                        <input
-                          {...props}
-                          className="text-black border-b-2 border-black"
-                        />
+                        <div className="border border-gray-600 rounded-lg p-2">
+                          <input
+                          type="number"
+                            {...props}
+                            className="text-black  focus:outline-none"
+                          />
+                        </div>
                       )}
                       className="border"
                     />
                     <button
                       onClick={() => verifyOtp()}
-                      type="button"
+                      type="submit"
                       disabled={loading === 2}
                       className="w-full rounded border bg-rose-600/90 disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
                     >
                       Verify OTP
                     </button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
