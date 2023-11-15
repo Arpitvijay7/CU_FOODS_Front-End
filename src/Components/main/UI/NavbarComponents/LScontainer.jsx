@@ -81,7 +81,7 @@ const LScontainer = () => {
         ...loginData,
         captchaValue,
       });
-      dispatch(loginUser());
+      dispatch(loginUser(data.user));
       dispatch(closeToggle());
       toast.success("Login Successfull", {
         duration: 1000,

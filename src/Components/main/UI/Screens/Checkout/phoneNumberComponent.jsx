@@ -12,6 +12,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
   const [loading, setLoading] = useState(0);
   const [otp, setOtp] = useState();
   const [showOtpModal, setShowOtpModal] = useState(false);
+  console.log(user);
   useEffect(() => {
     if (isPhoneVerified) {
       setPhoneNumber(userPhoneNumber);
@@ -118,7 +119,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
             onClick={() => verifyPhoneNumber()}
             type="button"
             disabled={loading === 1}
-            className="w-full rounded border bg-green-600/90 disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
+            className="w-full rounded border bg-[crimson] disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
           >
             Send OTP
           </button>
