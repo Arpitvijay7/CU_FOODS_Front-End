@@ -3,7 +3,7 @@ import Routings from './Components/main/Routes/Routes';
 
 function App() {
   return (
-    <div className="">
+    <div className="font-[open-sans]">
       <Routings/>
     </div>
   );
