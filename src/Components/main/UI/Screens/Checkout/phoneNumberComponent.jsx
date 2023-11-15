@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import toast from "react-hot-toast";
 import OtpInput from "react-otp-input";
+import { loginUser } from "../../../../Core/store/slice/userSlice";
 const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
+  const dispatch = useDispatch();
   const [editableStatus, setEditableStatus] = useState(true);
   const user = useSelector((state) => state.users);
   const { isPhoneVerified } = user.details;
@@ -12,7 +14,6 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
   const [loading, setLoading] = useState(0);
   const [otp, setOtp] = useState();
   const [showOtpModal, setShowOtpModal] = useState(false);
-  console.log(user);
   useEffect(() => {
     if (isPhoneVerified) {
       setPhoneNumber(userPhoneNumber);
@@ -62,14 +63,18 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
         otp,
         phoneNumber,
       });
-      console.log(data);
       if (data.success) {
         toast.success("OTP verified successfully");
         setShowOtpModal(false);
         setEditableStatus(false);
+        dispatch(loginUser({ ...user["details"], ["phoneNo"]: phoneNumber }));
       }
     } catch (err) {
-      toast.error("Something went wrong");
+      if (err.response.data.message === "Invalid Otp") {
+        toast.error("OTP Invalid");
+      } else {
+        toast.error("Something went wrong");
+      }
       console.log(err);
     } finally {
       setLoading(0);
@@ -150,7 +155,6 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
             onClick={() => verifyPhoneNumber()}
             type="button"
             disabled={loading === 1}
-
             className="w-full rounded border bg-[crimson]/90 disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
           >
             Send OTP
@@ -195,7 +199,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
                       renderInput={(props) => (
                         <div className="border border-gray-600 rounded-lg p-2">
                           <input
-                          type="number"
+                            type="number"
                             {...props}
                             className="text-black  focus:outline-none"
                           />
