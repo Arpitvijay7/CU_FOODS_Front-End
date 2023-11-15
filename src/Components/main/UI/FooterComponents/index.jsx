@@ -1,24 +1,23 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link} from "react-router-dom";
 import logo from "./../../../../Assets/Logo/CU_FOODS_WHITE_TRANSPARENT.png";
 
 const Footer = () => {
-  const path=useLocation()
   return (
     <>
-      <footer class="text-gray-600 body-font">
+      <footer class="text-gray-600 font-[open-sans]">
         <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <Link
             to="/"
             class="flex-shrink-0 md:mx-0 md:mt-[-45px] mb-[-30px] mx-auto text-center md:text-left"
           >
-            <p class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+            <p class="flex  font-medium items-center md:justify-start justify-center text-gray-900">
               <img className="w-[192px]" src={logo} />
             </p>
           </Link>
           <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
             <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+              <h2 class=" font-medium text-gray-900 tracking-widest text-sm mb-3">
                 Vendor
               </h2>
               <nav class="list-none mb-10">
@@ -41,7 +40,7 @@ const Footer = () => {
               </nav>
             </div>
             <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+              <h2 class=" font-medium text-gray-900 tracking-widest text-sm mb-3">
                 Customer
               </h2>
               <nav class="list-none mb-10">
@@ -80,7 +79,7 @@ const Footer = () => {
               </nav>
             </div>
             <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+              <h2 class=" font-medium text-gray-900 tracking-widest text-sm mb-3">
                 Careers
               </h2>
               <nav class="list-none mb-10">
