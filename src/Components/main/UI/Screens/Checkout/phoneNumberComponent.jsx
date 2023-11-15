@@ -36,7 +36,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
         phoneNumber,
       });
       console.log(data);
-      if (data.Otp) {
+      if (data.response.return) {
         toast.success("OTP sent successfully");
         setShowOtpModal(true);
       }
@@ -60,6 +60,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
       setLoading(2);
       const { data } = await axios.post(`${BASE_URL}user/OtpVerify`, {
         otp,
+        phoneNumber,
       });
       console.log(data);
       if (data.success) {
@@ -77,8 +78,8 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
   return (
     <>
       <div className="w-full flex flex-col justify-center items-center mt-7 border  p-5  rounded-md">
-        <div className="flex items-center w-full">
-          <label className="h-full pl-[0.15rem] hover:cursor-pointer">
+        <div className="flex items-start w-full">
+          <label className="h-full flex-1 md:flex-none hover:cursor-pointer text-md">
             Phone Number :
           </label>
           {editableStatus ? (
@@ -98,15 +99,45 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
               id="checkboxDefault"
             />
           ) : (
-            <input
-              className="w-[70%] ml-3 border border-gray-300 h-10 rounded p-5 focus:outline-none"
-              type="number"
-              maxLength={10}
-              placeholder="9876543210"
-              value={phoneNumber}
-              required
-              id="checkboxDefault"
-            />
+            <>
+              <div className="flex flex-col w-[60%] md:w-[70%]">
+                <input
+                  className="ml-3 border border-gray-300 h-10 rounded p-5 focus:outline-none"
+                  type="number"
+                  maxLength={10}
+                  placeholder="9876543210"
+                  value={phoneNumber}
+                  required
+                  id="checkboxDefault"
+                />
+                <p className="ml-5 flex gap-x-1 mt-1 font-bold text-sm items-center">
+                  Verified
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="green"
+                    class="w-4 h-4"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </p>
+              </div>
+              <button className="p-2" onClick={() => setEditableStatus(true)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                  <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                </svg>
+              </button>
+            </>
           )}
         </div>
         {phoneNumber.length < 10 && (
@@ -119,7 +150,8 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
             onClick={() => verifyPhoneNumber()}
             type="button"
             disabled={loading === 1}
-            className="w-full rounded border bg-[crimson] disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
+
+            className="w-full rounded border bg-[crimson]/90 disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
           >
             Send OTP
           </button>
@@ -151,7 +183,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
-                  <div className="bg-white w-[60vw] h-full flex justify-center flex-col items-center gap-y-5">
+                  <form className="bg-white w-[60vw] h-full flex justify-center flex-col items-center gap-y-5">
                     <h1 className="font-bold text-sm">
                       Please enter the OTP sent to your Phone Number
                     </h1>
@@ -159,24 +191,27 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
                       value={otp}
                       onChange={setOtp}
                       numInputs={6}
-                      renderSeparator={<span className="mx-2">-</span>}
+                      renderSeparator={<span className="p-1"></span>}
                       renderInput={(props) => (
-                        <input
-                          {...props}
-                          className="text-black border-b-2 border-black"
-                        />
+                        <div className="border border-gray-600 rounded-lg p-2">
+                          <input
+                          type="number"
+                            {...props}
+                            className="text-black  focus:outline-none"
+                          />
+                        </div>
                       )}
                       className="border"
                     />
                     <button
                       onClick={() => verifyOtp()}
-                      type="button"
+                      type="submit"
                       disabled={loading === 2}
-                      className="w-full rounded border bg-green-600/90 disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
+                      className="w-full rounded border bg-rose-600/90 disabled:opacity-50 text-white py-1.5 active:opacity-75 mt-2"
                     >
                       Verify OTP
                     </button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>

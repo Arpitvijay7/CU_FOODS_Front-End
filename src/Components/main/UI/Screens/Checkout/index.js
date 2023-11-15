@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import socketIO from "socket.io-client";
 import PhoneNumberComponent from "./phoneNumberComponent";
+import { useSelector } from "react-redux";
 const ENDPOINT = "https://api.cufoodz.com";
 let socket;
 
@@ -21,6 +22,7 @@ const Checkout = () => {
   const [orderPlacedId, setOrderPlacedId] = useState(0);
   const [shopStatus, setShopStatus] = useState("");
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const user = useSelector((state) => state.users);
   useEffect(() => {
     document.title = "Cart";
   }, []);
@@ -207,6 +209,11 @@ const Checkout = () => {
       toast.error("Phone Number required ", {
         duration: 1000,
       });
+      return;
+    }
+
+    if (!user.details.isPhoneVerified) {
+      toast.error("Verify Phone Number");
       return;
     }
 
