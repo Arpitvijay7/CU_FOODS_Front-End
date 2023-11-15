@@ -30,9 +30,9 @@ const MobileSearch = () => {
   }, []);
 
   return (
-    <div className="border-b min-h-[70vh]">
+    <div className="border-b min-h-[70vh] bg-gray-50">
       <div className="p-5">
-        <div className="flex place-items-center bg-white w-full h-14 rounded-lg md:rounded-lg border-2">
+        <div className="flex place-items-center bg-white w-full h-14 rounded-lg md:rounded-lg border shadow-md">
           <button
             type="button"
             onClick={() => navigate("/")}
