@@ -50,7 +50,7 @@ const MobileBanner = () => {
           <p>Search for restaurants</p>
         </Link>
         <div className="mt-2">
-          <img className="rounded-3xl h-[30vh]" src={heroImage} />
+          <img className="rounded-3xl w-full" src={heroImage} />
         </div>
         <div className="divider text-gray-500 tracking-widest text-xs uppercase">
           ALL restaurants
