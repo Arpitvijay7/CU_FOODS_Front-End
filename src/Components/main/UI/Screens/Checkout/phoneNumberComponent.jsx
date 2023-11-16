@@ -67,7 +67,7 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
         toast.success("OTP verified successfully");
         setShowOtpModal(false);
         setEditableStatus(false);
-        dispatch(loginUser({ ...user["details"], ["phoneNo"]: phoneNumber }));
+        dispatch(loginUser({ ...user["details"], ["phoneNo"]: phoneNumber , ["isPhoneVerified"]: true }));
       }
     } catch (err) {
       if (err.response.data.message === "Invalid Otp") {

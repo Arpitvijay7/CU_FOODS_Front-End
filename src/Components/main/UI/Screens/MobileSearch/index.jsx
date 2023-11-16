@@ -31,8 +31,8 @@ const MobileSearch = () => {
 
   return (
     <div className="border-b min-h-[70vh] bg-gray-50">
-      <div className="p-5">
-        <div className="flex place-items-center bg-white w-full h-14 rounded-lg md:rounded-lg border shadow-md">
+      <div className="p-4">
+        <div className="flex place-items-center bg-white w-full h-14 rounded-xl md:rounded-lg border shadow-md">
           <button
             type="button"
             onClick={() => navigate("/")}
@@ -116,7 +116,7 @@ const MobileSearch = () => {
         </div>
       )}
 
-      <div className="flex flex-col gap-5 px-2">
+      <div className="flex flex-col gap-5 px-4">
         {data &&
           search.length > 0 &&
           !load &&
@@ -124,11 +124,11 @@ const MobileSearch = () => {
             const rating = val.rating.avgRating;
             let ratingColor;
             if (rating > 3.5 && rating <= 4.5) {
-              ratingColor = "bg-lime-400";
+              ratingColor = "bg-green-500";
             } else if (rating > 4.5) {
               ratingColor = "bg-green-700";
             } else if (rating > 2.5 && rating <= 3.5) {
-              ratingColor = "bg-yellow-300";
+              ratingColor = "bg-yellow-500";
             } else if (rating <= 2.5) {
               ratingColor = "bg-red-600";
             }
@@ -136,7 +136,7 @@ const MobileSearch = () => {
               <Link
                 to={`/restaurant/${val._id}`}
                 key={index}
-                className=" py-5 rounded-xl shadow-md px-2"
+                className=" py-5 rounded-xl shadow-md px-3"
               >
                 <div className="flex justify-center items-center gap-4">
                   <img className="w-1/4 rounded-lg" src={val.image.path} loading="lazy"/>

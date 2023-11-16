@@ -6,11 +6,11 @@ const Card = (props) => {
 
   useEffect(() => {
     if (rating > 3.5 && rating <= 4.5) {
-      setCardColor("bg-lime-400");
+      setCardColor("bg-green-500");
     } else if (rating > 4.5) {
       setCardColor("bg-green-700");
     } else if (rating > 2.5 && rating <= 3.5) {
-      setCardColor("bg-yellow-300");
+      setCardColor("bg-yellow-500");
     } else if (rating <= 2.5) {
       setCardColor("bg-red-600");
     }
