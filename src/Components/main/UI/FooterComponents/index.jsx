@@ -5,7 +5,7 @@ import logo from "./../../../../Assets/Logo/CU_FOODS_WHITE_TRANSPARENT.png";
 const Footer = () => {
   return (
     <>
-      <footer class="text-gray-600 font-[open-sans]">
+      <footer class="text-gray-600">
         <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <Link
             to="/"
