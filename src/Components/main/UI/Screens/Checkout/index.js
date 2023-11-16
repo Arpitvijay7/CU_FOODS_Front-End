@@ -288,7 +288,7 @@ const Checkout = () => {
   return (
     <>
       <div className="h-20 w-full hidden sm:block"></div>
-      <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
+      <div className="grid sm:px-10 grid-cols-1 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div className="px-4 pt-8">
           <p className="text-xl font-medium text-center">Order Summary</p>
           <p className="text-gray-400 text-center">
