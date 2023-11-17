@@ -91,10 +91,9 @@ const MyOrders = () => {
       ) : (
         <div className="grid place-items-center w-full">
           <section className="text-gray-600 body-font w-full  pb-20">
-            <div className="p-2 pb-24 overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px]">
-              {orders && toogle === "live" && orders.length == 0 ? (
-                <div className="text-center mt-5">No Live Orders Found</div>
-              ) : (
+            <div className="p-2 pb-24 overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px] lg:min-h-[50vh]">
+              {orders &&
+                toogle === "live" &&
                 orders.map((order) => {
                   return (
                     <OrderItem
@@ -108,13 +107,9 @@ const MyOrders = () => {
                       toogle={toogle}
                     />
                   );
-                })
-              )}
+                })}
               {Deliveredorders &&
-              toogle === "Delivered" &&
-              Deliveredorders.length == 0 ? (
-                <div className="text-center mt-5">No Delivered Orders Found</div>
-              ) : (
+                toogle === "Delivered" &&
                 Deliveredorders.map((order) => {
                   return (
                     <OrderItem
@@ -130,8 +125,7 @@ const MyOrders = () => {
                       getDeliveredOrders={getDeliveredOrders}
                     />
                   );
-                })
-              )}
+                })}
             </div>
           </section>
         </div>
