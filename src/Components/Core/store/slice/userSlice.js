@@ -18,6 +18,7 @@ const userSlice = createSlice({
     logoutUser(state, action) {
       state.loading = false;
       state.auth = 0;
+      state.details = {};
     },
   },
 });
