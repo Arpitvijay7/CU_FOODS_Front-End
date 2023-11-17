@@ -91,7 +91,7 @@ const MyOrders = () => {
       ) : (
         <div className="grid place-items-center w-full">
           <section className="text-gray-600 body-font w-full  pb-20">
-            <div className="px-5 pb-24 mx-auto overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px] m-5">
+            <div className="p-2 pb-24 overflow-y-auto  flex flex-col gap-[2.5rem] rounded-[20px]">
               {orders &&
                 toogle === "live" &&
                 orders.map((order) => {

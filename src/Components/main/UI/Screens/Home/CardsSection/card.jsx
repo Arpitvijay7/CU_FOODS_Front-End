@@ -22,7 +22,7 @@ const Card = (props) => {
         to={"/restaurant/" + props.id}
         className="bg-f5f5f5 w-full md:w-1/2 lg:w-1/4 p-2  flex items-center justify-center h-full"
       >
-        <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden">
+        <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden relative">
           <div className="relative">
             <img
               className={`h-48 w-full ${

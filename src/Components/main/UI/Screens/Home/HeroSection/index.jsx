@@ -14,8 +14,9 @@ import {
   loginUser,
   logoutUser,
 } from "../../../../../Core/store/slice/userSlice";
-import toast ,{ Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import MobileBanner from "./MobileBanner";
 
 const HeroSection = ({ search, setSearch }) => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const HeroSection = ({ search, setSearch }) => {
 
   return (
     <>
-      <div className="max-w-screen bg-cover h-[60vh] HeroSection relative shadow-2xl">
+      <div className="hidden lg:block max-w-screen bg-cover h-[60vh] HeroSection relative shadow-2xl">
         <div className="text-xl font-bold sm:text-xl md:text-2xl lg:text-3xl text-white max-w-screen">
           <div className="flex justify-between p-5 lg:p-10">
             <p></p>
@@ -88,7 +89,6 @@ const HeroSection = ({ search, setSearch }) => {
             )}
           </div>
         </div>
-        {click != 0 ? <LScontainer /> : <></>}
         <div className="mt-10 md:mt-5 h-2/3">
           <div className="h-full flex flex-col place-items-center">
             <div className="w-full text-white">
@@ -126,16 +126,21 @@ const HeroSection = ({ search, setSearch }) => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   ></input>
-                  <Link to="/mobilesearch"
+                  <Link
+                    to="/mobilesearch"
                     type="text"
                     className="md:hidden h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg flex justify-start items-center text-neutral-400 font-semibold"
-                  >Search For Restaurants</Link>
+                  >
+                    Search For Restaurants
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {click != 0 ? <LScontainer /> : <></>}
+      <MobileBanner />
       <Toaster />
     </>
   );
