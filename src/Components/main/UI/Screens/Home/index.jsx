@@ -3,7 +3,6 @@ import HeroSection from "./HeroSection/index";
 import CardsSection from "./CardsSection/index";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import toast, { Toaster } from "react-hot-toast";
-import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
