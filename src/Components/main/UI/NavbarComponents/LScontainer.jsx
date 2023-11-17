@@ -187,7 +187,7 @@ const LScontainer = () => {
   const googleLoginHandler = () => {
     try {
       window.open(`${BASE_URL}user/googleAuth`, "_self");
-      dispatch(loginUser());
+      // dispatch(loginUser());
     } catch (err) {
       navigate("*");
       dispatch(logoutUser());

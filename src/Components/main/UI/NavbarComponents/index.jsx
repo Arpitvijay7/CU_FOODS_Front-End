@@ -16,11 +16,9 @@ const Navbar = () => {
     setRoute(pathname);
     if (pathname.includes("checkout")) {
       setToogle("checkout");
-    }
-    else if (pathname.includes("myorders")) {
+    } else if (pathname.includes("myorders")) {
       setToogle("myorders");
-    }
-    else if (pathname.includes("/")) {
+    } else if (pathname.includes("/")) {
       setToogle("home");
     }
   }, [pathname, toggle]);
@@ -32,7 +30,7 @@ const Navbar = () => {
           MozBoxShadow: "0px -11px 95px -32px rgba(0,0,0,0.75)",
           boxShadow: "0px -11px 95px -32px rgba(0,0,0,0.75)",
         }}
-        className={`bg-white z-10 fixed bottom-0 w-full shadow-lg shadow-gray-100 ${
+        className={`bg-white lg:bg-white z-10 fixed bottom-0 w-full shadow-lg shadow-gray-100 ${
           pathname !== "/"
             ? "md:flex md:justify-between  md:sticky md:top-0 md:left-0 md:w-full md:h-[3.5rem]"
             : "md:hidden"
@@ -44,10 +42,10 @@ const Navbar = () => {
         >
           <img src={logo} className="w-[150px] overflow-hidden" alt="Logo" />
         </Link>
-        <div className="flex relative justify-evenly h-full items-center bg-gray-200 overflow-y-auto md:overflow-y-visible space-x-5 shadow-2xl md:shadow-none py-2 rounded-xl">
+        <div className="flex relative justify-evenly h-full md:bg-white items-center bg-gray-200 overflow-y-auto md:overflow-y-visible space-x-5 shadow-2xl md:shadow-none  rounded-xl">
           <Link
             to="/"
-            className={`p-1 px-5 flex nav--links relative z-50 md:hidden flex-col justify-center items-center text-sm tracking-widest md:text-2xl ${
+            className={`p-1 px-5 py - 2 flex nav--links relative z-50 md:hidden flex-col justify-center items-center text-sm tracking-widest md:text-2xl ${
               route.includes("restaurant") || toggle == "home"
                 ? "text-[crimson] border-t-2 border-[crimson]"
                 : ""
@@ -59,7 +57,7 @@ const Navbar = () => {
 
           <Link
             to={"/checkout"}
-            className={`p-1 px-5 md:rounded-sm h-max flex relative nav--links z-50 flex-col justify-center items-center  md:text-base text-sm tracking-widest text-center cursor-pointer ${
+            className={`p-1 px-5 py - 2 md:rounded-sm h-max flex relative nav--links z-50 flex-col justify-center items-center  md:text-base text-sm tracking-widest text-center cursor-pointer ${
               toggle === "checkout"
                 ? "text-[crimson] border-t-2 border-[crimson]"
                 : ""
@@ -73,7 +71,7 @@ const Navbar = () => {
           </Link>
           <Link
             to={"/myorders"}
-            className={`p-1 px-5 md:rounded-sm h-max flex flex-col relative nav--links z-50 justify-center items-center  md:text-base text-sm tracking-widest text-center cursor-pointer ${
+            className={`p-1 px-5 py - 2 md:rounded-sm h-max flex flex-col relative nav--links z-50 justify-center items-center  md:text-base text-sm tracking-widest text-center cursor-pointer ${
               toggle === "myorders"
                 ? "text-[crimson] border-t-2 border-[crimson]"
                 : ""
