@@ -4,7 +4,8 @@ import { signinToggle } from "../../../../../Core/store/slice/toggleSlice";
 import { Link } from "react-router-dom";
 import heroImage from "../../../../../../Assets/Homepage/PC_Banner.jpg";
 import ExploreSection from "./ExploreSection";
-import UserDrawer from "./UserDrawer";
+import MobileUserDrawerUsingMiui from "./MiuiDrawer";
+import { Divider } from "@mui/material";
 const MobileBanner = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users);
@@ -25,7 +26,7 @@ const MobileBanner = () => {
               Login
             </button>
           )}
-          {userAuthenticated ? <UserDrawer user={user} /> : <></>}
+          {userAuthenticated ? <MobileUserDrawerUsingMiui /> : <></>}
         </nav>
         <Link
           to="/mobilesearch"
@@ -54,8 +55,8 @@ const MobileBanner = () => {
         </div>
       </div>
       <ExploreSection />
-      <div className="divider lg:hidden text-gray-500 tracking-widest text-xs uppercase">
-        ALL restaurants
+      <div className="lg:hidden">
+        <Divider>ALL RESTAURANTS</Divider>
       </div>
     </>
   );

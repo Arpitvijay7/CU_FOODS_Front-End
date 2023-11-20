@@ -1,17 +1,19 @@
 import React from "react";
-
-export default function Avatar({ user }) {
+import { Avatar } from "@mui/material";
+export default function AvatarWrapper({ user }) {
   return (
-    <label className="avatar" htmlFor="my-drawer-4">
-      <div className="w-14 pt-2 rounded-full grid place-items-center bg-[crimson]/10">
-        {user.details.img ? (
-          <img src="https://picsum.photos/536/354" />
-        ) : (
-          <p className="text-4xl text-[crimson]">
-            {user.details.name && user.details.name[0]}
-          </p>
-        )}
-      </div>
-    </label>
+    <>
+      {user.details.img ? (
+        <Avatar src={user.details.img} />
+      ) : (
+        <Avatar
+          sx={{ bgcolor: "crimson",height:56,width:56 }}
+          alt="Remy Sharp"
+          src="/broken-image.jpg"
+        >
+         <p className="text-4xl"> {user.details.name && user.details.name[0]}</p>
+        </Avatar>
+      )}
+    </>
   );
 }

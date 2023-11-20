@@ -87,7 +87,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="text-center">
+    <div className="text-center overflow-hidden">
       <HeroSection search={search} setSearch={setSearch} />
       <CardsSection data={data} setData={setData} load={load} />
       <Toaster />

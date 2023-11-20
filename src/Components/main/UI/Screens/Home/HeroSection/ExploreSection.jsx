@@ -1,15 +1,15 @@
+import { Avatar, Divider } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 const ImageWithDishNameComponent = ({ url, name }) => {
   return (
     <Link
+    style={{userSelect:"none"}}
       to={`/mobilesearch?keyword=${name}`}
       className="flex flex-col items-center gap-y-2 w-max"
     >
-      <img
-        className="w-28 h-28 object-cover rounded-full mix-blend-multiply"
-        src={url}
-      />
+      <Avatar  sx={{ height: "6rem", width: "6rem" }} src={url} />
+
       <p className="w-14">{name}</p>
     </Link>
   );
@@ -60,13 +60,15 @@ const ExploreSection = () => {
   ];
   return (
     <section className="lg:hidden">
-      <div className="divider text-gray-500 tracking-widest text-xs uppercase">
-        Whats on your mind?
-      </div>
+      <Divider className="py-5">WHATS ON YOUR MIND?</Divider>
       <div className="w-full -mt-3 p-3 grid grid-rows-2 grid-flow-col gap-x-5 gap-y-3 overflow-x-scroll scrollbar scrollbar-none">
         {sectionData &&
           sectionData.map((val, index) => (
-            <ImageWithDishNameComponent name={val.name} url={val.url} />
+            <ImageWithDishNameComponent
+              name={val.name}
+              url={val.url}
+              key={index}
+            />
           ))}
       </div>
     </section>

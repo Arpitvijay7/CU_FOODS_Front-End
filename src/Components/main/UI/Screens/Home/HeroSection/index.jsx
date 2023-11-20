@@ -44,6 +44,7 @@ const HeroSection = ({ search, setSearch }) => {
 
   return (
     <>
+    
       <div className="hidden lg:block max-w-screen bg-cover h-[60vh] HeroSection relative shadow-2xl">
         <div className="text-xl font-bold sm:text-xl md:text-2xl lg:text-3xl text-white max-w-screen">
           <div className="flex justify-between p-5 lg:p-10">
