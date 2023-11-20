@@ -12,7 +12,7 @@ const MobileBanner = () => {
   return (
     <>
       <div className="lg:hidden px-3 flex flex-col gap-y-5">
-        <nav className="flex justify-between pt-10 items-center">
+        <nav className="flex justify-between pt-5 items-center">
           <div className="text-start">
             <h1 className="font-black text-4xl">CU FOODZ</h1>
             <p className="font-semibold text-xs">Delicious. Delivered. Easy.</p>
@@ -25,7 +25,7 @@ const MobileBanner = () => {
               Login
             </button>
           )}
-          {userAuthenticated ? <UserDrawer user={user}/>:<></>}
+          {userAuthenticated ? <UserDrawer user={user} /> : <></>}
         </nav>
         <Link
           to="/mobilesearch"
@@ -53,8 +53,9 @@ const MobileBanner = () => {
           <img className="rounded-3xl w-full" src={heroImage} />
         </div>
         <div className="divider text-gray-500 tracking-widest text-xs uppercase">
-          ALL restaurants
+          Whats on your mind?
         </div>
+        <ExploreSection />
       </div>
     </>
   );
