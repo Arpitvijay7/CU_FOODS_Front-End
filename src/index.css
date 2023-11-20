@@ -22,7 +22,7 @@ body {
   visibility: hidden;
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }
 

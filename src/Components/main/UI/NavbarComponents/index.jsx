@@ -42,7 +42,7 @@ const Navbar = () => {
         >
           <img src={logo} className="w-[150px] overflow-hidden" alt="Logo" />
         </Link>
-        <div style={{boxShadow:"0px 4px 10px "}} className="flex shadow-gray-200 relative justify-evenly h-full md:bg-white items-center overflow-y-auto md:overflow-y-visible space-x-5 shadow-2xl md:shadow-none">
+        <div className="flex shadow-2xl shadow-black relative justify-evenly h-full md:bg-white items-center overflow-y-auto md:overflow-y-visible space-x-5 md:shadow-none">
           <Link
             to="/"
             className={`p-1 px-5 py-2 flex nav--links relative z-50 md:hidden flex-col justify-center items-center text-lg tracking-widest md:text-2xl ${
@@ -57,7 +57,7 @@ const Navbar = () => {
 
           <Link
             to={"/checkout"}
-            className={`p-1 -mt-1 px-5 py-2 md:rounded-sm h-max flex relative nav--links z-50 flex-col justify-center items-center  md:text-base text-lg tracking-widest text-center cursor-pointer ${
+            className={`p-1 px-5 py-2 md:rounded-sm h-max flex relative nav--links z-50 flex-col justify-center items-center  md:text-base text-lg tracking-widest text-center cursor-pointer ${
               toggle === "checkout"
                 ? "text-[crimson] border-t-2 border-[crimson]"
                 : ""
@@ -67,7 +67,7 @@ const Navbar = () => {
                 : ""
             }`}
           >
-            <BsCartFill className="text-sm tracking-widest" /> <span>Cart</span>
+            <BsCartFill className="text-md tracking-widest" /> <span>Cart</span>
           </Link>
           <Link
             to={"/myorders"}
