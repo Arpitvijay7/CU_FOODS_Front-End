@@ -216,7 +216,7 @@ const UserDrawer = () => {
 
           <button
             onClick={handleLogout}
-            className="text-white flex justify-between bg-rose-600 btn btn-error items-center"
+            className="text-white flex justify-between bg-rose-600 btn btn-error items-center font-bold"
           >
             Logout
             <svg
