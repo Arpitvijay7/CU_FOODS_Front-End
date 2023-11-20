@@ -52,10 +52,10 @@ const MobileBanner = () => {
         <div className="mt-2">
           <img className="rounded-3xl w-full" src={heroImage} />
         </div>
-        <div className="divider text-gray-500 tracking-widest text-xs uppercase">
-          Whats on your mind?
-        </div>
-        <ExploreSection />
+      </div>
+      <ExploreSection />
+      <div className="divider lg:hidden text-gray-500 tracking-widest text-xs uppercase">
+        ALL restaurants
       </div>
     </>
   );

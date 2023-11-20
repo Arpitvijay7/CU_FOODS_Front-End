@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 const MobileSearch = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keyword = searchParams.get("keyword");
   const [search, setSearch] = useState("");
   const inputRef = useRef(null);
   const [data, setData] = useState([]);
@@ -27,6 +34,9 @@ const MobileSearch = () => {
   useEffect(() => {
     // Focus the input element when the component mounts
     inputRef.current.focus();
+    if (keyword) {
+      setSearch(keyword);
+    }
   }, []);
 
   return (
@@ -108,7 +118,7 @@ const MobileSearch = () => {
         <div className="px-5 text-neutral-500">
           Suggestions:
           <ol type="a" className="p-2">
-          <li>Noor Muskan Dhaba</li>
+            <li>Noor Muskan Dhaba</li>
             <li>Italian Affair</li>
             <li>Vasano food</li>
             <li>Musical chat bhandar</li>
@@ -139,7 +149,11 @@ const MobileSearch = () => {
                 className=" py-5 rounded-xl shadow-md px-3"
               >
                 <div className="flex justify-center items-center gap-4">
-                  <img className="w-1/4 rounded-lg" src={val.image.path} loading="lazy"/>
+                  <img
+                    className="w-1/4 rounded-lg"
+                    src={val.image.path}
+                    loading="lazy"
+                  />
                   <div className="w-2/3">
                     <p className="font-bold text-xl">{val.name}</p>
                     {val.status === "closed" ? (

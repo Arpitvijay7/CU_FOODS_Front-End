@@ -45,7 +45,7 @@ const Restaurant = () => {
       if (error.response && error.response.status === 429) {
         // Handle the rate limiting error
         navigate("/tooManyRequests");
-      }else {
+      } else {
         alert("Internal Server Error");
       }
     }
@@ -69,11 +69,15 @@ const Restaurant = () => {
     setLoad(0);
   };
   const handleInfiniteScroll = () => {
+    console.log(
+      window.innerHeight,
+      document.documentElement.scrollTop,
+      document.documentElement.scrollHeight
+    );
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.scrollHeight
+      document.documentElement.scrollHeight - 10
     ) {
-      console.log(page, totalPage);
       if (paginationLoading === false && page < totalPage) {
         console.log(page);
         setPage((prev) => prev + 1);
@@ -84,6 +88,7 @@ const Restaurant = () => {
     window.addEventListener("scroll", handleInfiniteScroll);
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
   }, [data, paginationLoading]);
+
   useEffect(() => {
     if (menuLength > data.length || page === 1) {
       fetchMenu();
