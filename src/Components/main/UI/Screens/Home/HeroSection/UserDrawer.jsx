@@ -45,7 +45,7 @@ const UserDrawer = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu w-80 p-4 min-h-full bg-base-200 text-base-content flex flex-col justify-between">
+        <ul className="menu p-4 min-h-full bg-base-200 text-base-content flex flex-col justify-between">
           <div>
             <div className="flex w-full items-center space-x-5 justify-center py-5 border-b-2">
               <div>
