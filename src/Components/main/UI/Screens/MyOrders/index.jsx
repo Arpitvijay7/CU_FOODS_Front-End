@@ -108,6 +108,14 @@ const MyOrders = () => {
                     />
                   );
                 })}
+
+                {
+                  toogle === "live" && orders.length===0 && (<p className="py-10 text-center">No Live Orders</p>)
+                }
+                {
+                  toogle === "Delivered" && Deliveredorders.length===0 && (<p className="py-10 text-center">No Delivered Orders</p>)
+                }
+
               {Deliveredorders &&
                 toogle === "Delivered" &&
                 Deliveredorders.map((order) => {

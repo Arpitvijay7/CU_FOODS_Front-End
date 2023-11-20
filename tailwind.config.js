@@ -4,10 +4,10 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {},
-    base : false,
+    base: false,
   },
   daisyui: {
-    themes: ['light'],
+    themes: ["light"],
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("tailwind-scrollbar")],
 };
