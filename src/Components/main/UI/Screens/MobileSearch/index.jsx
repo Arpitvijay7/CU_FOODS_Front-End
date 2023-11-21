@@ -16,7 +16,7 @@ const MobileSearch = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
   const handleSearch = async () => {
-    if (keyword) {
+    if (foodKeyword) {
       return;
     }
     if (!search) {
@@ -35,7 +35,7 @@ const MobileSearch = () => {
     setLoad(false);
   };
   const fetchShopsByFoodKeyword = async () => {
-    if (!keyword) {
+    if (!foodKeyword) {
       return;
     }
     setLoad(true);
@@ -68,6 +68,11 @@ const MobileSearch = () => {
     fetchShopsByFoodKeyword();
   }, [foodKeyword]);
 
+  const handleremove = () => {
+    setSearch("");
+    setFoodKeyword("");
+    setData([]);
+  };
   return (
     <div className="border-b min-h-[70vh] bg-gray-50">
       <div className="p-4">
@@ -103,7 +108,7 @@ const MobileSearch = () => {
           {search.length > 0 && (
             <button
               type="button"
-              onClick={() => setSearch("")}
+              onClick={handleremove}
               className="pl-3 pr-2 rounded-full active:bg-gray-100 active:transition"
             >
               <svg

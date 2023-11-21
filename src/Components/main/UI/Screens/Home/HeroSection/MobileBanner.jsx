@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signinToggle } from "../../../../../Core/store/slice/toggleSlice";
 import { Link } from "react-router-dom";
-import heroImage from "../../../../../../Assets/Homepage/PC_Banner.jpg";
+import heroImage from "../../../../../../Assets/Homepage/MB_SWEET.png";
 import ExploreSection from "./ExploreSection";
 import MobileUserDrawerUsingMiui from "./MiuiDrawer";
 import { Divider } from "@mui/material";
