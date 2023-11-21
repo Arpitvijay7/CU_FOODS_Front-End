@@ -7,11 +7,13 @@ export default function AvatarWrapper({ user }) {
         <Avatar src={user.details.img} />
       ) : (
         <Avatar
-          sx={{ bgcolor: "crimson",height:56,width:56 }}
-          alt="Remy Sharp"
+          sx={{ bgcolor: "rgb(254 202 202)", height: 56, width: 56 }}
           src="/broken-image.jpg"
         >
-         <p className="text-4xl"> {user.details.name && user.details.name[0]}</p>
+          <p className="text-4xl text-[crimson] opacity-80">
+            {" "}
+            {user.details.name && user.details.name[0]}
+          </p>
         </Avatar>
       )}
     </>

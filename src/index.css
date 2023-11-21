@@ -16,6 +16,7 @@ body {
   user-select: none;
   /* Standard syntax */
   min-height: 100vh;
+  font-family: "Work Sans",sans-serif;
 }
 
 .grecaptcha-badge {

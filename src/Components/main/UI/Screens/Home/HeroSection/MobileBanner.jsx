@@ -15,7 +15,7 @@ const MobileBanner = () => {
       <div className="lg:hidden px-3 flex flex-col gap-y-5">
         <nav className="flex justify-between pt-5 items-center">
           <div className="text-start">
-            <h1 className="font-black text-4xl">CU FOODZ</h1>
+            <h1 className="text-4xl font-bold" >CuFoodz</h1>
             <p className="font-semibold text-xs">Delicious. Delivered. Easy.</p>
           </div>
           {!userAuthenticated && (
@@ -56,7 +56,9 @@ const MobileBanner = () => {
       </div>
       <ExploreSection />
       <div className="lg:hidden">
-        <Divider>ALL RESTAURANTS</Divider>
+        <Divider className="pt-5 text-center px-5 font-bold text-xl">
+          All Restaurants
+        </Divider>
       </div>
     </>
   );

@@ -10,11 +10,18 @@ const MobileSearch = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get("keyword");
+  const [foodKeyword, setFoodKeyword] = useState("");
   const [search, setSearch] = useState("");
   const inputRef = useRef(null);
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
   const handleSearch = async () => {
+    if (keyword) {
+      return;
+    }
+    if (!search) {
+      return;
+    }
     setLoad(true);
     const res = await fetch(`${BASE_URL}shop/getAllShops?keyword=${search}`);
     const data = await res.json();
@@ -27,7 +34,24 @@ const MobileSearch = () => {
     }
     setLoad(false);
   };
-
+  const fetchShopsByFoodKeyword = async () => {
+    if (!keyword) {
+      return;
+    }
+    setLoad(true);
+    const res = await fetch(
+      `${BASE_URL}shop/searchByCuisine?keyword=${search}`
+    );
+    const data = await res.json();
+    if (search.length > 0) {
+      if (data["shops"].length !== 0) {
+        setData(data.shops);
+      } else {
+        setData([]);
+      }
+    }
+    setLoad(false);
+  };
   useEffect(() => {
     handleSearch();
   }, [search]);
@@ -35,9 +59,14 @@ const MobileSearch = () => {
     // Focus the input element when the component mounts
     inputRef.current.focus();
     if (keyword) {
+      setFoodKeyword(keyword);
       setSearch(keyword);
     }
   }, []);
+
+  useEffect(() => {
+    fetchShopsByFoodKeyword();
+  }, [foodKeyword]);
 
   return (
     <div className="border-b min-h-[70vh] bg-gray-50">
@@ -146,11 +175,11 @@ const MobileSearch = () => {
               <Link
                 to={`/restaurant/${val._id}`}
                 key={index}
-                className=" py-5 rounded-xl shadow-md px-3"
+                className=" p-3 rounded-xl shadow-md"
               >
                 <div className="flex justify-center items-center gap-4">
                   <img
-                    className="w-1/4 rounded-lg"
+                    className="w-24 h-16 rounded-lg"
                     src={val.image.path}
                     loading="lazy"
                   />

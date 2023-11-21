@@ -247,9 +247,11 @@ export default function MobileUserDrawerUsingMiui() {
                   display: "flex",
                   justifyContent: "space-between",
                   fontWeight: "700",
+                  borderRadius:"8px",
+                  paddingLeft:"15px"
                 }}
                 onClick={handleLogout}
-                className="text-white flex justify-between btn btn-error items-center font-bold w-full"
+                className="text-white flex justify-between btn btn-error items-center font-bold w-full hover:text-black shadow-xl"
               >
                 Logout
                 <svg
