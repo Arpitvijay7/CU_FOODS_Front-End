@@ -136,13 +136,13 @@ const Banner = ({ id, setSearch, search }) => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 class="w-8 h-8"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M15.75 19.5L8.25 12l7.5-7.5"
                 />
               </svg>
@@ -182,13 +182,13 @@ const Banner = ({ id, setSearch, search }) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   class="w-6 h-6"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
@@ -254,13 +254,13 @@ const Banner = ({ id, setSearch, search }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               class="w-6 h-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
               />
             </svg>
@@ -274,7 +274,7 @@ const Banner = ({ id, setSearch, search }) => {
             }}
             type="text"
             className="h-full w-full focus:outline-none text-lg md:text-2xl rounded-lg"
-            placeholder={shop.name?`Search in ${shop.name}`:''}
+            placeholder={shop.name ? `Search in ${shop.name}` : ""}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onBlur={() => setFixed(false)}

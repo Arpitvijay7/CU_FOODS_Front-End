@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "./../../../../Assets/Logo/CU_FOODS_WHITE_TRANSPARENT.png";
 
 const Footer = () => {
@@ -120,9 +120,9 @@ const Footer = () => {
               <a class="text-gray-500">
                 <svg
                   fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   class="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
@@ -132,9 +132,9 @@ const Footer = () => {
               <a class="ml-3 text-gray-500">
                 <svg
                   fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   class="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
@@ -148,9 +148,9 @@ const Footer = () => {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   class="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
@@ -165,9 +165,9 @@ const Footer = () => {
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="0"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="0"
                   class="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
