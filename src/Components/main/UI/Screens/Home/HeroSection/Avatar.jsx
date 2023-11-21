@@ -3,8 +3,8 @@ import { Avatar } from "@mui/material";
 export default function AvatarWrapper({ user }) {
   return (
     <>
-      {user.details.img ? (
-        <Avatar src={user.details.img} />
+      {user.details.avatar ? (
+        <Avatar src={user.details.avatar} />
       ) : (
         <Avatar
           sx={{ bgcolor: "rgb(254 202 202)", height: 56, width: 56 }}
