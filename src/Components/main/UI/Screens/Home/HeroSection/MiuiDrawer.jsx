@@ -94,7 +94,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </div>
                     <Link
                       to="/checkout"
-                      className="py-3 border-b flex justify-between items-center"
+                      className="py-3 border-b flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <svg
@@ -117,7 +117,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </Link>
                     <Link
                       to="/myorders"
-                      className="py-3 flex justify-between items-center"
+                      className="py-3 flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <svg
@@ -146,7 +146,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </div>
                     <Link
                       to="/PrivacyPolicy"
-                      className="py-3 border-b flex justify-between items-center"
+                      className="py-3 border-b flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <Fingerprint />
@@ -156,7 +156,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </Link>
                     <Link
                       to="/TermsAndCodition"
-                      className="py-3 flex justify-between items-center border-b"
+                      className="py-3 flex justify-between items-center font-medium text-neutral-700 text-base border-b"
                     >
                       <div className="flex gap-x-2">
                         <FileLock2 />
@@ -166,7 +166,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </Link>
                     <Link
                       to="/RefundsAndReturns"
-                      className="py-3 flex justify-between items-center border-b"
+                      className="py-3 flex justify-between items-center font-medium text-neutral-700 text-base border-b"
                     >
                       <div className="flex gap-x-2">
                         <Wallet2 />
@@ -176,7 +176,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </Link>
                     <Link
                       to="/contactUs"
-                      className="py-3 flex justify-between items-center"
+                      className="py-3 flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <PhoneCall />
@@ -192,7 +192,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </div>
                     <Link
                       to="/joinUs"
-                      className="py-3 border-b flex justify-between items-center"
+                      className="py-3 border-b flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <Users2 />
@@ -202,7 +202,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </Link>
                     <Link
                       to="/joinUs"
-                      className="py-3 flex justify-between items-center"
+                      className="py-3 flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <ScrollText />
@@ -218,7 +218,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </div>
                     <Link
                       to="/vendorJoinUs"
-                      className="py-3 border-b flex justify-between items-center"
+                      className="py-3 border-b flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <Users2 />
@@ -228,7 +228,7 @@ export default function MobileUserDrawerUsingMiui() {
                     </Link>
                     <Link
                       to="/VendorHelp"
-                      className="py-3 flex justify-between items-center"
+                      className="py-3 flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">
                         <ScrollText />
