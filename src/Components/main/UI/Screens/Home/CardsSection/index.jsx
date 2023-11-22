@@ -16,7 +16,7 @@ const CardsSection = ({ data, setData, load }) => {
           <div className="w-full px-3 md:px-[5%]">
             <div className="">
               <section className="text-gray-600 body-font">
-                <div className="container pb-16">
+                <div className="container pb-8 lg:pb-16">
                   <div className="flex flex-wrap pt-10 -m-4">
                     {data.length ? (
                       data.map((val, id) => {
@@ -43,7 +43,7 @@ const CardsSection = ({ data, setData, load }) => {
                   </div>
                 </div>
               </section>
-              <h3 className="text-center ">More shops will be added soon.</h3>
+              <h3 className="text-center font-bold">More shops will be added soon...</h3>
             </div>
           </div>
         </>
