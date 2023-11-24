@@ -5,7 +5,9 @@ import { BASE_URL } from "../../../../Core/API/endpoint";
 import toast from "react-hot-toast";
 import OtpInput from "react-otp-input";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
+import { useNavigate } from "react-router-dom";
 const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [editableStatus, setEditableStatus] = useState(true);
   const user = useSelector((state) => state.users);
