@@ -67,11 +67,21 @@ const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
         toast.success("OTP verified successfully");
         setShowOtpModal(false);
         setEditableStatus(false);
-        dispatch(loginUser({ ...user["details"], ["phoneNo"]: phoneNumber , ["isPhoneVerified"]: true }));
+        dispatch(
+          loginUser({
+            ...user["details"],
+            ["phoneNo"]: phoneNumber,
+            ["isPhoneVerified"]: true,
+          })
+        );
       }
     } catch (err) {
-      if (err.response.data.message === "Invalid Otp") {
+      if (err.response && err.response.status === 429) {
+        navigate("/tooManyRequests");
+      } else if (err.response.data.message === "Invalid Otp") {
         toast.error("OTP Invalid");
+      } else if (err.response.data.message) {
+        toast.error(err.response.data.message);
       } else {
         toast.error("Something went wrong");
       }
