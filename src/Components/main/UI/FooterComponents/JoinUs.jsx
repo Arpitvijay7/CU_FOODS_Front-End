@@ -1,7 +1,10 @@
 // HiringPage.js
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const JoinUs = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Join Us";
@@ -33,8 +36,24 @@ const JoinUs = () => {
 
   return (
     <div className=" min-h-screen w-full ">
-      <div className="  p-8 rounded-lg ">
-        <h1 className="text-2xl font-semibold mb-4">Join Us</h1>
+       <button onClick={()=> navigate(-1)} className="md:hidden pl-5 pt-3">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="black"
+          className="w-8 h-8 -ml-3 active:bg-slate-300 transition rounded-full"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
+      </button>
+      <div className="p-8 pt-2 rounded-lg ">
+        <h1 className="text-2xl text-center md:text-left font-semibold mb-4">Join Us</h1>
         <p className="mb-4">
           Welcome to our hiring platform! We're excited to have you join our
           team. To apply for a position, please fill out the form below.

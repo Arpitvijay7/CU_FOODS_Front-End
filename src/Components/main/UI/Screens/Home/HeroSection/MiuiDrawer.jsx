@@ -201,7 +201,7 @@ export default function MobileUserDrawerUsingMiui() {
                       <ChevronRight />
                     </Link>
                     <Link
-                      to="/joinUs"
+                      to="/hearFromOurInterns"
                       className="py-3 flex justify-between items-center font-medium text-neutral-700 text-base"
                     >
                       <div className="flex gap-x-2">

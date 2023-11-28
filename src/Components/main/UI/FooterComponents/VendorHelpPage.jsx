@@ -1,13 +1,31 @@
 // VendorHelpPage.js
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const VendorHelpPage = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Vendor Help";
   }, []);
   return (
     <div className="min-h-screen w-full p-8">
+      <button onClick={() => navigate(-1)} className="md:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="black"
+          className="w-8 h-8 -ml-3 active:bg-slate-300 transition rounded-full"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
+      </button>
       <div className=" p-8 pt-2 rounded-lg ">
         <h1 className="text-2xl font-semibold mb-4">Need Help As a Vendor?</h1>
         <p className="mb-4">
@@ -34,7 +52,9 @@ const VendorHelpPage = () => {
         <ul className="list-disc list-inside mb-4">
           <li>
             Email:{" "}
-            <a className="text-[blue]" href="mailto:vendorsupport@cufoodz.com">vendorsupport@cufoodz.com</a>
+            <a className="text-[blue]" href="mailto:vendorsupport@cufoodz.com">
+              vendorsupport@cufoodz.com
+            </a>
           </li>
           <li>
             Phone: <a href="tel:+917737308877">+91 7737308877</a>

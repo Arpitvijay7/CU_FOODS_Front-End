@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RefundsAndReturns = () => {
-  
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Refunds And Returns";
@@ -9,6 +10,22 @@ const RefundsAndReturns = () => {
 
   return (
     <div className="container mx-auto p-4">
+            <button onClick={()=> navigate(-1)} className="md:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="black"
+          className="w-8 h-8 -ml-3 active:bg-slate-300 transition rounded-full"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
+      </button>
       <h1 className="text-3xl font-semibold mb-4">REFUNDS AND RETURNS</h1>
       <p>
         Arpit Vijay is committed to ensuring that your privacy is protected.
