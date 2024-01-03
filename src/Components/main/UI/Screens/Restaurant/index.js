@@ -119,7 +119,7 @@ const Restaurant = () => {
       />
       {paginationLoading && (
         <div className="pb-20 grid place-items-center">
-          <div class="lds-spinner-menu">
+          <div className="lds-spinner-menu">
             <div></div>
             <div></div>
             <div></div>

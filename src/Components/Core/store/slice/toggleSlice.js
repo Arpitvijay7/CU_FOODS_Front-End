@@ -6,16 +6,16 @@ const toggleSlice=createSlice({
     },
     reducers:{
         signinToggle(state,action){
-            return{...state,["toggle"]:1}
+            return{...state,"toggle":1}
         },
         signupToggle(state,action){
-            return{...state,["toggle"]:2}
+            return{...state,"toggle":2}
         },
         forgetPasswordToggle(state,action){
-            return{...state,["toggle"]:3}
+            return{...state,"toggle":3}
         },
         closeToggle(state,action){
-            return{...state,["toggle"]:0}
+            return{...state,"toggle":0}
         }
     }
 })

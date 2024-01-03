@@ -18,7 +18,7 @@ import {
 } from "../../Core/store/slice/userSlice";
 import { BASE_URL } from "../../Core/API/endpoint";
 import axios from "axios";
-import ProtectedRoutes from "./ProjectedRoutes";
+import ProtectedRoutes from "./ProtectedRoutes";
 import PrivacyPolicy from "../UI/FooterComponents/PrivacyPolicy";
 import TermsAndConditions from "../UI/FooterComponents/Terms&Conditions";
 import RefundsAndReturns from "../UI/FooterComponents/RefundsAndReturns";
@@ -80,7 +80,7 @@ const Routings = () => {
         <Route path="/resetpassword" element={<ResetPwd />} />
         <Route path="/forgotpassword" element={<ForgotPwd />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-        <Route path="/TermsAndCodition" element={<TermsAndConditions />} />
+        <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
         <Route path="/RefundsAndReturns" element={<RefundsAndReturns />} />
         <Route path="/VendorHelp" element={<VendorHelpPage />} />
         <Route path="/joinUs" element={<JoinUs />} />
