@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 const CartItem = ({
   name,
@@ -68,10 +68,10 @@ const CartItem = ({
   
   return (
     <div className={`${itemQuantity ? "" : "hidden"}`}>
-      <div class={` flex flex-row rounded-lg bg-white justify-between mt-4`}>
-        <div class="flex flex-col px-4 pb-3">
-          <div class="font-bold text-lg">{name}</div>
-          <p class="font-semibold">Rs {price}</p>
+      <div className={` flex flex-row rounded-lg bg-white justify-between mt-4`}>
+        <div className="flex flex-col px-4 pb-3">
+          <div className="font-bold text-lg">{name}</div>
+          <p className="font-semibold">Rs {price}</p>
           <p>{option}</p>
         </div>
         <div className="flex">
@@ -82,7 +82,7 @@ const CartItem = ({
             <button className="hover:cursor-default pl-2">
               <svg
                 aria-hidden="true"
-                class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
+                className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

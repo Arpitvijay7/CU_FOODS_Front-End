@@ -98,12 +98,12 @@ const Banner = ({ id, setSearch, search }) => {
         }}
       >
         <div className="pt-10 sm:pt-0 hidden md:block">
-          <div class="px-4 rounded-lg md:mt-0 md:rounded-none w-full flex justify-between">
+          <div className="px-4 rounded-lg md:mt-0 md:rounded-none w-full flex justify-between">
             <div className="md:w-[30vw] md:pt-3">
-              <h2 class="text-gray-900 title-font text-2xl font-bold pb-2">
+              <h2 className="text-gray-900 title-font text-2xl font-bold pb-2">
                 {shop.name}
               </h2>
-              <h3 class="text-gray-800 md:text-lg tracking-widest title-font mb-1 font-semibold">
+              <h3 className="text-gray-800 md:text-lg tracking-widest title-font mb-1 font-semibold">
                 {shop.description}
               </h3>
             </div>
@@ -122,7 +122,7 @@ const Banner = ({ id, setSearch, search }) => {
                 </p>
               </div>
 
-              <p class="text-[16px] text-slate-600 text-bold">
+              <p className="text-[16px] text-slate-600 text-bold">
                 {formatedNoOfReviews ? formatedNoOfReviews : 0} reviews
               </p>
             </div>
@@ -138,7 +138,7 @@ const Banner = ({ id, setSearch, search }) => {
                 viewBox="0 0 24 24"
                 strokeWidth="2"
                 stroke="currentColor"
-                class="w-8 h-8"
+                className="w-8 h-8"
               >
                 <path
                   strokeLinecap="round"
@@ -156,7 +156,7 @@ const Banner = ({ id, setSearch, search }) => {
                   viewBox="0 0 32 32"
                 >
                   <path
-                    class="cls-1"
+                    className="cls-1"
                     d="M2,29A1.12,1.12,0,0,1,1.69,29,1,1,0,0,1,1,28V27A19,19,0,0,1,17,8.24V4a1,1,0,0,1,1.6-.8l12,9a1,1,0,0,1,0,1.6l-12,9A1,1,0,0,1,17,22V18.25A18.66,18.66,0,0,0,4.93,25.67L2.81,28.59A1,1,0,0,1,2,29ZM19,6V9.12a1,1,0,0,1-.89,1,17,17,0,0,0-15,14.6l.16-.21A20.68,20.68,0,0,1,17.9,16.11a1,1,0,0,1,.77.26,1,1,0,0,1,.33.74V20l9.33-7Z"
                   />
                 </svg>
@@ -184,7 +184,7 @@ const Banner = ({ id, setSearch, search }) => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -203,8 +203,8 @@ const Banner = ({ id, setSearch, search }) => {
                   fill="none"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M21 0C32.598 0 42 9.40202 42 21C42 31.9234 33.6599 40.8989 23 41.906V64C23 65.1046 22.1046 66 21 66C19.8954 66 19 65.1046 19 64V41.906C8.34014 40.8989 0 31.9234 0 21C0 9.40202 9.40202 0 21 0Z"
                     fill="#E23744"
                   />
@@ -256,7 +256,7 @@ const Banner = ({ id, setSearch, search }) => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"

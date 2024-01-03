@@ -25,7 +25,7 @@ const LScontainer = () => {
   const navigate = useNavigate();
   const captchaRef = useRef(null);
   futureDate.setDate(futureDate.getDate() + 30);
-  const formattedDate = futureDate.toUTCString();
+  // const formattedDate = futureDate.toUTCString();
   const [termsAndConditionCheckbox, setTermsAndConditionCheckbox] =
     useState(true);
   const [RegisterVerification, setRegisterVerification] = useState(false);
@@ -155,7 +155,7 @@ const LScontainer = () => {
     setLoad(true);
     captchaRef.current.reset();
     try {
-      const { data } = await axios.post(`${BASE_URL}user/new`, {
+      await axios.post(`${BASE_URL}user/new`, {
         ...signupData,
         captchaValue,
       });
@@ -206,7 +206,7 @@ const LScontainer = () => {
       <div className="bg-white absolute top-[5%] z-20 w-[calc(100%-2rem)] md:w-1/3 rounded-lg">
         <div className="flex justify-between p-5 text-3xl font-bold">
           <div>
-            {click == 1 ? "Login" : click == 2 ? "Register" : "Forgot Password"}
+            {click === 1 ? "Login" : click === 2 ? "Register" : "Forgot Password"}
           </div>
           <button onClick={() => dispatch(closeToggle())}>
             <svg
@@ -215,7 +215,7 @@ const LScontainer = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              class="w-8 h-8"
+              className="w-8 h-8"
             >
               <path
                 strokeLinecap="round"
@@ -225,7 +225,7 @@ const LScontainer = () => {
             </svg>
           </button>
         </div>
-        {click == 2 ? (
+        {click === 2 ? (
           <form className="p-5">
             <div className="w-full p-1 border rounded-lg my-4">
               <input
@@ -383,7 +383,7 @@ const LScontainer = () => {
           )
         )}
 
-        {click == 3 ? (
+        {click === 3 ? (
           <form className="p-5">
             <div className="w-full p-1 border rounded-lg my-4 ">
               <input

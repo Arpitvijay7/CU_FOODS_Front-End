@@ -3,7 +3,7 @@ import './styles.css';
 
 const ButtonLoader = () => {
   return (
-    <span class="Buttonloader"></span>
+    <span className="Buttonloader"></span>
   )
 }
 

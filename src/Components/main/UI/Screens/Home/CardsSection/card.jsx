@@ -30,7 +30,8 @@ const Card = (props) => {
               }`}
               loading="lazy"
               src={props.image.path}
-            ></img>
+              alt={props.name}
+            />
             <div className="absolute bottom-4 right-4 bg-gray-200 text-gray-700 px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +39,7 @@ const Card = (props) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"
@@ -69,8 +70,8 @@ const Card = (props) => {
                     fill="none"
                   >
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M21 0C32.598 0 42 9.40202 42 21C42 31.9234 33.6599 40.8989 23 41.906V64C23 65.1046 22.1046 66 21 66C19.8954 66 19 65.1046 19 64V41.906C8.34014 40.8989 0 31.9234 0 21C0 9.40202 9.40202 0 21 0Z"
                       fill="#E23744"
                     />
@@ -105,7 +106,7 @@ const Card = (props) => {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -147,7 +148,7 @@ const Card = (props) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Link,
   useNavigate,
-  useParams,
   useSearchParams,
 } from "react-router-dom";
 import { BASE_URL } from "../../../../Core/API/endpoint";
@@ -117,7 +116,7 @@ const MobileSearch = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="black"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"
@@ -187,6 +186,7 @@ const MobileSearch = () => {
                     className="w-24 h-16 rounded-lg"
                     src={val.image.path}
                     loading="lazy"
+                    alt={val.name}
                   />
                   <div className="w-2/3">
                     <p className="font-bold text-xl">{val.name}</p>

@@ -40,7 +40,7 @@ const MobileBanner = () => {
             viewBox="0 0 24 24"
             strokeWidth="2.5"
             stroke="red"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -51,7 +51,7 @@ const MobileBanner = () => {
           <p>Search for restaurants</p>
         </Link>
         <div className="mt-2">
-          <img className="rounded-3xl w-full" src={heroImage} />
+          <img className="rounded-3xl w-full" src={heroImage} alt="Cufoodz Banner" />
         </div>
       </div>
       <ExploreSection />

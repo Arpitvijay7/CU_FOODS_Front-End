@@ -46,7 +46,7 @@ const Navbar = () => {
           <Link
             to="/"
             className={`p-1 px-5 py-2 flex nav--links relative z-50 md:hidden flex-col justify-center items-center text-lg tracking-widest md:text-2xl ${
-              route.includes("restaurant") || toggle == "home"
+              route.includes("restaurant") || toggle === "home"
                 ? "text-[crimson] border-t-2 border-[crimson]"
                 : ""
             }`}
