@@ -4,6 +4,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
+import { useDebounce } from "../../../../../Assets/hooks/hooks";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 const MobileSearch = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const MobileSearch = () => {
   const keyword = searchParams.get("keyword");
   const [foodKeyword, setFoodKeyword] = useState("");
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search);
   const inputRef = useRef(null);
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
@@ -18,13 +20,13 @@ const MobileSearch = () => {
     if (foodKeyword) {
       return;
     }
-    if (!search) {
+    if (!debouncedSearch) {
       return;
     }
     setLoad(true);
-    const res = await fetch(`${BASE_URL}shop/getAllShops?keyword=${search}`);
-    const data = await res.json();
-    if (search.length > 0) {
+    if (debouncedSearch.length > 0) {
+      const res = await fetch(`${BASE_URL}shop/getAllShops?keyword=${debouncedSearch}`);
+      const data = await res.json();
       if (data["shops"].length !== 0) {
         setData(data.shops);
       } else {
@@ -42,7 +44,7 @@ const MobileSearch = () => {
       `${BASE_URL}shop/searchByCuisine?keyword=${search}`
     );
     const data = await res.json();
-    if (search.length > 0) {
+    if (debouncedSearch.length > 0) {
       if (data["shops"].length !== 0) {
         setData(data.shops);
       } else {
@@ -53,7 +55,7 @@ const MobileSearch = () => {
   };
   useEffect(() => {
     handleSearch();
-  }, [search]);
+  }, [debouncedSearch]);
   useEffect(() => {
     // Focus the input element when the component mounts
     inputRef.current.focus();
