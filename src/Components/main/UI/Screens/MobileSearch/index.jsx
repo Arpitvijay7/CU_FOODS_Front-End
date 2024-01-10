@@ -4,7 +4,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { useDebounce } from "../../../../../Assets/hooks/hooks";
+import { useDebounce } from "../../../../../hooks/debounce.js";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 const MobileSearch = () => {
   const navigate = useNavigate();

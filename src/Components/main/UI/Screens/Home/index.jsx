@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
-import { useDebounce } from "../../../../../Assets/hooks/hooks";
+import { useDebounce } from "../../../../../hooks/debounce.js";
 const Home = () => {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search);
