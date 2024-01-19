@@ -1,16 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { BASE_URL } from "../../../../Core/API/endpoint";
 import toast from "react-hot-toast";
 import OtpInput from "react-otp-input";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
 import { useNavigate } from "react-router-dom";
+import { useCurrentUser } from "../../../../../hooks/currentUser";
 const PhoneNumberComponent = ({ phoneNumber, setPhoneNumber }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [editableStatus, setEditableStatus] = useState(true);
-  const user = useSelector((state) => state.users);
+  const user = useCurrentUser();
   const { isPhoneVerified } = user.details;
   const userPhoneNumber = user.details.phoneNo;
   const [loading, setLoading] = useState(0);

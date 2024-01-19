@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Avatar from "./Avatar";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -16,9 +15,10 @@ import {
   Users2,
   Wallet2,
 } from "lucide-react";
+import { useCurrentUser } from "../../../../../../hooks/currentUser";
 const UserDrawer = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.users);
+  const user = useCurrentUser();
   const handleLogout = async () => {
     try {
       await axios.get(`${BASE_URL}user/logout`);

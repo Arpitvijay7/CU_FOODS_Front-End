@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import socketIO from "socket.io-client";
 import PhoneNumberComponent from "./phoneNumberComponent";
-import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../../hooks/currentUser";
 const ENDPOINT = "https://api.cufoodz.com";
 let socket;
 
@@ -22,7 +22,7 @@ const Checkout = () => {
   const [orderPlacedId, setOrderPlacedId] = useState(0);
   const [shopStatus, setShopStatus] = useState("");
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
-  const user = useSelector((state) => state.users);
+  const user = useCurrentUser();
   useEffect(() => {
     document.title = "Cart";
   }, []);

@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Avatar from "./Avatar";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../../../../../Core/API/endpoint";
 import toast from "react-hot-toast";
@@ -19,6 +19,7 @@ import {
   Users2,
   Wallet2,
 } from "lucide-react";
+import { useCurrentUser } from "../../../../../../hooks/currentUser";
 export default function MobileUserDrawerUsingMiui() {
   const dispatch = useDispatch();
   const [state, setState] = React.useState({
@@ -52,7 +53,7 @@ export default function MobileUserDrawerUsingMiui() {
     }
     dispatch(logoutUser());
   };
-  const user = useSelector((state) => state.users);
+  const user = useCurrentUser();
 
   return (
     <div>
