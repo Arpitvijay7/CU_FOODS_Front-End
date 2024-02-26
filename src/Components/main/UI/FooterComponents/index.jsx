@@ -182,7 +182,6 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <div className="h-20"></div>
     </>
   );
 };
