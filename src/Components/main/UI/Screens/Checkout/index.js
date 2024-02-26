@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import socketIO from "socket.io-client";
 import PhoneNumberComponent from "./phoneNumberComponent";
-import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../../hooks/currentUser";
 const ENDPOINT = "https://api.cufoodz.com";
 let socket;
 
@@ -22,7 +22,7 @@ const Checkout = () => {
   const [orderPlacedId, setOrderPlacedId] = useState(0);
   const [shopStatus, setShopStatus] = useState("");
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
-  const user = useSelector((state) => state.users);
+  const user = useCurrentUser();
   useEffect(() => {
     document.title = "Cart";
   }, []);
@@ -75,18 +75,18 @@ const Checkout = () => {
     },
   ];
 
-  function generateUid(length) {
-    let result = "";
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
-  }
+  // function generateUid(length) {
+  //   let result = "";
+  //   const characters =
+  //     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  //   const charactersLength = characters.length;
+  //   let counter = 0;
+  //   while (counter < length) {
+  //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  //     counter += 1;
+  //   }
+  //   return result;
+  // }
 
   const [address, setAddress] = useState({
     hostel: "",
@@ -557,7 +557,7 @@ const Checkout = () => {
                 </button>
                 <div>
                   <p className="text-xs text-red-500 font-bold text-left w-[80%]">
-                    You will get a confirmation call withing 5 minutes.
+                    You will get a confirmation call within 5 minutes.
                   </p>
                 </div>
               </div>

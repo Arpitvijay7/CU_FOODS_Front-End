@@ -6,8 +6,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../Core/store/slice/userSlice";
+import { useDebounce } from "../../../../../hooks/debounce.js";
 const Home = () => {
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search);
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(1);
   const navigate = useNavigate();
@@ -64,9 +66,9 @@ const Home = () => {
     setLoad(0);
   };
   const handleSearch = async () => {
-    const res = await fetch(`${BASE_URL}shop/getAllShops?keyword=${search}`);
-    const data = await res.json();
-    if (search.length > 0) {
+    if (debouncedSearch.length > 0) {
+      const res = await fetch(`${BASE_URL}shop/getAllShops?keyword=${debouncedSearch}`);
+      const data = await res.json();
       if (data["shops"].length !== 0) {
         setData(data.shops);
       } else {
@@ -79,11 +81,10 @@ const Home = () => {
   };
   useEffect(() => {
     handleSearch();
-  }, [search]);
+  }, [debouncedSearch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchData();
   }, []);
 
   return (

@@ -10,7 +10,7 @@ import ResetPwd from "../UI/Screens/Resetpassword/resetPwd";
 import Checkout from "../UI/Screens/Checkout";
 import Restaurant from "../UI/Screens/Restaurant";
 import MyOrders from "../UI/Screens/MyOrders";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   loginRequest,
   loginUser,
@@ -18,7 +18,7 @@ import {
 } from "../../Core/store/slice/userSlice";
 import { BASE_URL } from "../../Core/API/endpoint";
 import axios from "axios";
-import ProtectedRoutes from "./ProjectedRoutes";
+import ProtectedRoutes from "./ProtectedRoutes";
 import PrivacyPolicy from "../UI/FooterComponents/PrivacyPolicy";
 import TermsAndConditions from "../UI/FooterComponents/Terms&Conditions";
 import RefundsAndReturns from "../UI/FooterComponents/RefundsAndReturns";
@@ -30,6 +30,7 @@ import HearfromOurInterns from "../UI/FooterComponents/HearfromOurInterns";
 import VerifyEmail from "../UI/Screens/VerifyEmail/VerifyEmail";
 import MobileSearch from "../UI/Screens/MobileSearch";
 import TooManyRequests from "../../../Assets/TooManyRequests/TooManyRequests";
+import { useCurrentUser } from "../../../hooks/currentUser";
 axios.defaults.withCredentials = true;
 
 const Routings = () => {
@@ -41,7 +42,7 @@ const Routings = () => {
 
   const dispatch = useDispatch();
 
-  const { auth, loading } = useSelector((state) => state.users);
+  const { auth, loading } = useCurrentUser();
   const getLogedInuser = async () => {
     dispatch(loginRequest());
     try {
@@ -80,7 +81,7 @@ const Routings = () => {
         <Route path="/resetpassword" element={<ResetPwd />} />
         <Route path="/forgotpassword" element={<ForgotPwd />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-        <Route path="/TermsAndCodition" element={<TermsAndConditions />} />
+        <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
         <Route path="/RefundsAndReturns" element={<RefundsAndReturns />} />
         <Route path="/VendorHelp" element={<VendorHelpPage />} />
         <Route path="/joinUs" element={<JoinUs />} />

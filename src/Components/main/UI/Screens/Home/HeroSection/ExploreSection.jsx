@@ -1,7 +1,7 @@
 import { Avatar, Divider } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useCurrentUser } from "../../../../../../hooks/currentUser";
 const ImageWithDishNameComponent = ({ url, name }) => {
   return (
     <Link
@@ -17,7 +17,7 @@ const ImageWithDishNameComponent = ({ url, name }) => {
 };
 
 const ExploreSection = () => {
-  const user = useSelector((state) => state.users);
+  const user = useCurrentUser();
   const sectionData = [
     {
       name: "Pizza",

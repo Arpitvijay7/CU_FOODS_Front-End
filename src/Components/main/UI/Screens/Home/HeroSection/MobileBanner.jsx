@@ -1,14 +1,15 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signinToggle } from "../../../../../Core/store/slice/toggleSlice";
 import { Link } from "react-router-dom";
 import heroImage from "../../../../../../Assets/Homepage/MB_SWEET.png";
 import ExploreSection from "./ExploreSection";
 import MobileUserDrawerUsingMiui from "./MiuiDrawer";
 import { Divider } from "@mui/material";
+import { useCurrentUser } from "../../../../../../hooks/currentUser";
 const MobileBanner = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.users);
+  const user = useCurrentUser();
   const userAuthenticated = user.auth;
   return (
     <>
@@ -40,7 +41,7 @@ const MobileBanner = () => {
             viewBox="0 0 24 24"
             strokeWidth="2.5"
             stroke="red"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
@@ -51,7 +52,7 @@ const MobileBanner = () => {
           <p>Search for restaurants</p>
         </Link>
         <div className="mt-2">
-          <img className="rounded-3xl w-full" src={heroImage} />
+          <img className="rounded-3xl w-full" src={heroImage} alt="Cufoodz Banner" />
         </div>
       </div>
       <ExploreSection />

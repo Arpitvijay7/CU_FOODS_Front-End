@@ -173,7 +173,7 @@ const MenuItemCard = ({
           <div className="w-full border border-rose-400 rounded-lg my-1 p-4 flex justify-between">
             <label
               for="half"
-              class="ml-2 text-gray-700 text-lg sm:text-2xl font-semibold"
+              className="ml-2 text-gray-700 text-lg sm:text-2xl font-semibold"
             >
               Half: &#8377; {price_half}
             </label>
@@ -189,7 +189,7 @@ const MenuItemCard = ({
           <div className="w-full border border-rose-400 rounded-lg my-1 p-4 flex justify-between">
             <label
               for="full"
-              class="ml-2 text-gray-700 text-lg sm:text-2xl font-semibold"
+              className="ml-2 text-gray-700 text-lg sm:text-2xl font-semibold"
             >
               Full: &#8377; {price_full}
             </label>
@@ -207,7 +207,7 @@ const MenuItemCard = ({
               <div role="status">
                 <svg
                   aria-hidden="true"
-                  class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-rose-600"
+                  className="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-rose-600"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +221,7 @@ const MenuItemCard = ({
                     fill="currentFill"
                   />
                 </svg>
-                <span class="">Adding to Cart...</span>
+                <span className="">Adding to Cart...</span>
               </div>
             </div>
           ) : (

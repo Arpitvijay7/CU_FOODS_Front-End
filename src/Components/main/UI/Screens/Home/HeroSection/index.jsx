@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./HeroStyles.css";
 import LScontainer from "../../../NavbarComponents/LScontainer";
@@ -6,12 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { BASE_URL } from "../../../../../Core/API/endpoint";
 import {
-  closeToggle,
   signinToggle,
   signupToggle,
 } from "../../../../../Core/store/slice/toggleSlice";
 import {
-  loginUser,
   logoutUser,
 } from "../../../../../Core/store/slice/userSlice";
 import toast, { Toaster } from "react-hot-toast";
@@ -28,9 +25,9 @@ const HeroSection = ({ search, setSearch }) => {
     return state.toggle["toggle"];
   });
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      const { data } = axios.get(`${BASE_URL}user/logout`);
+      await axios.get(`${BASE_URL}user/logout`);
       toast.success("Logout Successfull", {
         duration: 1000,
       });
@@ -111,7 +108,7 @@ const HeroSection = ({ search, setSearch }) => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                     >
                       <path
                         strokeLinecap="round"
@@ -140,7 +137,7 @@ const HeroSection = ({ search, setSearch }) => {
           </div>
         </div>
       </div>
-      {click != 0 ? <LScontainer /> : <></>}
+      {click !== 0 ? <LScontainer /> : <></>}
       <MobileBanner />
       <Toaster />
     </>
