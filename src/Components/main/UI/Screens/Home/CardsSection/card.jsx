@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 const Card = (props) => {
   const [cardColor, setCardColor] = useState("");
   const rating = props.rating.avgRating;
@@ -17,10 +18,24 @@ const Card = (props) => {
   }, [rating, props.rating]);
 
   return (
-    <>
+    <motion.div
+      initial={{
+        y: 75,
+        opacity: 0,
+      }}
+      whileInView={{
+        y: 0,
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+      viewport={{ once: true }}
+      className="w-full md:w-1/2 lg:w-1/4"
+    >
       <Link
         to={"/restaurant/" + props.id}
-        className="bg-f5f5f5 w-full md:w-1/2 lg:w-1/4 p-2  flex items-center justify-center h-full"
+        className="bg-f5f5f5 w-full p-2  flex items-center justify-center h-full"
       >
         <div className="bg-white w-[98%] shadow-lg rounded-3xl overflow-hidden relative">
           <div className="relative">
@@ -169,7 +184,7 @@ const Card = (props) => {
           </div>
         </div>
       </Link>
-    </>
+    </motion.div>
   );
 };
 
