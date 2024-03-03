@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const CardsSection = ({ data, setData, load }) => {
   return (
     <>
-      {!load ? (
+      {load ? (
         <div className="w-screen flex pt-10 pb-20 px-2 flex-wrap justify-evenly">
           <div
             className="hidden my-10 md:inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-rose-600 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
@@ -62,7 +62,7 @@ const CardsSection = ({ data, setData, load }) => {
                   </div>
                 </div>
               </section>
-              <h3 className="text-center font-bold mb-20 md:mb-0">
+              <h3 className="text-center font-bold">
                 More shops will be added soon...
               </h3>
             </div>

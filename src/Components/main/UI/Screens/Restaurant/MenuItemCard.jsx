@@ -6,6 +6,7 @@ import numeral from "numeral";
 import toast, { Toaster } from "react-hot-toast";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import ReadMore from "./ReadMore";
 
 const MenuItemCard = ({
   name,
@@ -123,7 +124,7 @@ const MenuItemCard = ({
             <p className="text-green-600 font-bold text-xl">
               &#8377; {price_half ? price_half : price}
             </p>
-            <p className="mb-4">{details}</p>
+            <ReadMore content={details}/>
           </div>
 
           <div className="flex-1 flex justify-end ">
