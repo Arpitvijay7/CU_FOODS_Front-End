@@ -44,7 +44,7 @@ const MobileSearch = () => {
       `${BASE_URL}shop/searchByCuisine?keyword=${search}`
     );
     const data = await res.json();
-    if (debouncedSearch.length > 0) {
+    if (search.length > 0) {
       if (data["shops"].length !== 0) {
         setData(data.shops);
       } else {
@@ -75,7 +75,7 @@ const MobileSearch = () => {
     setData([]);
   };
   return (
-    <div className="border-b min-h-[70vh] bg-gray-50">
+    <div className="min-h-[70vh]">
       <div className="p-4">
         <div className="flex place-items-center bg-white w-full h-14 rounded-xl md:rounded-lg border shadow-md">
           <button
